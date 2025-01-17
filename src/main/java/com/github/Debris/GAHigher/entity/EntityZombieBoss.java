@@ -151,7 +151,7 @@ public class EntityZombieBoss extends EntityZombie implements IBossDisplayData {
         if ((damage.getSource()).damageType.equals("player") || (damage.getSource()).damageType.equals("mob")) {
             if (damage.getSource().getResponsibleEntity() instanceof EntityPlayer player) {
                 player.removePotionEffect(Potion.damageBoost.id);
-                ((GAEntityPlayer) player).getBossManager().setBossResetDamageBoostCounter(200);
+                ((GAEntityPlayer) player).ga$getBossManager().setBossResetDamageBoostCounter(200);
                 this.attackedCounter = 200;
                 damage.setAmount(damage.getAmount() * (isFinal() ? 0.3F : 0.75F));
                 EntityDamageResult originDamage = super.attackEntityFrom(damage);
@@ -194,7 +194,7 @@ public class EntityZombieBoss extends EntityZombie implements IBossDisplayData {
 
     public EntityDamageResult attackEntityAsMob(Entity target) {
         if (target instanceof EntityPlayer player) {
-            ((GAEntityPlayer) player).getBossManager().setIsAttackByBossCounter(30);
+            ((GAEntityPlayer) player).ga$getBossManager().setIsAttackByBossCounter(30);
         }
         return super.attackEntityAsMob(target);
     }
@@ -298,7 +298,7 @@ public class EntityZombieBoss extends EntityZombie implements IBossDisplayData {
             if (!(target instanceof EntityPlayer))
                 healAndBroadcast();
             if (this.thunderTick % 40 == 0) {
-                if (target != null && target instanceof EntityPlayer player && (((GAEntityPlayer) player)).getBossManager().canBeAttacked())
+                if (target != null && target instanceof EntityPlayer player && (((GAEntityPlayer) player)).ga$getBossManager().canBeAttacked())
                     if (isFinal()) {
                         double currentX = this.posX;
                         double currentY = this.posY;

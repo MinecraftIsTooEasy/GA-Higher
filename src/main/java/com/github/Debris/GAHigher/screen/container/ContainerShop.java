@@ -47,7 +47,7 @@ public class ContainerShop extends Container {
                 double soldPrice = ((GAItem) var5.getItem()).getSoldPrice(var5.getItemSubtype());
                 if (soldPrice > 0.0D) {
                     double totalMoney = var5.stackSize * soldPrice;
-                    ((GAEntityPlayer) this.player).getMoneyManager().addMoneyWithSimplify(totalMoney);
+                    GAEntityPlayer.getMoneyManager(this.player).addMoneyWithSimplify(totalMoney);
                 }
                 var4.putStack(null);
             }

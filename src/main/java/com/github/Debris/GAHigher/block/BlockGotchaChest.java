@@ -14,7 +14,7 @@ public class BlockGotchaChest extends BlockEnderChest {
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, EnumFace face, float offset_x, float offset_y, float offset_z) {
         if (player.onServer())
             if (canOpenChest(world, x, y, z, player)) {
-                InventoryEnderChestTrans inventory = ((GAEntityPlayer) player).getInventoryEnderChestTrans();
+                InventoryEnderChestTrans inventory = ((GAEntityPlayer) player).ga$getInventoryEnderChestTrans();
                 TileEntityEnderChest tile_entity = (TileEntityEnderChest) world.getBlockTileEntity(x, y, z);
                 if (inventory != null && tile_entity != null) {
                     inventory.setAssociatedChest(tile_entity);

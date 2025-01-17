@@ -1,6 +1,7 @@
 package com.github.Debris.GAHigher.trans.entity.player;
 
 import com.github.Debris.GAHigher.api.GAEntityPlayer;
+import com.github.Debris.GAHigher.compat.KeepInventoryCompat;
 import com.github.Debris.GAHigher.entity.player.BossManager;
 import com.github.Debris.GAHigher.entity.player.JewelryManager;
 import com.github.Debris.GAHigher.entity.player.MoneyManager;
@@ -45,36 +46,36 @@ public abstract class EntityPlayerTrans extends EntityLivingBase implements ICom
     @Shadow
     public abstract EntityDamageResult attackEntityFrom(Damage paramDamage);
 
-    public InventoryEnderChestTrans getInventoryEnderChestTrans() {
+    public InventoryEnderChestTrans ga$getInventoryEnderChestTrans() {
         return this.enderTrans;
     }
 
-    public void addStoneCount(long stoneCount) {
+    public void ga$addStoneCount(long stoneCount) {
         this.StoneCount += stoneCount;
     }
 
     @Override
-    public InventoryJewelry getInventoryJewelry() {
+    public InventoryJewelry ga$getInventoryJewelry() {
         return this.inventoryJewelry;
     }
 
     @Override
-    public MoneyManager getMoneyManager() {
+    public MoneyManager ga$getMoneyManager() {
         return this.moneyManager;
     }
 
     @Override
-    public BossManager getBossManager() {
+    public BossManager ga$getBossManager() {
         return this.bossManager;
     }
 
     @Inject(method = {"clonePlayer(Lnet/minecraft/EntityPlayer;Z)V"}, at = {@At("RETURN")})
-    public void clonePlayerInject(EntityPlayer par1EntityPlayer, boolean par2, CallbackInfo callbackInfo) {
-        this.enderTrans = ((GAEntityPlayer) par1EntityPlayer).getInventoryEnderChestTrans();
-        if (par2 || this.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory")) {
-            this.inventoryJewelry = ((GAEntityPlayer) par1EntityPlayer).getInventoryJewelry();
+    public void clonePlayerInject(EntityPlayer oldPlayer, boolean par2, CallbackInfo callbackInfo) {
+        this.enderTrans = ((GAEntityPlayer) oldPlayer).ga$getInventoryEnderChestTrans();
+        if (par2 || KeepInventoryCompat.canKeepInventory(oldPlayer)) {
+            this.inventoryJewelry.clone(oldPlayer);
         }
-        this.moneyManager.clone(par1EntityPlayer);
+        this.moneyManager.clone(oldPlayer);
     }
 
     @Inject(method = {"readEntityFromNBT(Lnet/minecraft/NBTTagCompound;)V"}, at = {@At("RETURN")})

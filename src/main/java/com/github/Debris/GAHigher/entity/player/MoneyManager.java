@@ -16,7 +16,7 @@ public class MoneyManager extends AbstractManager {
 
     @Override
     public void clone(EntityPlayer entityPlayer) {
-        this.money = ((GAEntityPlayer) entityPlayer).getMoneyManager().money;
+        this.money = GAEntityPlayer.getMoneyManager(entityPlayer).money;
     }
 
     public void setMoney(double money) {

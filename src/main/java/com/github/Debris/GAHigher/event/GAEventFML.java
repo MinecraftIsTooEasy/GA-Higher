@@ -6,7 +6,7 @@ import com.github.Debris.GAHigher.block.entity.TileEntityItemDuper;
 import com.github.Debris.GAHigher.client.render.entity.RenderZombieBoss;
 import com.github.Debris.GAHigher.command.CommandForging;
 import com.github.Debris.GAHigher.command.CommandItemLevel;
-import com.github.Debris.GAHigher.compat.ITECompat;
+import com.github.Debris.GAHigher.compat.ModCompat;
 import com.github.Debris.GAHigher.entity.EntityExchanger;
 import com.github.Debris.GAHigher.entity.EntityFinalZombieBoss;
 import com.github.Debris.GAHigher.entity.EntityZombieBoss;
@@ -150,7 +150,7 @@ public class GAEventFML {
         entityRegisterEvent = event;
         addMapping(EntityZombieDoor.class, "EntityZombieDoor", nextEntityID());
         addMapping(EntityExchanger.class, "EntityExchanger", nextEntityID());
-        if (ITECompat.HAS_ITE) {
+        if (ModCompat.HAS_ITE) {
             addMapping(EntityZombieBoss.class, "EntityZombieBoss", nextEntityID());
             addMapping(EntityFinalZombieBoss.class, "EntityFinalZombieBoss", nextEntityID());
         }
@@ -167,7 +167,7 @@ public class GAEventFML {
 
     @Subscribe
     public void onEntityRendererRegister(EntityRendererRegistryEvent event) {
-        if (ITECompat.HAS_ITE) {
+        if (ModCompat.HAS_ITE) {
             event.register(EntityZombieBoss.class, new RenderZombieBoss());
         }
     }
@@ -179,7 +179,7 @@ public class GAEventFML {
 
     @Subscribe
     public void onCommandRegister(CommandRegisterEvent event) {
-        if (ITECompat.HAS_ITE) {
+        if (ModCompat.HAS_ITE) {
             event.register(new CommandForging());
             event.register(new CommandItemLevel());
         }

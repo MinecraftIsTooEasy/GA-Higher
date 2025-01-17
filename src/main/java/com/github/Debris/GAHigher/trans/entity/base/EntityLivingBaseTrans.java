@@ -54,6 +54,6 @@ public abstract class EntityLivingBaseTrans extends Entity {
 
     @Unique
     private boolean canDoubleJump() {
-        return this.isEntityPlayer() && ((GAEntityPlayer) this.getAsPlayer()).getInventoryJewelry().hasJewelry(Items.bottled_cloud);
+        return this.isEntityPlayer() && GAEntityPlayer.getInventoryJewelry(this.getAsPlayer()).hasJewelry(Items.bottled_cloud);
     }
 }

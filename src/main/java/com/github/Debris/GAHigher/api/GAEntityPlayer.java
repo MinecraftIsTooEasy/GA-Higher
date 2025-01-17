@@ -4,15 +4,24 @@ import com.github.Debris.GAHigher.entity.player.BossManager;
 import com.github.Debris.GAHigher.entity.player.MoneyManager;
 import com.github.Debris.GAHigher.screen.inventory.InventoryEnderChestTrans;
 import com.github.Debris.GAHigher.screen.inventory.InventoryJewelry;
+import net.minecraft.EntityPlayer;
 
 public interface GAEntityPlayer {
-    InventoryEnderChestTrans getInventoryEnderChestTrans();
+    InventoryEnderChestTrans ga$getInventoryEnderChestTrans();
 
-    void addStoneCount(long stoneCount);
+    void ga$addStoneCount(long stoneCount);
 
-    InventoryJewelry getInventoryJewelry();
+    InventoryJewelry ga$getInventoryJewelry();
 
-    MoneyManager getMoneyManager();
+    MoneyManager ga$getMoneyManager();
 
-    BossManager getBossManager();
+    BossManager ga$getBossManager();
+
+    static MoneyManager getMoneyManager(EntityPlayer player) {
+        return ((GAEntityPlayer) player).ga$getMoneyManager();
+    }
+
+    static InventoryJewelry getInventoryJewelry(EntityPlayer player) {
+        return ((GAEntityPlayer) player).ga$getInventoryJewelry();
+    }
 }

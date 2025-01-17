@@ -1,6 +1,6 @@
 package com.github.Debris.GAHigher.item;
 
-import com.github.Debris.GAHigher.compat.ITECompat;
+import com.github.Debris.GAHigher.compat.ModCompat;
 import net.minecraft.*;
 
 import java.util.List;
@@ -14,7 +14,7 @@ public class ItemZombie_Soup extends ItemFood {
     }
 
     public int getMaxItemUseDuration(ItemStack par1ItemStack) {
-        if (ITECompat.HAS_ITE) {
+        if (ModCompat.HAS_ITE) {
             return ITECompatImpl.getZombieSoupEatingDuration();
         }
         return super.getMaxItemUseDuration(par1ItemStack);

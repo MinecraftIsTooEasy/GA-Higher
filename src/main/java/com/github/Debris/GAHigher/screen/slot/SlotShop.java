@@ -27,7 +27,7 @@ public class SlotShop extends Slot {
     @Override
     public void onSlotClicked(EntityPlayer entity_player, int button, Container container) {
         super.onSlotClicked(entity_player, button, container);
-        MoneyManager moneyManager = ((GAEntityPlayer) entity_player).getMoneyManager();
+        MoneyManager moneyManager = GAEntityPlayer.getMoneyManager(entity_player);
         if (getStack() != null) {
             ItemStack var5 = getStack().copy();
             PriceItem price = ((GAItemStack) var5).getPrice();

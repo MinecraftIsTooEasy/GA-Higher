@@ -23,7 +23,7 @@ public class JewelryManager extends AbstractManager {
     @SuppressWarnings("unchecked")
     @Override
     public void tick() {
-        InventoryJewelry inventoryJewelry = ((GAEntityPlayer) this.player).getInventoryJewelry();
+        InventoryJewelry inventoryJewelry = GAEntityPlayer.getInventoryJewelry(this.player);
 //        this.itemRingKiller = ((GAInventoryPlayer) this.player.inventory).getRingKiller();
         this.itemRingKiller = inventoryJewelry.getRingKiller();
         if (this.itemRingKiller != null) {

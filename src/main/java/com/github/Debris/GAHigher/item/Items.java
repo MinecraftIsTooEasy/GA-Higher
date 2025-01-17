@@ -3,7 +3,7 @@ package com.github.Debris.GAHigher.item;
 import com.github.Debris.GAHigher.GAStart;
 import com.github.Debris.GAHigher.block.Blocks;
 import com.github.Debris.GAHigher.client.GACreativeTabs;
-import com.github.Debris.GAHigher.compat.ITECompat;
+import com.github.Debris.GAHigher.compat.ModCompat;
 import com.github.Debris.GAHigher.config.Configs;
 import com.github.Debris.GAHigher.item.api.StandardItem;
 import com.github.Debris.GAHigher.item.guilt.*;
@@ -139,7 +139,7 @@ public class Items extends Item {
     public static final ItemJewelry[] jewelries = new ItemJewelry[]{item_magnet, lucky_clover, bottled_cloud, pocket_piston};
 
     private static Material getBestMaterial() {
-        if (ITECompat.HAS_ITE) {
+        if (ModCompat.HAS_ITE) {
             return ITECompatImpl.getVibraniumMaterial();
         }
         return Material.adamantium;
@@ -260,7 +260,7 @@ public class Items extends Item {
                 Item.ingotAncientMetal);
         List<Item> nuggets = new ArrayList<>(vanillaNuggets);
         List<Item> ingots = new ArrayList<>(vanillaIngots);
-        if (ITECompat.HAS_ITE) {
+        if (ModCompat.HAS_ITE) {
             ITECompatImpl.addNuggetToList(nuggets);
             ITECompatImpl.addIngotToList(ingots);
         }
@@ -475,7 +475,7 @@ public class Items extends Item {
 //        registerUpdateBootsRecipe(register, bootsAdamantium, bootsMithril, ingotAdamantium);
 
 
-        if (ITECompat.HAS_ITE) {
+        if (ModCompat.HAS_ITE) {
             ITECompatImpl.registerCompatRecipes(register);
         } else {
             vibranium_skirt.setLowestCraftingDifficultyToProduce(adamantium_skirt.getLowestCraftingDifficultyToProduce() * 2);// to suppress the warning

@@ -19,7 +19,7 @@ public abstract class ContainerPlayerTrans extends MITEContainerCrafting {
 
     @Inject(method = {"createSlots()V"}, at = {@At("RETURN")})
     public void createSlotsInject(CallbackInfo callbackInfo) {
-        InventoryJewelry inventoryJewelry = ((GAEntityPlayer) this.player).getInventoryJewelry();
+        InventoryJewelry inventoryJewelry = GAEntityPlayer.getInventoryJewelry(this.player);
 //        for (int i = 0; i < inventoryJewelry.getSizeInventory(); i++) {// old slots
 //            this.addSlotToContainer(new Slot(inventoryJewelry, i, 80 + i * 18, 64));
 //        }

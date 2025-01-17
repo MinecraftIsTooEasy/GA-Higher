@@ -25,7 +25,7 @@ public class GAConfigManyLib extends SimpleConfigs {
 
     public static final ConfigBoolean OverrideEmi = new ConfigBoolean("是否覆写Emi列数", true, "因为emi有可能挡住珠宝栏, 这个功能会自动设置emi的列数");
 
-    public static final ConfigInteger OverrideEmiColumn = new ConfigInteger("覆写Emi列数", 8, 0, 32, "界面尺寸为自动时生效; 因为emi有可能挡住珠宝栏; 设置成0取消覆写");
+    public static final ConfigInteger OverrideEmiColumn = new ConfigInteger("覆写Emi列数", 6, 0, 32, "界面尺寸为自动时生效; 因为emi有可能挡住珠宝栏; 设置成0取消覆写");
 
     public static final ConfigInteger OverrideEmiColumnWiden = new ConfigInteger("覆写Emi列数(物品栏扩大时)", 4, 0, 32, "界面尺寸为自动时生效; 因为emi有可能挡住珠宝栏; 设置成0取消覆写");
 

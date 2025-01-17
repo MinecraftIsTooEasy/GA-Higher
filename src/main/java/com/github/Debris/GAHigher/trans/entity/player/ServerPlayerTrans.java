@@ -33,7 +33,7 @@ public abstract class ServerPlayerTrans extends EntityPlayer implements ICraftin
         this.openContainer = new ContainerShop(this);
         this.openContainer.windowId = this.currentWindowId;
         this.openContainer.addCraftingToCrafters(this);
-        GANetwork.sendToClient(this.getAsEntityPlayerMP(),new S2CSyncShopInfo(Items.priceStackList.size(), ((GAEntityPlayer) this).getMoneyManager().getMoney()));
+        GANetwork.sendToClient(this.getAsEntityPlayerMP(), new S2CSyncShopInfo(Items.priceStackList.size(), GAEntityPlayer.getMoneyManager(this).getMoney()));
     }
 
     @Shadow
@@ -45,9 +45,8 @@ public abstract class ServerPlayerTrans extends EntityPlayer implements ICraftin
 
     @Inject(method = "onDeath", at = @At("RETURN"))
     private void onDeath(DamageSource par1DamageSource, CallbackInfo ci) {
-        if (this.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory")) return;
         if (KeepInventoryCompat.canKeepInventory(this)) return;
-        ((GAEntityPlayer) ((EntityPlayer) this)).getInventoryJewelry().dropAll();
+        GAEntityPlayer.getInventoryJewelry(this).dropAll();
     }
 
 }

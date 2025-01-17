@@ -5,13 +5,14 @@ import com.github.Debris.GAHigher.config.GAConfigManyLib;
 import net.minecraft.Container;
 import net.minecraft.GuiContainer;
 import net.minecraft.InventoryEffectRenderer;
-import net.xiaoyu233.fml.FishModLoader;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+// assuming has emi
 @Mixin(InventoryEffectRenderer.class)
 public abstract class InventoryEffectRendererMixin extends GuiContainer {
     @Shadow
@@ -21,13 +22,9 @@ public abstract class InventoryEffectRendererMixin extends GuiContainer {
         super(par1Container);
     }
 
-    @Inject(method = "initGui", at = @At("RETURN"))
+    @Inject(method = "initGui", at = @At("HEAD"))
     private void onInit(CallbackInfo ci) {
-        if (!FishModLoader.hasMod("emi")) {
-            return;
-        }
-        if (this.mc.gameSettings.guiScale != 0) return;
-        if (!GAConfigManyLib.OverrideEmi.getBooleanValue()) return;
+        if (this.shouldSkip()) return;
         EmiSettingsCompat.cacheColumn();
         if (this.field_74222_o) {
             EmiSettingsCompat.trySetColumn(GAConfigManyLib.OverrideEmiColumnWiden.getIntegerValue());
@@ -39,11 +36,14 @@ public abstract class InventoryEffectRendererMixin extends GuiContainer {
     @Override
     public void onGuiClosed() {
         super.onGuiClosed();
-        if (!FishModLoader.hasMod("emi")) {
-            return;
-        }
-        if (this.mc.gameSettings.guiScale != 0) return;
-        if (!GAConfigManyLib.OverrideEmi.getBooleanValue()) return;
+        if (this.shouldSkip()) return;
         EmiSettingsCompat.restore();
+    }
+
+    @Unique
+    private boolean shouldSkip() {
+        if (this.mc.gameSettings.guiScale != 0) return true;
+        if (!GAConfigManyLib.OverrideEmi.getBooleanValue()) return true;
+        return false;
     }
 }

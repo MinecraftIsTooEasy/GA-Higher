@@ -13,24 +13,24 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin({EnchantmentHelper.class})
 public class EnchantmentHelperMixin {
     @ModifyReturnValue(method = "getFortuneModifier", at = @At("RETURN"))
-    private static int moreFortune(int original, @Local(argsOnly = true) EntityLivingBase par0EntityLivingBase) {
-        if (par0EntityLivingBase instanceof EntityPlayer player && ((GAEntityPlayer) player).getInventoryJewelry().hasJewelry(Items.lucky_clover)) {
+    private static int moreFortune(int original, @Local(argsOnly = true) EntityLivingBase entity) {
+        if (entity instanceof EntityPlayer player && GAEntityPlayer.getInventoryJewelry(player).hasJewelry(Items.lucky_clover)) {
             original += 1;
         }
         return original;
     }
 
     @ModifyReturnValue(method = "getLootingModifier", at = @At("RETURN"))
-    private static int moreLoot(int original, @Local(argsOnly = true) EntityLivingBase par0EntityLivingBase) {
-        if (par0EntityLivingBase instanceof EntityPlayer player && ((GAEntityPlayer) player).getInventoryJewelry().hasJewelry(Items.lucky_clover)) {
+    private static int moreLoot(int original, @Local(argsOnly = true) EntityLivingBase entity) {
+        if (entity instanceof EntityPlayer player && GAEntityPlayer.getInventoryJewelry(player).hasJewelry(Items.lucky_clover)) {
             original += 1;
         }
         return original;
     }
 
     @ModifyReturnValue(method = "getButcheringModifier", at = @At("RETURN"))
-    private static int moreButcher(int original, @Local(argsOnly = true) EntityLivingBase par0EntityLivingBase) {
-        if (par0EntityLivingBase instanceof EntityPlayer player && ((GAEntityPlayer) player).getInventoryJewelry().hasJewelry(Items.lucky_clover)) {
+    private static int moreButcher(int original, @Local(argsOnly = true) EntityLivingBase entity) {
+        if (entity instanceof EntityPlayer player && GAEntityPlayer.getInventoryJewelry(player).hasJewelry(Items.lucky_clover)) {
             original += 1;
         }
         return original;

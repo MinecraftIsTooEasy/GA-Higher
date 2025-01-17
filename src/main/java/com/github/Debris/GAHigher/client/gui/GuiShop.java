@@ -58,7 +58,7 @@ public class GuiShop extends GuiContainer {
         String shopContainerName = I18n.getString("container.shop");
         this.fontRenderer.drawString(shopContainerName, this.xSize / 2 - this.fontRenderer.getStringWidth(shopContainerName) / 2, 6, 4210752);
         this.fontRenderer.drawString(I18n.getString("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
-        String moneyText = ((GAEntityPlayer) this.inventorySlots.player).getMoneyManager().getMoneyText();
+        String moneyText = GAEntityPlayer.getMoneyManager(this.inventorySlots.player).getMoneyText();
         this.fontRenderer.drawString(moneyText, this.xSize / 2 - this.fontRenderer.getStringWidth(moneyText) / 2, this.ySize - 110, 4210752);
     }
 

@@ -67,7 +67,7 @@ public class BlockStoneTrans extends Block {
                     if (M1 == 0)
                         MMPlayer.addChatMessage("a_pickaxe.msg." + M2);
                     MMPlayer.tryDamageHeldItem(DamageSource.generic, count * 240);
-                    (((GAEntityPlayer) (EntityPlayer) MMPlayer)).addStoneCount(count);
+                    (((GAEntityPlayer) (EntityPlayer) MMPlayer)).ga$addStoneCount(count);
                     MMPlayer.addExperience(count, true, true);
                 }
             } else {

@@ -2,7 +2,7 @@ package com.github.Debris.GAHigher.item;
 
 import com.github.Debris.GAHigher.api.GAWorld;
 import com.github.Debris.GAHigher.block.Blocks;
-import com.github.Debris.GAHigher.compat.ITECompat;
+import com.github.Debris.GAHigher.compat.ModCompat;
 import com.github.Debris.GAHigher.entity.EntityZombieBoss;
 import net.minecraft.*;
 
@@ -63,7 +63,7 @@ public class ItemConsumables extends Item {
 //            return true;
 //        }
         if (consumable.getItem() == Items.final_key) {
-            if (!ITECompat.HAS_ITE) return false;
+            if (!ModCompat.HAS_ITE) return false;
             RaycastCollision rc = player.getSelectedObject(partial_tick, false);
             if (rc != null)
                 if (rc.isBlock()) {

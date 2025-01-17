@@ -19,9 +19,10 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String s, String s1) {
-        if (s1.equals("com.github.Debris.GAHigher.trans.compat.FastVibraniumWorkbenchMixin")) return ITECompat.HAS_ITE;
-        if (s.equals("net.minecraft.BlockMobSpawner")) return ITECompat.HAS_ITE;// zombie boss
-        if (s.equals("net.minecraft.BlockWeb")) return ITECompat.HAS_ITE;// zombie boss
+        if (s1.equals("com.github.Debris.GAHigher.trans.compat.FastVibraniumWorkbenchMixin")) return ModCompat.HAS_ITE;
+        if (s.equals("net.minecraft.BlockMobSpawner")) return ModCompat.HAS_ITE;// zombie boss
+        if (s.equals("net.minecraft.BlockWeb")) return ModCompat.HAS_ITE;// zombie boss
+        if (s1.equals("net.minecraft.InventoryEffectRenderer")) return ModCompat.HAS_EMI;
         return true;
     }
 

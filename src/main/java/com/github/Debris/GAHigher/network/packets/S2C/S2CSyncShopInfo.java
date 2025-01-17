@@ -31,7 +31,7 @@ public class S2CSyncShopInfo implements Packet {
     @Override
     public void apply(EntityPlayer entityPlayer) {
         Items.shopSize = shopSize;
-        ((GAEntityPlayer) entityPlayer).getMoneyManager().setMoney(this.money);
+        GAEntityPlayer.getMoneyManager(entityPlayer).setMoney(this.money);
     }
 
     @Override

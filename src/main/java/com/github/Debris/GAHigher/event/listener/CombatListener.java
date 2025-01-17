@@ -11,7 +11,7 @@ import net.minecraft.EnumEntityReachContext;
 public class CombatListener implements ICombatListener {
     @Override
     public float onPlayerBlockReachModify(EntityPlayer player, Block block, int metadata, float original) {
-        if (((GAEntityPlayer) player).getInventoryJewelry().hasJewelry(Items.pocket_piston)) {
+        if (GAEntityPlayer.getInventoryJewelry(player).hasJewelry(Items.pocket_piston)) {
             original += 1;
         }
         return original;
@@ -19,7 +19,7 @@ public class CombatListener implements ICombatListener {
 
     @Override
     public float onPlayerEntityReachModify(EntityPlayer player, EnumEntityReachContext context, Entity entity, float original) {
-        if (((GAEntityPlayer) player).getInventoryJewelry().hasJewelry(Items.pocket_piston)) {
+        if (GAEntityPlayer.getInventoryJewelry(player).hasJewelry(Items.pocket_piston)) {
             original += 1;
         }
         return original;

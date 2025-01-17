@@ -100,7 +100,7 @@ public class InventoryJewelry extends InventoryBasic {
 //                System.out.println(Arrays.toString((Object[]) new Map[]{(par2ItemStack.getItem()).soldPriceArray}));
                 double soldPrice = ((GAItem) par2ItemStack.getItem()).getSoldPrice(par2ItemStack.getItemSubtype());
                 if (soldPrice > 0.0D && !this.player.worldObj.isRemote) {
-                    MoneyManager moneyManager = ((GAEntityPlayer) this.player).getMoneyManager();
+                    MoneyManager moneyManager = GAEntityPlayer.getMoneyManager(this.player);
                     moneyManager.addMoney(par2ItemStack.stackSize * soldPrice);
                     double now = moneyManager.getMoney();
                     this.player.addChatMessage("现有余额：" + String.format("%.2f", now));
@@ -110,5 +110,12 @@ public class InventoryJewelry extends InventoryBasic {
             return;
         }
         super.setInventorySlotContents(par1, par2ItemStack);
+    }
+
+    public void clone(EntityPlayer oldPlayer) {
+        InventoryJewelry oldInventory = GAEntityPlayer.getInventoryJewelry(oldPlayer);
+        for (int i = 0; i < this.getSizeInventory(); i++) {
+            this.setInventorySlotContents(i, ItemStack.copyItemStack(oldInventory.getStackInSlot(i)));
+        }
     }
 }
