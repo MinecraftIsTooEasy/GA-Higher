@@ -46,7 +46,7 @@ public class ITECompatImpl {
     }
 
     public static void registerPrices() {
-        ((GAItem) VIBRANIUM_INGOT).setSoldPrice(250.0D);
-        ((GAItem) VIBRANIUM_NUGGET).setSoldPrice(25.0D);
+        ((GAItem) VIBRANIUM_INGOT).ga$setSoldPriceForAllSubs(250.0D);
+        ((GAItem) VIBRANIUM_NUGGET).ga$setSoldPriceForAllSubs(25.0D);
     }
 }

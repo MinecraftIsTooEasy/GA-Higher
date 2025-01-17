@@ -1,15 +1,15 @@
 package com.github.Debris.GAHigher.api;
 
 public interface GAItem {
-    double getSoldPrice(int subtype);
+    double ga$getSoldPrice(int subtype);
 
-    double getBuyPrice(int subtype);
+    double ga$getBuyPrice(int subtype);
 
-    void registerSoldPrice(int subtype, double soldPrice);
+    void ga$setSoldPrice(int subtype, double soldPrice);
 
-    void registerBuyPrice(int subtype, double soldPrice);
+    void ga$setBuyPrice(int subtype, double soldPrice);
 
-    GAItem setBuyPrice(double price);
+    GAItem ga$setBuyPriceForAllSubs(double price);
 
-    GAItem setSoldPrice(double price);
+    GAItem ga$setSoldPriceForAllSubs(double price);
 }

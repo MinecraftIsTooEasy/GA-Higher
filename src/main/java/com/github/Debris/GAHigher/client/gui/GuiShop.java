@@ -1,11 +1,11 @@
 package com.github.Debris.GAHigher.client.gui;
 
 import com.github.Debris.GAHigher.api.GAEntityPlayer;
-import com.github.Debris.GAHigher.item.Items;
 import com.github.Debris.GAHigher.network.GANetwork;
 import com.github.Debris.GAHigher.network.packets.C2S.C2SShopIndex;
 import com.github.Debris.GAHigher.screen.container.ContainerShop;
 import com.github.Debris.GAHigher.screen.inventory.InventoryShop;
+import com.github.Debris.GAHigher.util.PriceStacks;
 import net.minecraft.*;
 import org.lwjgl.opengl.GL11;
 
@@ -45,7 +45,7 @@ public class GuiShop extends GuiContainer {
             case 2 -> {
                 this.left.enabled = true;
                 this.pageIndex++;
-                if (this.pageIndex == (double) (Items.shopSize / InventoryShop.pageSize)) {
+                if (this.pageIndex == (double) (PriceStacks.shopSize / InventoryShop.pageSize)) {
                     var1.enabled = false;
                 }
             }

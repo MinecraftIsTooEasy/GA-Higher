@@ -17,64 +17,67 @@ import java.util.Map;
 @Mixin({Item.class})
 public abstract class ItemTrans implements GAItem {
     @Unique
-    private Map<Integer, Double> soldPriceArray = new HashMap<>();
+    private final Map<Integer, Double> soldPriceArray = new HashMap<>();
 
     @Unique
-    private Map<Integer, Double> buyPriceArray = new HashMap<>();
+    private final Map<Integer, Double> buyPriceArray = new HashMap<>();
 
     @Override
-    public double getSoldPrice(int subtype) {
-        return this.soldPriceArray.get(subtype);
+    public double ga$getSoldPrice(int subtype) {
+        return this.soldPriceArray.getOrDefault(subtype, 0.0D);
     }
 
     @Override
-    public double getBuyPrice(int subtype) {
-        return this.buyPriceArray.get(subtype);
+    public double ga$getBuyPrice(int subtype) {
+        return this.buyPriceArray.getOrDefault(subtype, 0.0D);
     }
 
     @Override
-    public void registerSoldPrice(int subtype, double soldPrice) {
-        this.soldPriceArray.put(subtype, soldPrice);
+    public void ga$setSoldPrice(int subtype, double soldPrice) {
+        if (soldPrice > 0) {
+            this.soldPriceArray.put(subtype, soldPrice);
+        }
     }
 
     @Override
-    public void registerBuyPrice(int subtype, double buyPrice) {
-        this.buyPriceArray.put(subtype, buyPrice);
+    public void ga$setBuyPrice(int subtype, double buyPrice) {
+        if (buyPrice > 0) {
+            this.buyPriceArray.put(subtype, buyPrice);
+        }
     }
 
     @Override
-    public GAItem setBuyPrice(double price) {
+    public GAItem ga$setBuyPriceForAllSubs(double price) {
+        if (price <= 0) {
+            return this;
+        }
         if (getHasSubtypes()) {
             List<ItemStack> subs = getSubItems();
-            for (int i = 0; i < subs.size(); i++) {
-                ItemStack itemStack = subs.get(i);
+            for (ItemStack itemStack : subs) {
                 int sub = itemStack.getItemSubtype();
-                this.buyPriceArray.put(Integer.valueOf(sub), Double.valueOf(price));
+                this.buyPriceArray.put(sub, price);
             }
         } else {
-            this.buyPriceArray.put(Integer.valueOf(0), Double.valueOf(price));
+            this.buyPriceArray.put(0, price);
         }
         return this;
     }
 
     @Override
-    public GAItem setSoldPrice(double price) {
+    public GAItem ga$setSoldPriceForAllSubs(double price) {
+        if (price <= 0) {
+            return this;
+        }
         if (this.getHasSubtypes()) {
             List<ItemStack> subs = getSubItems();
-            for (int i = 0; i < subs.size(); i++) {
-                ItemStack itemStack = subs.get(i);
+            for (ItemStack itemStack : subs) {
                 int sub = itemStack.getItemSubtype();
-                this.soldPriceArray.put(Integer.valueOf(sub), Double.valueOf(price));
+                this.soldPriceArray.put(sub, price);
             }
         } else {
-            this.soldPriceArray.put(Integer.valueOf(0), Double.valueOf(price));
+            this.soldPriceArray.put(0, price);
         }
         return this;
-    }
-
-    @Shadow
-    public Item setMaxStackSize(int maxStackSize) {
-        return null;
     }
 
     @Shadow

@@ -8,7 +8,8 @@
     "many-lib": ">=2.0.0"
   },
   "suggests": {
-    "mite_ite": ">=2.0.9"
+    "mite_ite": ">=2.0.9",
+    "baubles": ">=1.0.9"
   },
   "environment": "*",
   "name": "GA-Higher",
@@ -33,7 +34,10 @@
       "com.github.Debris.GAHigher.compat.ModMenuImpl"
     ],
     "emi": [
-      "com.github.Debris.GAHigher.compat.GAEmiPlugin"
+      "com.github.Debris.GAHigher.compat.EmiPlugin"
+    ],
+    "baubles": [
+      "com.github.Debris.GAHigher.compat.BaublesPlugin"
     ]
   },
   "mixins": [

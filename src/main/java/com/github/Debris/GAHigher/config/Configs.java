@@ -3,7 +3,7 @@ package com.github.Debris.GAHigher.config;
 import com.github.Debris.GAHigher.GAStart;
 import com.github.Debris.GAHigher.api.GAItem;
 import com.github.Debris.GAHigher.api.GAItemStack;
-import com.github.Debris.GAHigher.item.Items;
+import com.github.Debris.GAHigher.util.PriceStacks;
 import net.minecraft.Item;
 import net.minecraft.ItemBlock;
 import net.minecraft.ItemMap;
@@ -14,10 +14,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
@@ -244,7 +241,7 @@ public class Configs {
     }
 
     public static void readShopConfigFromFile(File file_mite, Properties properties) {
-        Items.priceStackList.clear();
+        PriceStacks.beginLoading();
         try {
             FileWriter fileWriter = new FileWriter(file_mite, true);
             for (Item item : Item.itemsList) {
@@ -257,7 +254,8 @@ public class Configs {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            sortList();
+            PriceStacks.endLoading();
+            PriceStacks.sortList();
         }
     }
 
@@ -301,35 +299,36 @@ public class Configs {
     }
 
     private static void setPrice(Item item, int sub, ItemStack itemStack, double soldPrice, double buyPrice) {
-        double soldPriceFromMemory = ((GAItem) item).getSoldPrice(sub);
+        double soldPriceFromMemory = ((GAItem) item).ga$getSoldPrice(sub);
         if (soldPrice == 0.0D && soldPriceFromMemory > 0.0D) {
             soldPrice = soldPriceFromMemory;
         }
-        double buyPriceFromMemory = ((GAItem) item).getBuyPrice(sub);
+        double buyPriceFromMemory = ((GAItem) item).ga$getBuyPrice(sub);
         if (buyPrice == 0.0D && buyPriceFromMemory > 0.0D) {
-            buyPrice = soldPriceFromMemory;
+            buyPrice = buyPriceFromMemory;
         }
-        ((GAItem) item).registerSoldPrice(sub, soldPrice);
-        ((GAItem) item).registerBuyPrice(sub, buyPrice);
+
+        ((GAItem) item).ga$setSoldPrice(sub, soldPrice);
+        ((GAItem) item).ga$setBuyPrice(sub, buyPrice);
         ((GAItemStack) itemStack).setPrice(soldPrice, buyPrice);
         if (soldPrice > 0.0D || buyPrice > 0.0D) {
-            Items.priceStackList.add(itemStack);
+            PriceStacks.addStack(itemStack);
         }
     }
 
     public static void writeShopConfigFormatter(FileWriter fileWriter, Item item, ItemStack itemStack) throws IOException {
         int sub = itemStack.getItemSubtype();
-        double soldPrice = ((GAItem) item).getSoldPrice(sub);
-        double buyPrice = ((GAItem) item).getBuyPrice(sub);
+        double soldPrice = ((GAItem) item).ga$getSoldPrice(sub);
+        double buyPrice = ((GAItem) item).ga$getBuyPrice(sub);
         ((GAItemStack) itemStack).setPrice(soldPrice, buyPrice);
         if (soldPrice > 0.0D || buyPrice > 0.0D)
-            Items.priceStackList.add(itemStack);
+            PriceStacks.addStack(itemStack);
         if (item.getHasSubtypes()) {
             fileWriter.write("// " + itemStack.getDisplayName() + " ID: " + itemStack.itemID + " meta:" + sub + "\n");
-            fileWriter.write(itemStack.getUnlocalizedName() + "$" + item.itemID + "$" + sub + "=" + ((GAItem) item).getSoldPrice(sub) + "," + ((GAItem) item).getBuyPrice(sub) + "\n\n");
+            fileWriter.write(itemStack.getUnlocalizedName() + "$" + item.itemID + "$" + sub + "=" + ((GAItem) item).ga$getSoldPrice(sub) + "," + ((GAItem) item).ga$getBuyPrice(sub) + "\n\n");
         } else {
             fileWriter.write("// " + itemStack.getDisplayName() + " ID: " + item.itemID + "\n");
-            fileWriter.write(itemStack.getUnlocalizedName() + "$" + item.itemID + "=" + ((GAItem) item).getSoldPrice(0) + "," + ((GAItem) item).getBuyPrice(0) + "\n\n");
+            fileWriter.write(itemStack.getUnlocalizedName() + "$" + item.itemID + "=" + ((GAItem) item).ga$getSoldPrice(0) + "," + ((GAItem) item).ga$getBuyPrice(0) + "\n\n");
         }
     }
 
@@ -357,21 +356,8 @@ public class Configs {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            sortList();
+            PriceStacks.sortList();
         }
     }
 
-    private static void sortList() {
-        Items.priceStackList.sort((o1, o2) -> {
-            double offset;
-            double o1Buy = (((GAItemStack) o1).getPrice()).buyPrice();
-            double o2Buy = (((GAItemStack) o2).getPrice()).buyPrice();
-            if (o2Buy > 0.0D && o1Buy > 0.0D) {
-                offset = o1Buy - o2Buy;
-            } else {
-                offset = o2Buy - o1Buy;
-            }
-            return (offset > 0.0D) ? 1 : ((offset == 0.0D) ? 0 : -1);
-        });
-    }
 }

@@ -1,8 +1,8 @@
 package com.github.Debris.GAHigher.network.packets.S2C;
 
 import com.github.Debris.GAHigher.api.GAEntityPlayer;
-import com.github.Debris.GAHigher.item.Items;
 import com.github.Debris.GAHigher.network.GANetwork;
+import com.github.Debris.GAHigher.util.PriceStacks;
 import moddedmite.rustedironcore.network.Packet;
 import moddedmite.rustedironcore.network.PacketByteBuf;
 import net.minecraft.EntityPlayer;
@@ -30,7 +30,7 @@ public class S2CSyncShopInfo implements Packet {
 
     @Override
     public void apply(EntityPlayer entityPlayer) {
-        Items.shopSize = shopSize;
+        PriceStacks.shopSize = shopSize;
         GAEntityPlayer.getMoneyManager(entityPlayer).setMoney(this.money);
     }
 

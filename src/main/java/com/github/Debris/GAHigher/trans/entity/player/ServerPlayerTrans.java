@@ -3,11 +3,11 @@ package com.github.Debris.GAHigher.trans.entity.player;
 import com.github.Debris.GAHigher.api.GAEntityPlayer;
 import com.github.Debris.GAHigher.api.GAPlayer;
 import com.github.Debris.GAHigher.compat.KeepInventoryCompat;
-import com.github.Debris.GAHigher.item.Items;
 import com.github.Debris.GAHigher.network.GANetwork;
 import com.github.Debris.GAHigher.network.packets.S2C.S2COpenWindow;
 import com.github.Debris.GAHigher.network.packets.S2C.S2CSyncShopInfo;
 import com.github.Debris.GAHigher.screen.container.ContainerShop;
+import com.github.Debris.GAHigher.util.PriceStacks;
 import net.minecraft.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -33,7 +33,7 @@ public abstract class ServerPlayerTrans extends EntityPlayer implements ICraftin
         this.openContainer = new ContainerShop(this);
         this.openContainer.windowId = this.currentWindowId;
         this.openContainer.addCraftingToCrafters(this);
-        GANetwork.sendToClient(this.getAsEntityPlayerMP(), new S2CSyncShopInfo(Items.priceStackList.size(), GAEntityPlayer.getMoneyManager(this).getMoney()));
+        GANetwork.sendToClient(this.getAsEntityPlayerMP(), new S2CSyncShopInfo(PriceStacks.getStackListSize(), GAEntityPlayer.getMoneyManager(this).getMoney()));
     }
 
     @Shadow

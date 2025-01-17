@@ -4,15 +4,17 @@ import com.github.Debris.GAHigher.api.GAEntityPlayer;
 import com.github.Debris.GAHigher.enums.RingKillerImmune;
 import com.github.Debris.GAHigher.item.ItemRingKiller;
 import com.github.Debris.GAHigher.item.jewelry.ItemJewelry;
-import com.github.Debris.GAHigher.screen.inventory.InventoryJewelry;
-import net.minecraft.*;
+import com.github.Debris.GAHigher.util.BaublesUtil;
+import net.minecraft.Damage;
+import net.minecraft.DamageSource;
+import net.minecraft.Entity;
+import net.minecraft.EntityPlayer;
 
 import java.util.List;
+import java.util.Optional;
 
 public class JewelryManager extends AbstractManager {
-
-    ItemStack itemRingKiller;
-
+    ItemRingKiller itemRingKiller;
 
     private int surroundHurtCollDown = 20;
 
@@ -23,12 +25,11 @@ public class JewelryManager extends AbstractManager {
     @SuppressWarnings("unchecked")
     @Override
     public void tick() {
-        InventoryJewelry inventoryJewelry = GAEntityPlayer.getInventoryJewelry(this.player);
-//        this.itemRingKiller = ((GAInventoryPlayer) this.player.inventory).getRingKiller();
-        this.itemRingKiller = inventoryJewelry.getRingKiller();
+        Optional<ItemRingKiller> optional = BaublesUtil.getBestRingKiller(this.player);
+        this.itemRingKiller = optional.orElse(null);
         if (this.itemRingKiller != null) {
-            float range = ((ItemRingKiller) this.itemRingKiller.getItem()).getRingKillerSkillRange();
-            int cooldownTime = ((ItemRingKiller) this.itemRingKiller.getItem()).getRingKillerSkillCoolDownTime();
+            float range = this.itemRingKiller.getRingKillerSkillRange();
+            int cooldownTime = this.itemRingKiller.getRingKillerSkillCoolDownTime();
             List<Entity> targets = this.player.getNearbyEntities(range, range);
             if (targets.size() > 0) {
                 if (this.surroundHurtCollDown == cooldownTime) {
@@ -45,22 +46,11 @@ public class JewelryManager extends AbstractManager {
                     this.surroundHurtCollDown = cooldownTime;
             }
         }
-        inventoryJewelry.getJewelry().forEach(x -> ((ItemJewelry) x.getItem()).onTick(x, this.player.getAsEntityPlayerMP()));
+        GAEntityPlayer.getInventoryJewelry(this.player).getJewelry().forEach(x -> ((ItemJewelry) x.getItem()).onTick(x, this.player.getAsEntityPlayerMP()));
     }
-
-    @Override
-    public void write(NBTTagCompound nbtTagCompound) {
-        super.write(nbtTagCompound);
-    }
-
-    @Override
-    public void read(NBTTagCompound nbtTagCompound) {
-        super.read(nbtTagCompound);
-    }
-
 
     public void attackMonsters(List<Entity> targets) {
-        float damage = ((ItemRingKiller) this.itemRingKiller.getItem()).getRingKillerSkillDamage();
+        float damage = this.itemRingKiller.getRingKillerSkillDamage();
         for (Entity entity : targets) {
             if (RingKillerImmune.shouldApply(entity)) {
                 entity.attackEntityFrom(new Damage(DamageSource.causePlayerDamage(this.player), damage));

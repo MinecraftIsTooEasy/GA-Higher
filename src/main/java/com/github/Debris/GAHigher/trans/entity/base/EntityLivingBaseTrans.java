@@ -1,7 +1,7 @@
 package com.github.Debris.GAHigher.trans.entity.base;
 
-import com.github.Debris.GAHigher.api.GAEntityPlayer;
 import com.github.Debris.GAHigher.item.Items;
+import com.github.Debris.GAHigher.util.BaublesUtil;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.Entity;
 import net.minecraft.EntityLivingBase;
@@ -54,6 +54,6 @@ public abstract class EntityLivingBaseTrans extends Entity {
 
     @Unique
     private boolean canDoubleJump() {
-        return this.isEntityPlayer() && GAEntityPlayer.getInventoryJewelry(this.getAsPlayer()).hasJewelry(Items.bottled_cloud);
+        return this.isEntityPlayer() && BaublesUtil.hasBaubleWorn(this.getAsPlayer(), Items.bottled_cloud);
     }
 }

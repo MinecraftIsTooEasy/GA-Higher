@@ -520,10 +520,6 @@ public class Items extends Item {
         return IdUtil.getNextItemID();
     }
 
-    public static final List<ItemStack> priceStackList = new ArrayList<>();
-
-    public static int shopSize = 0;
-
     private static class RepeatRecipeBuilder {
         final int inputID;
         final int inputMeta;

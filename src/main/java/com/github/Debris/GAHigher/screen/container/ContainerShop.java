@@ -44,7 +44,7 @@ public class ContainerShop extends Container {
             if (par2 < 0 || par2 >= 45) {
                 ItemStack var5 = var4.getStack();
 //                System.out.println(var5.getItem());
-                double soldPrice = ((GAItem) var5.getItem()).getSoldPrice(var5.getItemSubtype());
+                double soldPrice = ((GAItem) var5.getItem()).ga$getSoldPrice(var5.getItemSubtype());
                 if (soldPrice > 0.0D) {
                     double totalMoney = var5.stackSize * soldPrice;
                     GAEntityPlayer.getMoneyManager(this.player).addMoneyWithSimplify(totalMoney);

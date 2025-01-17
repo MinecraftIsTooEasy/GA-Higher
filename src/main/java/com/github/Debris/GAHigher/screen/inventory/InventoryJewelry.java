@@ -42,7 +42,7 @@ public class InventoryJewelry extends InventoryBasic {
         return builder.build();
     }
 
-    public boolean hasJewelry(Item item) {
+    public boolean hasItem(Item item) {
         for (int i = 0; i < this.getSizeInventory(); i++) {
             ItemStack stackInSlot = this.getStackInSlot(i);
             if (stackInSlot == null) continue;// empty slot
@@ -51,21 +51,15 @@ public class InventoryJewelry extends InventoryBasic {
         return false;
     }
 
-    public ItemStack getRingKiller() {
-        ItemStack strongestRingKiller = null;
+    public List<ItemStack> getRingKillers() {
+        ImmutableList.Builder<ItemStack> builder = ImmutableList.builder();
         for (int i = 0; i < this.getSizeInventory(); i++) {
             ItemStack stackInSlot = this.getStackInSlot(i);
             if (stackInSlot == null) continue;// empty slot
             if (!(stackInSlot.getItem() instanceof ItemRingKiller)) continue;// the slot is not ring killer
-            if (strongestRingKiller == null) {// if null just apply first
-                strongestRingKiller = stackInSlot;
-                continue;
-            }
-            if (((ItemRingKiller) stackInSlot.getItem()).getLevel() > ((ItemRingKiller) strongestRingKiller.getItem()).getLevel()) {// choose better one
-                strongestRingKiller = stackInSlot;
-            }
+            builder.add(stackInSlot);
         }
-        return strongestRingKiller;
+        return builder.build();
     }
 
     public void readFromNBT(NBTTagList par1NBTTagList) {
@@ -98,7 +92,7 @@ public class InventoryJewelry extends InventoryBasic {
         if (par1 == 7 && par2ItemStack != null) {
             if (!Configs.wenscConfig.isCloseShop.ConfigValue) {
 //                System.out.println(Arrays.toString((Object[]) new Map[]{(par2ItemStack.getItem()).soldPriceArray}));
-                double soldPrice = ((GAItem) par2ItemStack.getItem()).getSoldPrice(par2ItemStack.getItemSubtype());
+                double soldPrice = ((GAItem) par2ItemStack.getItem()).ga$getSoldPrice(par2ItemStack.getItemSubtype());
                 if (soldPrice > 0.0D && !this.player.worldObj.isRemote) {
                     MoneyManager moneyManager = GAEntityPlayer.getMoneyManager(this.player);
                     moneyManager.addMoney(par2ItemStack.stackSize * soldPrice);

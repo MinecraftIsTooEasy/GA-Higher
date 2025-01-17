@@ -1,7 +1,7 @@
 package com.github.Debris.GAHigher.trans.item.enchantment;
 
-import com.github.Debris.GAHigher.api.GAEntityPlayer;
 import com.github.Debris.GAHigher.item.Items;
+import com.github.Debris.GAHigher.util.BaublesUtil;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.EnchantmentHelper;
@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 public class EnchantmentHelperMixin {
     @ModifyReturnValue(method = "getFortuneModifier", at = @At("RETURN"))
     private static int moreFortune(int original, @Local(argsOnly = true) EntityLivingBase entity) {
-        if (entity instanceof EntityPlayer player && GAEntityPlayer.getInventoryJewelry(player).hasJewelry(Items.lucky_clover)) {
+        if (entity instanceof EntityPlayer player && BaublesUtil.hasBaubleWorn(player, Items.lucky_clover)) {
             original += 1;
         }
         return original;
@@ -22,7 +22,7 @@ public class EnchantmentHelperMixin {
 
     @ModifyReturnValue(method = "getLootingModifier", at = @At("RETURN"))
     private static int moreLoot(int original, @Local(argsOnly = true) EntityLivingBase entity) {
-        if (entity instanceof EntityPlayer player && GAEntityPlayer.getInventoryJewelry(player).hasJewelry(Items.lucky_clover)) {
+        if (entity instanceof EntityPlayer player && BaublesUtil.hasBaubleWorn(player, Items.lucky_clover)) {
             original += 1;
         }
         return original;
@@ -30,7 +30,7 @@ public class EnchantmentHelperMixin {
 
     @ModifyReturnValue(method = "getButcheringModifier", at = @At("RETURN"))
     private static int moreButcher(int original, @Local(argsOnly = true) EntityLivingBase entity) {
-        if (entity instanceof EntityPlayer player && GAEntityPlayer.getInventoryJewelry(player).hasJewelry(Items.lucky_clover)) {
+        if (entity instanceof EntityPlayer player && BaublesUtil.hasBaubleWorn(player, Items.lucky_clover)) {
             original += 1;
         }
         return original;

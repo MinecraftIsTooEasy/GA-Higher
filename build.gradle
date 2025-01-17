@@ -56,6 +56,7 @@ dependencies {
     implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\RustedIronCore.jar")
     implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\RustedIronCore-sources.jar")
     implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\MITE-ITE.jar")
+    implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\Baubles.jar")
 }
 
 processResources {
