@@ -1,5 +1,8 @@
 package com.github.Debris.GAHigher.trans.block;
 
+import com.github.Debris.GAHigher.api.Condition;
+import com.github.Debris.GAHigher.api.ConditionalMixin;
+import com.github.Debris.GAHigher.compat.ModCompat;
 import com.github.Debris.GAHigher.config.Configs;
 import com.github.Debris.GAHigher.entity.EntityFinalZombieBoss;
 import com.github.Debris.GAHigher.entity.EntityZombieBoss;
@@ -10,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+@ConditionalMixin(require = @Condition(value = ModCompat.ITE))
 @Mixin({BlockMobSpawner.class})
 public abstract class BlockMobSpawnerTrans extends BlockContainer {
     protected BlockMobSpawnerTrans(int par1, Material par2Material, BlockConstants block_constants) {

@@ -9,10 +9,10 @@ import net.minecraft.EntityPlayer;
 import net.minecraft.Item;
 import net.minecraft.ItemStack;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 public class BaublesUtil {
     public static boolean hasBaubleWorn(EntityPlayer player, Item item) {
@@ -25,9 +25,11 @@ public class BaublesUtil {
 
     public static Optional<ItemRingKiller> getBestRingKiller(EntityPlayer player) {
         InventoryJewelry inventoryJewelry = GAEntityPlayer.getInventoryJewelry(player);
-        List<ItemStack> stacks1 = inventoryJewelry.getRingKillers();
-        List<ItemStack> stacks2 = BaublesAccessor.getStacksPredicate(player, stack -> stack.getItem() instanceof ItemRingKiller);
-        return Stream.concat(stacks1.stream(), stacks2.stream())
+        List<ItemStack> stacks = new ArrayList<>(inventoryJewelry.getRingKillers());
+        if (ModCompat.HAS_BAUBLES) {
+            stacks.addAll(BaublesAccessor.getStacksPredicate(player, stack -> stack.getItem() instanceof ItemRingKiller));
+        }
+        return stacks.stream()
                 .map(ItemStack::getItem)
                 .map(x -> (ItemRingKiller) x)
                 .max(Comparator.comparingInt(ItemRingKiller::getLevel));

@@ -6,7 +6,7 @@ public class EmiSettingsCompat {
     private static int columnCache = 12;
 
     public static void cacheColumn() {
-        columnCache = EmiConfig.rightSidebarSize.values.getInt(0);
+        columnCache = EmiConfig.rightSidebarSize.values.get(0);
     }
 
     public static void trySetColumn(int column) {

@@ -1,5 +1,6 @@
 package com.github.Debris.GAHigher.compat;
 
+import com.github.Debris.GAHigher.util.MixinConditionUtil;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -18,12 +19,8 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
     }
 
     @Override
-    public boolean shouldApplyMixin(String s, String s1) {
-        if (s1.equals("com.github.Debris.GAHigher.trans.compat.FastVibraniumWorkbenchMixin")) return ModCompat.HAS_ITE;
-        if (s.equals("net.minecraft.BlockMobSpawner")) return ModCompat.HAS_ITE;// zombie boss
-        if (s.equals("net.minecraft.BlockWeb")) return ModCompat.HAS_ITE;// zombie boss
-        if (s1.equals("net.minecraft.InventoryEffectRenderer")) return ModCompat.HAS_EMI;
-        return true;
+    public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+        return MixinConditionUtil.check(mixinClassName);
     }
 
     @Override

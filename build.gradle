@@ -41,7 +41,17 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     implementation files(loom.getFML().toPath())
+
+    // runtime needed
+    implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\RustedIronCore.jar")
+    implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\RustedIronCore-sources.jar")
     implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\ManyLib.jar")
+
+    // compile needed
+    compileOnly files("D:\\Code\\Java\\FML3.0.0\\lib\\MITE-ITE.jar")
+    implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\EMI.jar")// but this is useful
+
+    // useful mods
     implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\ModernMite.jar")
 //    implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\MithrilCore.jar")
     implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\ommc.jar")
@@ -52,10 +62,6 @@ dependencies {
     implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\Hwite.jar")
     implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\ModMenu.jar")
     implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\PinIn-Lib.jar")
-    implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\EMI.jar")
-    implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\RustedIronCore.jar")
-    implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\RustedIronCore-sources.jar")
-    implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\MITE-ITE.jar")
     implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\Baubles.jar")
 }
 
