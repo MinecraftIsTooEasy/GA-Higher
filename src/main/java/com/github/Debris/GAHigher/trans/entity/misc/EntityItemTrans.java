@@ -1,38 +1,20 @@
 package com.github.Debris.GAHigher.trans.entity.misc;
 
 import com.github.Debris.GAHigher.api.GAEntityItem;
-import com.github.Debris.GAHigher.item.Items;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import net.minecraft.*;
+import net.minecraft.Entity;
+import net.minecraft.EntityItem;
+import net.minecraft.EntityPlayer;
+import net.minecraft.World;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin({EntityItem.class})
+@Mixin(EntityItem.class)
 public abstract class EntityItemTrans extends Entity implements GAEntityItem {
-
     public EntityItemTrans(World par1World) {
         super(par1World);
-    }
-
-    @Shadow
-    protected abstract boolean canTriggerWalking();
-
-    @Shadow
-    public abstract ItemStack getEntityItem();
-
-    @Inject(method = "onUpdate", at = @At("RETURN"))
-    private void removeIllegal(CallbackInfo ci) {
-        if (!this.isDead && this.onServer()) {
-            ItemStack entityItem = this.getEntityItem();
-            if (entityItem != null && entityItem.getItem() == Items.lavaInPipes) {
-                this.setDead();
-            }
-        }
     }
 
     @Unique

@@ -6,6 +6,7 @@ import com.github.Debris.GAHigher.block.entity.TileEntityItemDuper;
 import com.github.Debris.GAHigher.client.render.entity.RenderZombieBoss;
 import com.github.Debris.GAHigher.command.CommandForging;
 import com.github.Debris.GAHigher.command.CommandItemLevel;
+import com.github.Debris.GAHigher.command.CommandPrice;
 import com.github.Debris.GAHigher.compat.ModCompat;
 import com.github.Debris.GAHigher.entity.EntityExchanger;
 import com.github.Debris.GAHigher.entity.EntityFinalZombieBoss;
@@ -183,6 +184,7 @@ public class GAEventFML {
             event.register(new CommandForging());
             event.register(new CommandItemLevel());
         }
+        event.register(new CommandPrice());
     }
 
     @Subscribe

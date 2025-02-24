@@ -4,21 +4,29 @@ import com.github.Debris.GAHigher.GAStart;
 import com.github.Debris.GAHigher.api.GAItem;
 import com.github.Debris.GAHigher.api.GAItemStack;
 import com.github.Debris.GAHigher.util.PriceStacks;
+import moddedmite.rustedironcore.api.util.LogUtil;
 import net.minecraft.Item;
-import net.minecraft.ItemBlock;
 import net.minecraft.ItemMap;
 import net.minecraft.ItemStack;
+import org.apache.logging.log4j.Logger;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class Configs {
+    private static final Logger LOGGER = LogUtil.getLogger();
+
+    public static final String configFilePath = "config" + File.separator + GAStart.MOD_ID + ".cfg";
+    public static final String shopConfigFilePath = "config" + File.separator + GAStart.MOD_ID + "-shop.cfg";
+
     public static Map<String, ConfigItem> wenscMap = new HashMap<>();
 
     public static void loadConfigs() {
@@ -56,14 +64,13 @@ public class Configs {
         wenscMap.put("enhanceLimit", wenscConfig.enhanceLimit);
         wenscMap.put("boostEnhance", wenscConfig.boostEnhance);
         wenscMap.put("zombieBossSpawnPercent", wenscConfig.zombieBossSpawnPercent);
-        String filePth = "config" + File.separator + GAStart.MOD_ID + ".cfg";
-        loadFromFile(filePth, (fileObj, properties) -> {
+        loadOrCreateFile(configFilePath, (fileObj, properties) -> {
             readConfigFromFile(fileObj, properties);
             packConfigFile(fileObj, properties);
         }, Configs::generateConfigFile);
     }
 
-    public static void loadFromFile(String filePth, BiConsumer<File, Properties> readAction, Consumer<File> generateAction) {
+    public static void loadOrCreateFile(String filePth, BiConsumer<File, Properties> loadAction, Consumer<File> createAction) {
         File fileObj = new File(filePth);
         if (fileObj.exists()) {
             Properties properties = new Properties();
@@ -72,9 +79,9 @@ public class Configs {
                 fr = new FileReader(fileObj);
                 properties.load(fr);
                 fr.close();
-                readAction.accept(fileObj, properties);
-            } catch (IOException var7) {
-                var7.printStackTrace();
+                loadAction.accept(fileObj, properties);
+            } catch (IOException e) {
+                LOGGER.warn("fail loading file", e);
             }
         } else {
             if (!fileObj.getParentFile().exists()) {
@@ -85,13 +92,10 @@ public class Configs {
                     fileObj.setExecutable(true);
                     fileObj.setReadable(true);
                     fileObj.setWritable(true);
-                    generateAction.accept(fileObj);
+                    createAction.accept(fileObj);
                 }
             } catch (IOException e) {
-                e.printStackTrace();
-                JFrame jFrame = new JFrame();
-                jFrame.setAlwaysOnTop(true);
-                JOptionPane.showMessageDialog(jFrame, "创建wensc.cfg配置文件失败，请尝试在游戏目录中创建config文件夹并重新启动", "错误", 0);
+                LOGGER.warn("fail creating file", e);
             }
         }
     }
@@ -243,43 +247,36 @@ public class Configs {
     public static void readShopConfigFromFile(File file_mite, Properties properties) {
         PriceStacks.beginLoading();
         try {
-            FileWriter fileWriter = new FileWriter(file_mite, true);
+            FileWriter appender = new FileWriter(file_mite, true);
             for (Item item : Item.itemsList) {
-                if (shouldReadItem(item)) {
-                    readOrWritePriceLine(properties, fileWriter, item);
-//                        Minecraft.setErrorMessage("配置项：" + item.getItemDisplayName() + " ID: " + item.itemID + " 错误！！！");
+                if (canTrade(item)) {
+                    for (ItemStack itemStack : createVariants(item)) {
+                        if (!loadPrice(properties, item, itemStack))
+                            appendPriceLine(appender, item, itemStack);
+                    }
                 }
             }
-            fileWriter.close();
+            appender.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.warn("error reading shop config", e);
         } finally {
             PriceStacks.endLoading();
             PriceStacks.sortList();
         }
     }
 
-    private static boolean shouldReadItem(Item item) {
-        if (item == null) return false;
-        if (item instanceof ItemMap) return false;
-        if (item instanceof ItemBlock && !((ItemBlock) item).getBlock().canBeCarried()) return false;
-        return true;
-    }
-
-    public static void readOrWritePriceLine(Properties properties, FileWriter fileWriter, Item item) throws IOException {
+    @SuppressWarnings("unchecked")
+    private static List<ItemStack> createVariants(Item item) {
         if (item.getHasSubtypes()) {
-            List<ItemStack> subs = item.getSubItems();
-            for (ItemStack itemStack : subs) {
-                writePriceIntoMemory(properties, fileWriter, item, itemStack);
-            }
+            return item.getSubItems();
         } else {
-            writePriceIntoMemory(properties, fileWriter, item, new ItemStack(item));
+            return List.of(new ItemStack(item));
         }
     }
 
-    public static void writePriceIntoMemory(Properties properties, FileWriter fileWriter, Item item, ItemStack itemStack) throws IOException {
+    private static boolean loadPrice(Properties properties, Item item, ItemStack itemStack) {
         int sub = itemStack.getItemSubtype();
-        String name = "";
+        String name;
         if (item.getHasSubtypes()) {
             name = itemStack.getUnlocalizedName() + "$" + itemStack.itemID + "$" + sub;
         } else {
@@ -289,34 +286,31 @@ public class Configs {
         if (itemPrice != null) {
             String[] soldPriceAndBuyPrice = itemPrice.split(",");
             if (soldPriceAndBuyPrice.length == 2) {
-                setPrice(item, sub, itemStack, Double.parseDouble(soldPriceAndBuyPrice[0]), Double.parseDouble(soldPriceAndBuyPrice[1]));
+                setPriceFromFile(item, sub, itemStack, Double.parseDouble(soldPriceAndBuyPrice[0]), Double.parseDouble(soldPriceAndBuyPrice[1]));
             } else {
-                setPrice(item, sub, itemStack, Double.parseDouble(soldPriceAndBuyPrice[0]), 0.0D);
+                setPriceFromFile(item, sub, itemStack, Double.parseDouble(soldPriceAndBuyPrice[0]), 0.0D);
             }
-        } else {
-            writeShopConfigFormatter(fileWriter, item, itemStack);
+            return true;
         }
+        return false;
     }
 
-    private static void setPrice(Item item, int sub, ItemStack itemStack, double soldPrice, double buyPrice) {
-        double soldPriceFromMemory = ((GAItem) item).ga$getSoldPrice(sub);
-        if (soldPrice == 0.0D && soldPriceFromMemory > 0.0D) {
-            soldPrice = soldPriceFromMemory;
-        }
-        double buyPriceFromMemory = ((GAItem) item).ga$getBuyPrice(sub);
-        if (buyPrice == 0.0D && buyPriceFromMemory > 0.0D) {
-            buyPrice = buyPriceFromMemory;
+    private static void setPriceFromFile(Item item, int sub, ItemStack itemStack, double soldPrice, double buyPrice) {
+        if (!GAConfigManyLib.PriceConfigStrongOverride.getBooleanValue()) {
+            double soldPriceFromMemory = ((GAItem) item).ga$getSoldPrice(sub);
+            if (soldPrice == 0.0D && soldPriceFromMemory > 0.0D) {
+                soldPrice = soldPriceFromMemory;
+            }
+            double buyPriceFromMemory = ((GAItem) item).ga$getBuyPrice(sub);
+            if (buyPrice == 0.0D && buyPriceFromMemory > 0.0D) {
+                buyPrice = buyPriceFromMemory;
+            }
         }
 
-        ((GAItem) item).ga$setSoldPrice(sub, soldPrice);
-        ((GAItem) item).ga$setBuyPrice(sub, buyPrice);
-        ((GAItemStack) itemStack).setPrice(soldPrice, buyPrice);
-        if (soldPrice > 0.0D || buyPrice > 0.0D) {
-            PriceStacks.addStack(itemStack);
-        }
+        PriceStacks.setPrice(itemStack, soldPrice, buyPrice);
     }
 
-    public static void writeShopConfigFormatter(FileWriter fileWriter, Item item, ItemStack itemStack) throws IOException {
+    public static void appendPriceLine(FileWriter fileWriter, Item item, ItemStack itemStack) throws IOException {
         int sub = itemStack.getItemSubtype();
         double soldPrice = ((GAItem) item).ga$getSoldPrice(sub);
         double buyPrice = ((GAItem) item).ga$getBuyPrice(sub);
@@ -325,10 +319,10 @@ public class Configs {
             PriceStacks.addStack(itemStack);
         if (item.getHasSubtypes()) {
             fileWriter.write("// " + itemStack.getDisplayName() + " ID: " + itemStack.itemID + " meta:" + sub + "\n");
-            fileWriter.write(itemStack.getUnlocalizedName() + "$" + item.itemID + "$" + sub + "=" + ((GAItem) item).ga$getSoldPrice(sub) + "," + ((GAItem) item).ga$getBuyPrice(sub) + "\n\n");
+            fileWriter.write(itemStack.getUnlocalizedName() + "$" + item.itemID + "$" + sub + "=" + soldPrice + "," + buyPrice + "\n\n");
         } else {
             fileWriter.write("// " + itemStack.getDisplayName() + " ID: " + item.itemID + "\n");
-            fileWriter.write(itemStack.getUnlocalizedName() + "$" + item.itemID + "=" + ((GAItem) item).ga$getSoldPrice(0) + "," + ((GAItem) item).ga$getBuyPrice(0) + "\n\n");
+            fileWriter.write(itemStack.getUnlocalizedName() + "$" + item.itemID + "=" + soldPrice + "," + buyPrice + "\n\n");
         }
     }
 
@@ -337,27 +331,45 @@ public class Configs {
             FileWriter fileWriter = new FileWriter(file);
             fileWriter.write("// MITE-GA-Higher商店配置文件，说明：参数之间使用英文逗号分隔，请严格遵循格式（商品英文名=售出价格,购买价格），价格小于等于0代表不可出售或者不可购买，价格可以为小数，乱改造成无法启动概不负责\n");
             for (Item item : Item.itemsList) {
-                if (item != null && (
-                        !(item instanceof ItemBlock) || (
-                                (ItemBlock) item).getBlock().canBeCarried()))
-                    if (!(item instanceof ItemMap))
-                        if (item.getHasSubtypes()) {
-                            List<ItemStack> subs = item.getSubItems();
-                            for (int i = 0; i < subs.size(); i++) {
-                                ItemStack itemStack = subs.get(i);
-                                writeShopConfigFormatter(fileWriter, item, itemStack);
-                            }
-                        } else {
-                            ItemStack itemStack = new ItemStack(item, 1, 0);
-                            writeShopConfigFormatter(fileWriter, item, itemStack);
-                        }
+                if (canTrade(item)) {
+                    for (ItemStack itemStack : createVariants(item)) {
+                        appendPriceLine(fileWriter, item, itemStack);
+                    }
+                }
             }
             fileWriter.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.warn("error while generating shop config file", e);
         } finally {
             PriceStacks.sortList();
         }
     }
 
+    public static void saveShopConfigFile(File file) {
+        PriceStacks.beginLoading();
+        try {
+            FileWriter fileWriter = new FileWriter(file);
+            fileWriter.write("// MITE-GA-Higher商店配置文件，说明：参数之间使用英文逗号分隔，请严格遵循格式（商品英文名=售出价格,购买价格），价格小于等于0代表不可出售或者不可购买，价格可以为小数，乱改造成无法启动概不负责\n");
+            for (Item item : Item.itemsList) {
+                if (canTrade(item)) {
+                    for (ItemStack itemStack : createVariants(item)) {
+                        appendPriceLine(fileWriter, item, itemStack);
+                    }
+                }
+            }
+            fileWriter.close();
+        } catch (IOException e) {
+            LOGGER.warn("error while generating shop config file", e);
+        } finally {
+            PriceStacks.endLoading();
+            PriceStacks.sortList();
+        }
+    }
+
+    public static boolean canTrade(Item item) {
+        if (item == null) return false;
+        if (item.isBlock() && !item.getAsItemBlock().getBlock().canBeCarried()) return false;
+        if (item instanceof ItemMap) return false;
+        return true;
+    }
 }

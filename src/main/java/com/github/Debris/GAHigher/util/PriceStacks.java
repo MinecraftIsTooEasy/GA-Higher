@@ -1,10 +1,13 @@
 package com.github.Debris.GAHigher.util;
 
+import com.github.Debris.GAHigher.api.GAItem;
 import com.github.Debris.GAHigher.api.GAItemStack;
+import net.minecraft.Item;
 import net.minecraft.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class PriceStacks {
     private static final List<ItemStack> priceStackList = new ArrayList<>();
@@ -15,6 +18,17 @@ public class PriceStacks {
     public static void beginLoading() {
         priceStackList.clear();
         loadingFlag = true;
+    }
+
+    public static void setPrice(ItemStack itemStack, double soldPrice, double buyPrice) {
+        Item item = itemStack.getItem();
+        int sub = itemStack.getItemSubtype();
+        ((GAItem) item).ga$setSoldPrice(sub, soldPrice);
+        ((GAItem) item).ga$setBuyPrice(sub, buyPrice);
+        ((GAItemStack) itemStack).setPrice(soldPrice, buyPrice);
+        if (soldPrice > 0.0D || buyPrice > 0.0D) {
+            PriceStacks.addStack(itemStack);
+        }
     }
 
     public static void addStack(ItemStack itemStack) {
@@ -49,5 +63,22 @@ public class PriceStacks {
 
     public static List<ItemStack> subList(int from, int to) {
         return priceStackList.subList(from, to);
+    }
+
+    public static void handlePriceCommand(ItemStack itemStack, double soldPrice, double buyPrice) {
+        Optional<ItemStack> current = matchItemStack(itemStack);
+        current.ifPresent(priceStackList::remove);
+        loadingFlag = true;
+        setPrice(new ItemStack(itemStack.itemID, 1, itemStack.getItemSubtype()), soldPrice, buyPrice);
+        loadingFlag = false;
+    }
+
+    public static Optional<ItemStack> matchItemStack(ItemStack itemStack) {
+        int itemID = itemStack.itemID;
+        int itemSubtype = itemStack.getItemSubtype();
+        for (ItemStack stack : priceStackList) {
+            if (stack.itemID == itemID && stack.getItemSubtype() == itemSubtype) return Optional.of(stack);
+        }
+        return Optional.empty();
     }
 }

@@ -205,7 +205,6 @@ public class Items extends Item {
         register("creeper_baby", Creeper_Baby).setUnlocalizedName("creeper_baby");
         register("creeper_soul", Creeper_Soul).setUnlocalizedName("creeper_soul").setCraftingDifficultyAsComponent(1.0E-9F);
         register("ga_bag", GABag).setUnlocalizedName("ga_bag").setLowestCraftingDifficultyToProduce(1.0F);
-        register("lava_in_pipes", lavaInPipes).setUnlocalizedName("lava_in_pipes").setLowestCraftingDifficultyToProduce(1.0F);
         register("ring_killer/ring_killer_copper", ringKillerCopper).setUnlocalizedName("ring_killer_copper").setLowestCraftingDifficultyToProduce(1.0F);
         register("ring_killer/ring_killer_iron", ringKillerIron).setUnlocalizedName("ring_killer_iron").setLowestCraftingDifficultyToProduce(1.0F);
         register("ring_killer/ring_killer_ancient", ringKillerAncient).setUnlocalizedName("ring_killer_ancient").setLowestCraftingDifficultyToProduce(1.0F);
@@ -433,7 +432,7 @@ public class Items extends Item {
 
         for (Item ingot : ingots) {
             if (ingot == Item.ingotIron) continue;
-            register.registerShapedRecipe(new ItemStack(Block.hopperBlock), true, "I I", "IDI", " I ", ('D'), Block.chest, ('I'), Item.ingotGold);
+            register.registerShapedRecipe(new ItemStack(Block.hopperBlock), true, "I I", "IDI", " I ", ('D'), Block.chest, ('I'), ingot);
         }
 
         if (Configs.wenscConfig.isRecipeRingKiller.ConfigValue) {

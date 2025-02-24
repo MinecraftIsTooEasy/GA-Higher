@@ -7,6 +7,7 @@ import com.github.Debris.GAHigher.screen.container.ContainerShop;
 import com.github.Debris.GAHigher.screen.inventory.InventoryShop;
 import com.github.Debris.GAHigher.util.PriceStacks;
 import net.minecraft.*;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 public class GuiShop extends GuiContainer {
@@ -34,23 +35,50 @@ public class GuiShop extends GuiContainer {
         GANetwork.sendToServer(new C2SShopIndex(this.pageIndex));
     }
 
+    @Override
+    public void updateScreen() {
+        super.updateScreen();
+        int wheelStatus = Mouse.getDWheel();
+        if (wheelStatus == 0) return;
+        if (wheelStatus < 0) {
+            this.pageDown();
+        } else {
+            this.pageUp();
+        }
+    }
+
     protected void actionPerformed(GuiButton var1) {
         switch (var1.id) {
-            case 1 -> {
-                this.pageIndex--;
-                if (this.pageIndex == 0)
-                    var1.enabled = false;
-                this.right.enabled = true;
-            }
-            case 2 -> {
-                this.left.enabled = true;
-                this.pageIndex++;
-                if (this.pageIndex == (double) (PriceStacks.shopSize / InventoryShop.pageSize)) {
-                    var1.enabled = false;
-                }
-            }
+            case 1 -> pageUp();
+            case 2 -> pageDown();
         }
+    }
+
+    private void pageDown() {
+        if (!this.canPageDown()) return;
+        this.pageIndex++;
+        if (this.pageIndex == (double) (PriceStacks.shopSize / InventoryShop.pageSize)) {
+            this.right.enabled = false;
+        }
+        this.left.enabled = true;
         GANetwork.sendToServer(new C2SShopIndex(this.pageIndex));
+    }
+
+    private void pageUp() {
+        if (!this.canPageUp()) return;
+        this.pageIndex--;
+        if (this.pageIndex == 0)
+            this.left.enabled = false;
+        this.right.enabled = true;
+        GANetwork.sendToServer(new C2SShopIndex(this.pageIndex));
+    }
+
+    private boolean canPageUp() {
+        return this.left.enabled;
+    }
+
+    private boolean canPageDown() {
+        return this.right.enabled;
     }
 
     @Override

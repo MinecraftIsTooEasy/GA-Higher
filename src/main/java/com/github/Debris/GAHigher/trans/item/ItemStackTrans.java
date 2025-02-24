@@ -1,11 +1,14 @@
 package com.github.Debris.GAHigher.trans.item;
 
 import com.github.Debris.GAHigher.api.GAItemStack;
+import com.github.Debris.GAHigher.config.GAConfigManyLib;
 import com.github.Debris.GAHigher.screen.slot.SlotShop;
 import com.github.Debris.GAHigher.util.PriceItem;
+import com.github.Debris.GAHigher.util.PriceStacks;
 import net.minecraft.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -26,13 +29,23 @@ public abstract class ItemStackTrans implements GAItemStack {
 
     @SuppressWarnings("unchecked")
     @Inject(method = {"getTooltip"}, at = {@At(value = "RETURN")})
-    public void InjectGetTooltip(EntityPlayer par1EntityPlayer, boolean par2, Slot slot, CallbackInfoReturnable<ArrayList> callbackInfoReturnable) {
+    public void onTooltip(EntityPlayer par1EntityPlayer, boolean detailed, Slot slot, CallbackInfoReturnable<ArrayList> callbackInfoReturnable) {
         List<String> list = callbackInfoReturnable.getReturnValue();
-        if (par2 && slot instanceof SlotShop && slot.getHasStack()) {
-            ItemStack itemStack = slot.getStack();
-            list.add(EnumChatFormatting.AQUA + "售出价格:" + EnumChatFormatting.WHITE + ((GAItemStack) itemStack).getPrice().soldPrice());
-            list.add(EnumChatFormatting.AQUA + "购买价格:" + EnumChatFormatting.WHITE + ((GAItemStack) itemStack).getPrice().buyPrice());
+
+        if (slot instanceof SlotShop && slot.getHasStack()) {
+            addPriceTooltip(slot.getStack(), list);
+            return;
         }
+
+        if (detailed && GAConfigManyLib.PriceOnTooltip.getBooleanValue()) {
+            PriceStacks.matchItemStack((ItemStack) (Object) this).ifPresent(x -> addPriceTooltip(x, list));
+        }
+    }
+
+    @Unique
+    private static void addPriceTooltip(ItemStack itemStack, List<String> list) {
+        list.add(EnumChatFormatting.AQUA + "售出价格:" + EnumChatFormatting.WHITE + ((GAItemStack) itemStack).getPrice().soldPrice());
+        list.add(EnumChatFormatting.AQUA + "购买价格:" + EnumChatFormatting.WHITE + ((GAItemStack) itemStack).getPrice().buyPrice());
     }
 
     @Override

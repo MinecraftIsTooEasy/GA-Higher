@@ -29,6 +29,10 @@ public class GAConfigManyLib extends SimpleConfigs {
 
     public static final ConfigInteger OverrideEmiColumnWiden = new ConfigInteger("覆写Emi列数(物品栏扩大时)", 4, 0, 32, "界面尺寸为自动时生效; 因为emi有可能挡住珠宝栏; 设置成0取消覆写");
 
+    public static final ConfigBoolean PriceConfigStrongOverride = new ConfigBoolean("商店价格强覆写", true, "强覆写: 完全按配置文件\n 弱覆写: 同时考虑了硬编码");
+
+    public static final ConfigBoolean PriceOnTooltip = new ConfigBoolean("物品价格显示", true);
+
     public static final ConfigInteger DropJewelryRate = new ConfigInteger("饰品掉率", 10000, 1, Integer.MAX_VALUE, "击杀普通怪物时掉率");
 
     public static final ConfigHotkey Shop = new ConfigHotkey("打开商店", "V", null);
@@ -49,7 +53,7 @@ public class GAConfigManyLib extends SimpleConfigs {
     static {
         hotkeys = List.of(Shop, OpenConfig);
         data = List.of(DropJewelryRate);
-        function = List.of(OverrideEmi, OverrideEmiColumn, OverrideEmiColumnWiden);
+        function = List.of(OverrideEmi, OverrideEmiColumn, OverrideEmiColumnWiden, PriceConfigStrongOverride, PriceOnTooltip);
 
         tabs = new ArrayList<>();
         tabs.add(new ConfigTab("游戏数据", data));
