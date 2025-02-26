@@ -314,7 +314,7 @@ public class Configs {
         int sub = itemStack.getItemSubtype();
         double soldPrice = ((GAItem) item).ga$getSoldPrice(sub);
         double buyPrice = ((GAItem) item).ga$getBuyPrice(sub);
-        ((GAItemStack) itemStack).setPrice(soldPrice, buyPrice);
+        ((GAItemStack) itemStack).ga$setPrice(soldPrice, buyPrice);
         if (soldPrice > 0.0D || buyPrice > 0.0D)
             PriceStacks.addStack(itemStack);
         if (item.getHasSubtypes()) {

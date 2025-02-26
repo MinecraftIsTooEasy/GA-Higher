@@ -30,7 +30,7 @@ public class SlotShop extends Slot {
         MoneyManager moneyManager = GAEntityPlayer.getMoneyManager(entity_player);
         if (getStack() != null) {
             ItemStack var5 = getStack().copy();
-            PriceItem price = ((GAItemStack) var5).getPrice();
+            PriceItem price = ((GAItemStack) var5).ga$getPrice();
             switch (button) {
                 case 0 -> {
                     double buyPrice = price.buyPrice();

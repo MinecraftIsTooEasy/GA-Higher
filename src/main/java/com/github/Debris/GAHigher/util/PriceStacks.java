@@ -25,7 +25,7 @@ public class PriceStacks {
         int sub = itemStack.getItemSubtype();
         ((GAItem) item).ga$setSoldPrice(sub, soldPrice);
         ((GAItem) item).ga$setBuyPrice(sub, buyPrice);
-        ((GAItemStack) itemStack).setPrice(soldPrice, buyPrice);
+        ((GAItemStack) itemStack).ga$setPrice(soldPrice, buyPrice);
         if (soldPrice > 0.0D || buyPrice > 0.0D) {
             PriceStacks.addStack(itemStack);
         }
@@ -46,14 +46,14 @@ public class PriceStacks {
     public static void sortList() {
         priceStackList.sort((o1, o2) -> {
             double offset;
-            double o1Buy = (((GAItemStack) o1).getPrice()).buyPrice();
-            double o2Buy = (((GAItemStack) o2).getPrice()).buyPrice();
+            double o1Buy = GAItemStack.getPrice(o1).buyPrice();
+            double o2Buy = GAItemStack.getPrice(o2).buyPrice();
             if (o2Buy > 0.0D && o1Buy > 0.0D) {
                 offset = o1Buy - o2Buy;
             } else {
                 offset = o2Buy - o1Buy;
             }
-            return (offset > 0.0D) ? 1 : ((offset == 0.0D) ? 0 : -1);
+            return Double.compare(offset, 0.0D);
         });
     }
 

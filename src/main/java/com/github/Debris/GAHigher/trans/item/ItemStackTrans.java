@@ -44,12 +44,13 @@ public abstract class ItemStackTrans implements GAItemStack {
 
     @Unique
     private static void addPriceTooltip(ItemStack itemStack, List<String> list) {
-        list.add(EnumChatFormatting.AQUA + "售出价格:" + EnumChatFormatting.WHITE + ((GAItemStack) itemStack).getPrice().soldPrice());
-        list.add(EnumChatFormatting.AQUA + "购买价格:" + EnumChatFormatting.WHITE + ((GAItemStack) itemStack).getPrice().buyPrice());
+        PriceItem price = GAItemStack.getPrice(itemStack);
+        list.add(EnumChatFormatting.AQUA + "售出价格:" + EnumChatFormatting.WHITE + price.soldPrice());
+        list.add(EnumChatFormatting.AQUA + "购买价格:" + EnumChatFormatting.WHITE + price.buyPrice());
     }
 
     @Override
-    public PriceItem getPrice() {
+    public PriceItem ga$getPrice() {
         if (this.stackTagCompound != null && this.stackTagCompound.hasKey("price")) {
             NBTTagCompound nbtTagCompound = (NBTTagCompound) this.stackTagCompound.getTag("price");
             return new PriceItem(nbtTagCompound.getDouble("soldPrice"), nbtTagCompound.getDouble("buyPrice"));
@@ -58,7 +59,7 @@ public abstract class ItemStackTrans implements GAItemStack {
     }
 
     @Override
-    public void setPrice(double soldPrice, double buyPrice) {
+    public void ga$setPrice(double soldPrice, double buyPrice) {
         if (this.stackTagCompound == null)
             this.setTagCompound(new NBTTagCompound());
         if (!this.stackTagCompound.hasKey("price")) {

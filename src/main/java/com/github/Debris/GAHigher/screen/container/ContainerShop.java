@@ -1,7 +1,8 @@
 package com.github.Debris.GAHigher.screen.container;
 
 import com.github.Debris.GAHigher.api.GAEntityPlayer;
-import com.github.Debris.GAHigher.api.GAItem;
+import com.github.Debris.GAHigher.api.GAItemStack;
+import com.github.Debris.GAHigher.entity.player.MoneyManager;
 import com.github.Debris.GAHigher.screen.inventory.InventoryShop;
 import com.github.Debris.GAHigher.screen.slot.SlotShop;
 import net.minecraft.*;
@@ -37,21 +38,19 @@ public class ContainerShop extends Container {
         return true;
     }
 
-    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
-        ItemStack var3 = null;
-        Slot var4 = (Slot) this.inventorySlots.get(par2);
-        if (var4 != null && var4.getHasStack())
-            if (par2 < 0 || par2 >= 45) {
-                ItemStack var5 = var4.getStack();
-//                System.out.println(var5.getItem());
-                double soldPrice = ((GAItem) var5.getItem()).ga$getSoldPrice(var5.getItemSubtype());
-                if (soldPrice > 0.0D) {
-                    double totalMoney = var5.stackSize * soldPrice;
-                    GAEntityPlayer.getMoneyManager(this.player).addMoneyWithSimplify(totalMoney);
-                }
-                var4.putStack(null);
+    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int slotIndex) {
+        Slot slot;
+        if (slotIndex >= 45 && (slot = (Slot) this.inventorySlots.get(slotIndex)) != null && slot.getHasStack()) {
+            ItemStack stack = slot.getStack();
+            double soldPrice = GAItemStack.getPrice(stack).soldPrice();
+            if (soldPrice > 0.0D) {
+                double totalMoney = stack.stackSize * soldPrice;
+                MoneyManager moneyManager = GAEntityPlayer.getMoneyManager(this.player);
+                moneyManager.addMoneyWithSimplify(totalMoney);
             }
-        return var3;
+            slot.putStack(null);
+        }// selling item to the shop
+        return null;
     }
 
     public void updatePlayerInventory(EntityPlayer player) {

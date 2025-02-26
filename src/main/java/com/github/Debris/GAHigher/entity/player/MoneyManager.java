@@ -1,9 +1,14 @@
 package com.github.Debris.GAHigher.entity.player;
 
 import com.github.Debris.GAHigher.api.GAEntityPlayer;
+import com.github.Debris.GAHigher.network.GANetwork;
+import com.github.Debris.GAHigher.network.packets.S2C.S2CSyncMoney;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.EntityPlayer;
 import net.minecraft.I18n;
 import net.minecraft.NBTTagCompound;
+import net.minecraft.ServerPlayer;
 
 import java.math.BigDecimal;
 
@@ -64,5 +69,15 @@ public class MoneyManager extends AbstractManager {
     public void simplify() {
         BigDecimal two = new BigDecimal(this.money);
         this.money = two.setScale(2, 4).doubleValue();
+    }
+
+    @Environment(EnvType.SERVER)
+    public void syncToClient() {
+        GANetwork.sendToClient((ServerPlayer) this.player, new S2CSyncMoney(this.money));
+    }
+
+    @Environment(EnvType.SERVER)
+    public static void syncToClient(ServerPlayer player) {
+        GANetwork.sendToClient(player, new S2CSyncMoney(GAEntityPlayer.getMoneyManager(player).money));
     }
 }
