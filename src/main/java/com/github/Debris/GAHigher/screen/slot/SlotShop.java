@@ -25,49 +25,55 @@ public class SlotShop extends Slot {
     }
 
     @Override
-    public void onSlotClicked(EntityPlayer entity_player, int button, Container container) {
-        super.onSlotClicked(entity_player, button, container);
-        MoneyManager moneyManager = GAEntityPlayer.getMoneyManager(entity_player);
-        if (getStack() != null) {
-            ItemStack var5 = getStack().copy();
-            PriceItem price = ((GAItemStack) var5).ga$getPrice();
-            switch (button) {
-                case 0 -> {
-                    double buyPrice = price.buyPrice();
-                    if (buyPrice > 0.0D) {
-                        if (moneyManager.getMoney() - buyPrice >= 0.0D) {
-                            moneyManager.subMoney(buyPrice);
-                            entity_player.inventory.addItemStackToInventoryOrDropIt(new ItemStack(var5.itemID, 1, var5.getItemSubtype()));
-                        } else {
-                            this.containerShop.player.addChatMessage("余额不足");
-                        }
-                    } else {
-                        this.containerShop.player.addChatMessage("商店不支持购买此商品");
-                    }
-                }
+    public void onSlotClicked(EntityPlayer player, int button, Container container) {
+        super.onSlotClicked(player, button, container);
+        if (!this.getHasStack()) return;
 
-                case 1 -> {
-                    if (price.buyPrice() > 0.0D) {
-                        double totalMoney = var5.getMaxStackSize() * price.buyPrice();
-                        if (moneyManager.getMoney() >= totalMoney) {
-                            entity_player.inventory.addItemStackToInventoryOrDropIt(new ItemStack(var5.itemID, var5.getMaxStackSize(), var5.getItemSubtype()));
-                            moneyManager.subMoneyWithSimplify(totalMoney);
-                        } else {
-                            int maxStackSize = (int) Math.floor(moneyManager.getMoney() / price.buyPrice());
-                            if (maxStackSize > 0) {
-                                totalMoney = maxStackSize * price.buyPrice();
-                                moneyManager.subMoneyWithSimplify(totalMoney);
-                                var5.setStackSize(maxStackSize);
-                                entity_player.inventory.addItemStackToInventoryOrDropIt(var5);
-                            } else {
-                                entity_player.addChatMessage("余额不足");
-                            }
-                        }
+        MoneyManager moneyManager = GAEntityPlayer.getMoneyManager(player);
+        ItemStack template = getStack().copy();
+        PriceItem price = ((GAItemStack) template).ga$getPrice();
+        final double buyPrice = price.buyPrice();
+
+        if (button != 0 && button != 1) return;
+
+        if (buyPrice <= 0.0D) {
+            this.notify(player, "商店不支持购买此商品");
+            return;
+        }
+
+        switch (button) {
+            case 0 -> {
+                if (moneyManager.getMoney() - buyPrice >= 0.0D) {
+                    moneyManager.subMoney(buyPrice);
+                    player.inventory.addItemStackToInventoryOrDropIt(new ItemStack(template.itemID, 1, template.getItemSubtype()));
+                } else {
+                    this.notify(player, "余额不足");
+                }
+            }
+
+            case 1 -> {
+                double totalMoney = template.getMaxStackSize() * buyPrice;
+                if (moneyManager.getMoney() >= totalMoney) {
+                    player.inventory.addItemStackToInventoryOrDropIt(new ItemStack(template.itemID, template.getMaxStackSize(), template.getItemSubtype()));
+                    moneyManager.subMoneyWithSimplify(totalMoney);
+                } else {
+                    int maxStackSize = (int) Math.floor(moneyManager.getMoney() / buyPrice);
+                    if (maxStackSize > 0) {
+                        totalMoney = maxStackSize * buyPrice;
+                        moneyManager.subMoneyWithSimplify(totalMoney);
+                        template.setStackSize(maxStackSize);
+                        player.inventory.addItemStackToInventoryOrDropIt(template);
                     } else {
-                        entity_player.addChatMessage("商店不支持购买此商品");
+                        this.notify(player, "余额不足");
                     }
                 }
             }
+        }
+    }
+
+    private void notify(EntityPlayer player, String message) {
+        if (player.onServer()) {
+            player.addChatMessage(message);
         }
     }
 

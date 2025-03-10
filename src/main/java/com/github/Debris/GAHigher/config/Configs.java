@@ -327,6 +327,7 @@ public class Configs {
     }
 
     public static void generateShopConfigFile(File file) {
+        PriceStacks.beginLoading();
         try {
             FileWriter fileWriter = new FileWriter(file);
             fileWriter.write("// MITE-GA-Higher商店配置文件，说明：参数之间使用英文逗号分隔，请严格遵循格式（商品英文名=售出价格,购买价格），价格小于等于0代表不可出售或者不可购买，价格可以为小数，乱改造成无法启动概不负责\n");
@@ -343,6 +344,7 @@ public class Configs {
         } finally {
             PriceStacks.sortList();
         }
+        PriceStacks.endLoading();
     }
 
     public static void saveShopConfigFile(File file) {

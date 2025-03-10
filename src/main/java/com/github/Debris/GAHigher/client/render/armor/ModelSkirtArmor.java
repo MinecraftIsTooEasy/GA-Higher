@@ -1,7 +1,10 @@
 package com.github.Debris.GAHigher.client.render.armor;
 
 
-import net.minecraft.*;
+import net.minecraft.Entity;
+import net.minecraft.MathHelper;
+import net.minecraft.ModelBiped;
+import net.minecraft.ModelRenderer;
 import org.lwjgl.opengl.GL11;
 
 public class ModelSkirtArmor extends ModelBiped {

@@ -5,6 +5,7 @@ import com.github.Debris.GAHigher.api.GAItemStack;
 import com.github.Debris.GAHigher.entity.player.MoneyManager;
 import com.github.Debris.GAHigher.screen.inventory.InventoryShop;
 import com.github.Debris.GAHigher.screen.slot.SlotShop;
+import com.github.Debris.GAHigher.util.PriceStacks;
 import net.minecraft.*;
 
 import java.util.ArrayList;
@@ -42,13 +43,15 @@ public class ContainerShop extends Container {
         Slot slot;
         if (slotIndex >= 45 && (slot = (Slot) this.inventorySlots.get(slotIndex)) != null && slot.getHasStack()) {
             ItemStack stack = slot.getStack();
-            double soldPrice = GAItemStack.getPrice(stack).soldPrice();
-            if (soldPrice > 0.0D) {
-                double totalMoney = stack.stackSize * soldPrice;
-                MoneyManager moneyManager = GAEntityPlayer.getMoneyManager(this.player);
-                moneyManager.addMoneyWithSimplify(totalMoney);
-            }
-            slot.putStack(null);
+            PriceStacks.matchItemStack(stack).ifPresent(template -> {
+                double soldPrice = GAItemStack.getPrice(template).soldPrice();
+                if (soldPrice > 0.0D) {
+                    double totalMoney = stack.stackSize * soldPrice;
+                    MoneyManager moneyManager = GAEntityPlayer.getMoneyManager(this.player);
+                    moneyManager.addMoneyWithSimplify(totalMoney);
+                    slot.putStack(null);
+                }
+            });
         }// selling item to the shop
         return null;
     }

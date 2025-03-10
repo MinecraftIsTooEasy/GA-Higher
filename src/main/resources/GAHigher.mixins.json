@@ -8,7 +8,7 @@
     "MinecraftServerMixin",
     "block.BlockCropTrans",
     "block.BlockLeavesTrans",
-    "block.BlockLongGrassTrans",
+    "block.BlockTallGrassTrans",
     "block.BlockMobSpawnerTrans",
     "block.BlockNetherWartTrans",
     "block.BlockStoneTrans",
