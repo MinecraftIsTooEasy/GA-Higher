@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.HashMap;
 import java.util.Map;
 
-@Mixin({EntityPlayer.class})
+@Mixin(EntityPlayer.class)
 public abstract class EntityPlayerTrans extends EntityLivingBase implements ICommandSender, GAEntityPlayer {
     @Unique
     private final Map<Entity, Integer> attackCountMap = new HashMap<>();
@@ -69,7 +69,7 @@ public abstract class EntityPlayerTrans extends EntityLivingBase implements ICom
         return this.bossManager;
     }
 
-    @Inject(method = {"clonePlayer(Lnet/minecraft/EntityPlayer;Z)V"}, at = {@At("RETURN")})
+    @Inject(method = "clonePlayer(Lnet/minecraft/EntityPlayer;Z)V", at = @At("RETURN"))
     public void clonePlayerInject(EntityPlayer oldPlayer, boolean par2, CallbackInfo callbackInfo) {
         this.enderTrans = ((GAEntityPlayer) oldPlayer).ga$getInventoryEnderChestTrans();
         if (par2 || KeepInventoryCompat.canKeepInventory(oldPlayer)) {
@@ -78,7 +78,7 @@ public abstract class EntityPlayerTrans extends EntityLivingBase implements ICom
         this.moneyManager.clone(oldPlayer);
     }
 
-    @Inject(method = {"readEntityFromNBT(Lnet/minecraft/NBTTagCompound;)V"}, at = {@At("RETURN")})
+    @Inject(method = "readEntityFromNBT(Lnet/minecraft/NBTTagCompound;)V", at = @At("RETURN"))
     public void injectReadNBT(NBTTagCompound par1NBTTagCompound, CallbackInfo ci) {
         this.StoneCount = par1NBTTagCompound.getLong("StoneCount");
         this.vision_dimming = par1NBTTagCompound.getFloat("vision_dimming");
@@ -104,7 +104,7 @@ public abstract class EntityPlayerTrans extends EntityLivingBase implements ICom
     }
 
 
-    @Inject(method = {"writeEntityToNBT(Lnet/minecraft/NBTTagCompound;)V"}, at = {@At("RETURN")})
+    @Inject(method = "writeEntityToNBT(Lnet/minecraft/NBTTagCompound;)V", at = @At("RETURN"))
     public void injectWriteNBT(NBTTagCompound par1NBTTagCompound, CallbackInfo callback) {
         par1NBTTagCompound.setLong("StoneCount", this.StoneCount);
         par1NBTTagCompound.setFloat("vision_dimming", this.vision_dimming);
@@ -142,7 +142,7 @@ public abstract class EntityPlayerTrans extends EntityLivingBase implements ICom
         return new ItemStack[0];
     }
 
-    @Inject(method = {"onLivingUpdate()V"}, at = {@At(value = "INVOKE", target = "Lnet/minecraft/EntityLivingBase;onLivingUpdate()V", shift = At.Shift.AFTER)})
+    @Inject(method = "onLivingUpdate()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/EntityLivingBase;onLivingUpdate()V", shift = At.Shift.AFTER))
     private void injectTick(CallbackInfo c) {
         this.inventory.decrementAnimations();
         if (!this.worldObj.isRemote) {

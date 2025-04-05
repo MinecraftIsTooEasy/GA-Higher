@@ -11,13 +11,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin({ContainerPlayer.class})
+@Mixin(ContainerPlayer.class)
 public abstract class ContainerPlayerTrans extends MITEContainerCrafting {
     public ContainerPlayerTrans(EntityPlayer player) {
         super(player);
     }
 
-    @Inject(method = {"createSlots()V"}, at = {@At("RETURN")})
+    @Inject(method = "createSlots()V", at = @At("TAIL"))
     public void addJewelrySlots(CallbackInfo callbackInfo) {
         InventoryJewelry inventoryJewelry = GAEntityPlayer.getInventoryJewelry(this.player);
 //        for (int i = 0; i < inventoryJewelry.getSizeInventory(); i++) {// old slots

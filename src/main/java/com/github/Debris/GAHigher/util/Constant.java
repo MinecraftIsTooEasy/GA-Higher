@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Random;
 
 public class Constant {
-    public static final ResourceLocation ExtremeInventory = new ResourceLocation("textures/gui/container/extreme_inventory.png");
+    public static final ResourceLocation JewelryInventory = new ResourceLocation("textures/gui/container/inventory_jewelry.png");
 
     public static Random GARandom = new Random();
 

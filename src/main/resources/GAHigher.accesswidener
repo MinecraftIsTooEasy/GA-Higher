@@ -33,6 +33,7 @@ accessible method net/minecraft/CraftingManager addShapelessRecipe (Lnet/minecra
 accessible field net/minecraft/ContainerWorkbench x I
 accessible field net/minecraft/ContainerWorkbench y I
 accessible field net/minecraft/ContainerWorkbench z I
+accessible class net/minecraft/SlotCreativeInventory
 
 accessible method net/minecraft/EntityVillager adjustProbability (F)F
 
