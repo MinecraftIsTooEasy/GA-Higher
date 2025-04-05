@@ -22,7 +22,7 @@ repositories {
 loom {
     accessWidenerPath = file("src/main/resources/GAHigher.accesswidener")
     mergedMinecraftJar()
-    setFML(new File("D:\\Code\\Java\\FML3.0.0\\lib\\FishModLoader.jar"))
+    setFML(new File("${lib_dir}/${fish_mod_loader}"))
     mods {
         "HelloFML" {
             sourceSet sourceSets.main
@@ -32,7 +32,7 @@ loom {
 }
 
 runClient {
-    args("--username", "De6ris", "--session", "a.a.a.a", "--width", 854, "--height", 480)
+    args("--username", "${username}", "--session", "a.a.a.a", "--width", 854, "--height", 480)
 }
 
 dependencies {
@@ -43,26 +43,26 @@ dependencies {
     implementation files(loom.getFML().toPath())
 
     // runtime needed
-    implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\RustedIronCore.jar")
-    implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\RustedIronCore-sources.jar")
-    implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\ManyLib.jar")
+    implementation files("${lib_dir}/RustedIronCore.jar")
+    implementation files("${lib_dir}/RustedIronCore-sources.jar")
+    implementation files("${lib_dir}/ManyLib.jar")
 
     // compile needed
-    compileOnly files("D:\\Code\\Java\\FML3.0.0\\lib\\MITE-ITE.jar")
-    implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\EMI.jar")// but this is useful
+    compileOnly files("${lib_dir}/MITE-ITE.jar")
+    implementation files("${lib_dir}/EMI.jar")// but this is useful
 
     // useful mods
-    implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\ModernMite.jar")
-//    implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\MithrilCore.jar")
-    implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\ommc.jar")
-    implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\GammaFree.jar")
-    implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\Neodymium.jar")
-    implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\FPSPlus.jar")
-    implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\ExtraGui.jar")
-    implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\Hwite.jar")
-    implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\ModMenu.jar")
-    implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\PinIn-Lib.jar")
-    implementation files("D:\\Code\\Java\\FML3.0.0\\lib\\Baubles.jar")
+    implementation files("${lib_dir}/ModernMite.jar")
+//    implementation files("${lib_dir}/MithrilCore.jar")
+    implementation files("${lib_dir}/ommc.jar")
+    implementation files("${lib_dir}/GammaFree.jar")
+    implementation files("${lib_dir}/Neodymium.jar")
+    implementation files("${lib_dir}/FPSPlus.jar")
+    implementation files("${lib_dir}/ExtraGui.jar")
+    implementation files("${lib_dir}/Hwite.jar")
+    implementation files("${lib_dir}/ModMenu.jar")
+    implementation files("${lib_dir}/PinIn-Lib.jar")
+    implementation files("${lib_dir}/Baubles.jar")
 }
 
 processResources {
