@@ -30,7 +30,6 @@ public class GAConfigManyLib extends SimpleConfigs {
 
     // data
     public static final ConfigInteger DropJewelryRate = new ConfigInteger("饰品掉率", 10000, 1, Integer.MAX_VALUE, "击杀普通怪物时掉率");
-    public static final ConfigInteger VibraniumWorkbenchSpeed = new ConfigInteger("振金工作台速度", 25, 1, 100, "25为原版极限速度, 再高可能引发崩溃");
 
 
     // hotkey
@@ -51,7 +50,7 @@ public class GAConfigManyLib extends SimpleConfigs {
 
     static {
         hotkeys = List.of(Shop, OpenConfig);
-        data = List.of(DropJewelryRate, VibraniumWorkbenchSpeed);
+        data = List.of(DropJewelryRate);
         function = List.of(PriceConfigStrongOverride, PriceOnTooltip);
 
         tabs = new ArrayList<>();
