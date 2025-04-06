@@ -2,7 +2,7 @@ package com.github.Debris.GAHigher.enums;
 
 import com.github.Debris.GAHigher.block.Blocks;
 import com.github.Debris.GAHigher.compat.ModCompat;
-import com.github.Debris.GAHigher.item.ITECompatImpl;
+import com.github.Debris.GAHigher.unsafe.ITEAccessor;
 import net.minecraft.Achievement;
 import net.minecraft.AchievementList;
 import net.minecraft.Item;
@@ -18,7 +18,7 @@ public class Achievements {
         openShop = (new Achievement(getNextAchievementID(), "openShop", -4, 2, new ItemStack(Blocks.blockColorful, 1, 1), AchievementList.openInventory)).setIndependent().registerAchievement();
         Item item;
         if (ModCompat.HAS_ITE) {
-            item = ITECompatImpl.getIconForKillZombieBoss();
+            item = ITEAccessor.getIconForKillZombieBoss();
         } else {
             item = Item.warHammerAdamantium;
         }

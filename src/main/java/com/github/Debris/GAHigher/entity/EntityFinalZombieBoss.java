@@ -7,7 +7,7 @@ import net.minecraft.ItemStack;
 import net.minecraft.SharedMonsterAttributes;
 import net.minecraft.World;
 
-import static net.xiaoyu233.mitemod.miteite.item.Items.*;
+import static net.xiaoyu233.mitemod.miteite.item.MITEITEItemRegistryInit.*;
 
 public class EntityFinalZombieBoss extends EntityZombieBoss {
     public EntityFinalZombieBoss(World par1World) {

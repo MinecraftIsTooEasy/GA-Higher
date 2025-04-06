@@ -10,6 +10,7 @@ import com.github.Debris.GAHigher.item.guilt.*;
 import com.github.Debris.GAHigher.item.jewelry.ItemJewelry;
 import com.github.Debris.GAHigher.item.jewelry.ItemMagnet;
 import com.github.Debris.GAHigher.item.material.Materials;
+import com.github.Debris.GAHigher.unsafe.ITEAccessor;
 import com.github.Debris.GAHigher.util.ReflectHelper;
 import moddedmite.rustedironcore.api.event.events.CraftingRecipeRegisterEvent;
 import net.minecraft.*;
@@ -140,7 +141,7 @@ public class Items extends Item {
 
     private static Material getBestMaterial() {
         if (ModCompat.HAS_ITE) {
-            return ITECompatImpl.getVibraniumMaterial();
+            return ITEAccessor.getVibraniumMaterial();
         }
         return Material.adamantium;
     }
@@ -260,8 +261,8 @@ public class Items extends Item {
         List<Item> nuggets = new ArrayList<>(vanillaNuggets);
         List<Item> ingots = new ArrayList<>(vanillaIngots);
         if (ModCompat.HAS_ITE) {
-            ITECompatImpl.addNuggetToList(nuggets);
-            ITECompatImpl.addIngotToList(ingots);
+            ITEAccessor.addNuggetToList(nuggets);
+            ITEAccessor.addIngotToList(ingots);
         }
 
         register.registerShapelessRecipe(new ItemStack(Blocks.blockLantern, 1), true, Blocks.torchWood, ironNugget, ironNugget, ironNugget, ironNugget, ironNugget, ironNugget, ironNugget, ironNugget);
@@ -475,13 +476,13 @@ public class Items extends Item {
 
 
         if (ModCompat.HAS_ITE) {
-            ITECompatImpl.registerCompatRecipes(register);
+            ITEAccessor.registerCompatRecipes(register);
         } else {
             vibranium_skirt.setLowestCraftingDifficultyToProduce(adamantium_skirt.getLowestCraftingDifficultyToProduce() * 2);// to suppress the warning
         }
     }
 
-    static void registerSkirtRecipe(CraftingRecipeRegisterEvent register, Item skirt, Item ingot) {
+    public static void registerSkirtRecipe(CraftingRecipeRegisterEvent register, Item skirt, Item ingot) {
         register.registerShapedRecipe(new ItemStack(skirt), true, "###", "#A#", "# #",
                 '#', ingot,
                 'A', silk);

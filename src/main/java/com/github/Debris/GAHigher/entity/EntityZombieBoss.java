@@ -12,8 +12,8 @@ import net.xiaoyu233.mitemod.miteite.api.ITEEnchantment;
 
 import java.util.*;
 
-import static net.xiaoyu233.mitemod.miteite.item.Items.*;
-import static net.xiaoyu233.mitemod.miteite.item.enchantment.Enchantments.*;
+import static net.xiaoyu233.mitemod.miteite.item.MITEITEItemRegistryInit.*;
+import static net.xiaoyu233.mitemod.miteite.item.enchantment.MITEITEEnchantmentRegistryInit.*;
 
 public class EntityZombieBoss extends EntityZombie implements IBossDisplayData {
     private final Enchantment[] enhanceSpecialBookList = new Enchantment[]{

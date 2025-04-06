@@ -1,4 +1,4 @@
-package com.github.Debris.GAHigher.item;
+package com.github.Debris.GAHigher.unsafe;
 
 import com.github.Debris.GAHigher.api.GAItem;
 import com.github.Debris.GAHigher.config.Configs;
@@ -10,12 +10,12 @@ import net.minecraft.Material;
 import java.util.List;
 
 import static com.github.Debris.GAHigher.item.Items.*;
-import static net.xiaoyu233.mitemod.miteite.block.Blocks.blockVibranium;
-import static net.xiaoyu233.mitemod.miteite.item.Items.*;
+import static net.xiaoyu233.mitemod.miteite.block.MITEITEBlockRegistryInit.blockVibranium;
+import static net.xiaoyu233.mitemod.miteite.item.MITEITEItemRegistryInit.*;
 import static net.xiaoyu233.mitemod.miteite.item.Materials.vibranium;
 import static net.xiaoyu233.mitemod.miteite.util.Configs.Item.ENCHANTED_GOLDEN_APPLE_EAT_TIME;
 
-public class ITECompatImpl {
+public class ITEAccessor {
     public static void registerCompatRecipes(CraftingRecipeRegisterEvent register) {
         registerSkirtRecipe(register, vibranium_skirt, VIBRANIUM_INGOT);
         if (Configs.wenscConfig.isRecipeGAPickaxe.ConfigValue) {

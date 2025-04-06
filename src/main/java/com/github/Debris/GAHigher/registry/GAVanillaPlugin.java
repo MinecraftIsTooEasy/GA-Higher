@@ -5,7 +5,7 @@ import com.github.Debris.GAHigher.api.GAPlugin;
 import com.github.Debris.GAHigher.api.GARegistry;
 import com.github.Debris.GAHigher.block.Blocks;
 import com.github.Debris.GAHigher.compat.ModCompat;
-import com.github.Debris.GAHigher.item.ITECompatImpl;
+import com.github.Debris.GAHigher.unsafe.ITEAccessor;
 import com.github.Debris.GAHigher.item.Items;
 import com.github.Debris.GAHigher.item.jewelry.ItemJewelry;
 
@@ -100,7 +100,7 @@ public class GAVanillaPlugin implements GAPlugin {
         }
 
         if (ModCompat.HAS_ITE) {
-            ITECompatImpl.registerPrices();
+            ITEAccessor.registerPrices();
         }
     }
 }

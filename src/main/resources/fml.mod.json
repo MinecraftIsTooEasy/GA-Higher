@@ -8,8 +8,11 @@
     "many-lib": ">=2.0.0"
   },
   "suggests": {
-    "mite_ite": ">=2.0.9",
+    "mite_ite": ">=2.0.11",
     "baubles": ">=1.0.9"
+  },
+  "breaks": {
+    "mite_ite": "<=2.0.10"
   },
   "environment": "*",
   "name": "GA-Higher",

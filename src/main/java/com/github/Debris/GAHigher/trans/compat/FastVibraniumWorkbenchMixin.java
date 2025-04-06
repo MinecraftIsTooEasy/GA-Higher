@@ -8,7 +8,7 @@ import net.minecraft.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-import static net.xiaoyu233.mitemod.miteite.block.Blocks.vibraniumWorkBench;
+import static net.xiaoyu233.mitemod.miteite.block.MITEITEBlockRegistryInit.vibraniumWorkBench;
 
 @ConditionalMixin(require = @Condition(value = ModCompat.ITE))
 @Mixin(SlotCrafting.class)
