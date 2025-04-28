@@ -16,6 +16,8 @@ public class GAStart implements ModInitializer {
     public static final String MOD_ID_COMPACT = "GA";
     public static final String MOD_VERSION = "15.0.2";
 
+    public static final String NAMESPACE = "ga";
+
     @Override
     public void onInitialize() {
         MITEEvents.MITE_EVENT_BUS.register(new GAEventFML());

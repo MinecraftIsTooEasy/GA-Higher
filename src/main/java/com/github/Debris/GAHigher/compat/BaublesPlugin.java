@@ -2,7 +2,6 @@ package com.github.Debris.GAHigher.compat;
 
 import baubles.api.BaubleType;
 import baubles.api.IBaublePlugin;
-import com.github.Debris.GAHigher.item.ItemRingKiller;
 import com.github.Debris.GAHigher.item.Items;
 import com.github.Debris.GAHigher.item.jewelry.ItemJewelry;
 import net.minecraft.EntityLivingBase;
@@ -18,7 +17,6 @@ public class BaublesPlugin implements IBaublePlugin {
             for (ItemJewelry jewelry : Items.jewelries) {
                 if (jewelry == item) return true;
             }
-            if (item instanceof ItemRingKiller) return true;
         }
         return false;
     }

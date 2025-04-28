@@ -18,6 +18,9 @@ public class ItemSpider_Leg extends ItemFood {
             int Buff = Constant.GARandom.nextInt(100);
             if (Buff < 25)
                 par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 7200, 2));
+            int k = EnchantmentHelper.getEnchantmentLevel(Enchantment.speed, par3EntityPlayer.getHeldItemStack());
+            if (k > 0 && Constant.GARandom.nextInt(100) < k)
+                par3EntityPlayer.dropItem(Items.Powder_Feng.itemID, 1, 1.0F);
             par3EntityPlayer.getFoodStats().setSatiation(par3EntityPlayer.getSatiation() + 1, true);
         }
     }

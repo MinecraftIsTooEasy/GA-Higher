@@ -1,5 +1,6 @@
 package com.github.Debris.GAHigher.item;
 
+import com.github.Debris.GAHigher.enums.Achievements;
 import net.minecraft.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class ItemDrug_ZJ extends ItemFood {
         if (!par2World.isRemote) {
             par3EntityPlayer.addPotionEffect(new PotionEffect(Potion.resistance.id, 1760, 8));
             par3EntityPlayer.setInsulinResistance(par3EntityPlayer.getInsulinResistance() - 12800);
+            par3EntityPlayer.triggerAchievement(Achievements.Achievement_zhujidan);
         }
     }
 

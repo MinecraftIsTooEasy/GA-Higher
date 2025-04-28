@@ -1,6 +1,6 @@
 package com.github.Debris.GAHigher.item;
 
-import com.github.Debris.GAHigher.item.material.Materials;
+import com.github.Debris.GAHigher.material.Materials;
 import net.minecraft.*;
 
 import java.util.List;

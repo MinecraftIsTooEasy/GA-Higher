@@ -1,26 +1,17 @@
 package com.github.Debris.GAHigher.event;
 
-import com.github.Debris.GAHigher.GAStart;
 import com.github.Debris.GAHigher.block.Blocks;
 import com.github.Debris.GAHigher.block.entity.TileEntityItemDuper;
-import com.github.Debris.GAHigher.client.render.entity.RenderZombieBoss;
 import com.github.Debris.GAHigher.command.CommandForging;
 import com.github.Debris.GAHigher.command.CommandItemLevel;
-import com.github.Debris.GAHigher.command.CommandPrice;
 import com.github.Debris.GAHigher.compat.ModCompat;
-import com.github.Debris.GAHigher.entity.EntityExchanger;
-import com.github.Debris.GAHigher.entity.EntityFinalZombieBoss;
-import com.github.Debris.GAHigher.entity.EntityZombieBoss;
-import com.github.Debris.GAHigher.entity.EntityZombieDoor;
 import com.github.Debris.GAHigher.enums.Achievements;
 import com.github.Debris.GAHigher.item.Items;
-import com.github.Debris.GAHigher.item.enchantment.Enchantments;
 import com.github.Debris.GAHigher.network.GANetwork;
 import com.github.Debris.GAHigher.network.packets.S2C.S2COverlayMessage;
 import com.google.common.eventbus.Subscribe;
 import net.minecraft.*;
 import net.xiaoyu233.fml.reload.event.*;
-import net.xiaoyu233.fml.reload.utils.IdUtil;
 
 public class GAEventFML {
     @Subscribe
@@ -144,47 +135,12 @@ public class GAEventFML {
         }
     }
 
-    static EntityRegisterEvent entityRegisterEvent;
-
-    @Subscribe
-    public void onEntityRegister(EntityRegisterEvent event) {
-        entityRegisterEvent = event;
-        addMapping(EntityZombieDoor.class, "EntityZombieDoor", nextEntityID());
-        addMapping(EntityExchanger.class, "EntityExchanger", nextEntityID());
-        if (ModCompat.HAS_ITE) {
-            addMapping(EntityZombieBoss.class, "EntityZombieBoss", nextEntityID());
-            addMapping(EntityFinalZombieBoss.class, "EntityFinalZombieBoss", nextEntityID());
-        }
-        entityRegisterEvent = null;
-    }
-
-    private static int nextEntityID() {
-        return IdUtil.getNextEntityID();
-    }
-
-    private static void addMapping(Class<? extends Entity> clazz, String name, int id) {
-        entityRegisterEvent.register(clazz, GAStart.MOD_ID, name, id);
-    }
-
-    @Subscribe
-    public void onEntityRendererRegister(EntityRendererRegistryEvent event) {
-        if (ModCompat.HAS_ITE) {
-            event.register(EntityZombieBoss.class, new RenderZombieBoss());
-        }
-    }
-
-    @Subscribe
-    public void onEnchantmentRegister(EnchantmentRegistryEvent event) {
-        Enchantments.init();
-    }
-
     @Subscribe
     public void onCommandRegister(CommandRegisterEvent event) {
         if (ModCompat.HAS_ITE) {
             event.register(new CommandForging());
             event.register(new CommandItemLevel());
         }
-        event.register(new CommandPrice());
     }
 
     @Subscribe

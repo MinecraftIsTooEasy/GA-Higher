@@ -2,25 +2,34 @@ package com.github.Debris.GAHigher.block;
 
 import com.github.Debris.GAHigher.GAStart;
 import com.github.Debris.GAHigher.client.GACreativeTabs;
-import com.github.Debris.GAHigher.item.material.Materials;
-import com.github.Debris.GAHigher.util.ReflectHelper;
+import com.github.Debris.GAHigher.material.Materials;
 import moddedmite.rustedironcore.api.event.events.CraftingRecipeRegisterEvent;
 import net.minecraft.*;
 import net.xiaoyu233.fml.reload.event.ItemRegistryEvent;
 import net.xiaoyu233.fml.reload.utils.IdUtil;
+import net.xiaoyu233.fml.util.ReflectHelper;
 
-public class Blocks extends Block {
-    public static final BlockGotcha blockGotcha = new BlockGotcha(getNextBlockID(), Material.glass, false);
+public abstract class Blocks extends Block {
+    public static final BlockGotcha BlockGotcha = new BlockGotcha(getNextBlockID(), Material.glass, false);
+
+    // block ga seems to be colorful block so skip it
+
+//    public static final BlockNewTorch BlockNewTorch = (new BlockNewTorch(176, Material.s)).setCraftingDifficultyAsComponent(1.0E-9F);
+//    public static final BlockNewTorch BlockNewTorch = (new BlockNewTorch(176, Material.circuits)).setCraftingDifficultyAsComponent(1.0E-9F);
+
+    public static final BlockSlime BlockSlime = new BlockSlime(177);
+
+    public static final BlockTomato BlockTomato = new BlockTomato(178);
+
+    public static final BlockBamboo BlockBamboo = new BlockBamboo(179);
 
     public static final BlockGotchaChest GotchaBox = new BlockGotchaChest(getNextBlockID());
 
-    public static final Block blockColorful = ReflectHelper.createInstance(BlockColorful.class, new Class[]{int.class, Material.class}, Integer.valueOf(getNextBlockID()), Materials.stone).setUnlocalizedName("blockColorful");
+    public static final Block blockColorful = ReflectHelper.createInstance(BlockColorful.class, new Class[]{int.class, Material.class}, getNextBlockID(), Materials.stone).setUnlocalizedName("blockColorful");
 
-    public static final Block blockColorfulBrick = ReflectHelper.createInstance(BlockColorfulBrick.class, new Class[]{int.class, Material.class}, Integer.valueOf(getNextBlockID()), Materials.stone).setUnlocalizedName("blockColorfulBrick");
+    public static final Block blockColorfulBrick = ReflectHelper.createInstance(BlockColorfulBrick.class, new Class[]{int.class, Material.class}, getNextBlockID(), Materials.stone).setUnlocalizedName("blockColorfulBrick");
 
     public static final Block blockColorfulWall = new BlockColorfulWall(getNextBlockID(), blockColorful, 0);
-
-    public static final Block blockLantern = new BlockLantern(getNextBlockID(), Materials.circuits).setHardness(0.0F).setStepSound(soundPowderFootstep).setUnlocalizedName("blockLantern");
 
     public static final Block blockStairsColorful0 = new BlockStairsColorful(getNextBlockID(), blockColorful, 0);
 
@@ -64,24 +73,6 @@ public class Blocks extends Block {
 
     public static final Block blockItemDuper = new BlockItemDuper(getNextBlockID()).setHardness(3.0F);
 
-    //    static {// what does it do
-//        try {
-//            Field field = Block.class.getDeclaredField("is_normal_cube_lookup");
-//            field.setAccessible(true);
-//            Field modifiers = field.getClass().getDeclaredField("modifiers");
-//            modifiers.setAccessible(true);
-//            modifiers.setInt(field, field.getModifiers() & 0xFFFFFFEF);
-//            field.set(null, new boolean[4096]);
-//            boolean[] is_normal_block = (boolean[]) field.get(null);
-//            for (Block block : Block.blocksList) {
-//                if (block != null)
-//                    is_normal_block[block.blockID] = block.is_normal_cube;
-//            }
-//            modifiers.setInt(field, field.getModifiers() & 0xFFFFFFEF);
-//        } catch (IllegalAccessException | NoSuchFieldException e) {
-//            e.printStackTrace();
-//        }
-//    }
     protected Blocks(int par1, Material par2Material, BlockConstants constants) {
         super(par1, par2Material, constants);
     }
@@ -102,11 +93,14 @@ public class Blocks extends Block {
     public static void registerModern(ItemRegistryEvent register) {
         itemRegistryEvent = register;
 
-        registerItemBlock(blockGotcha, "gotcha");
+        registerItemBlock(BlockGotcha, "gotcha");
+//        registerItemBlock((Block)BlockNewTorch, "new_torch_on");
+        registerItemBlock(BlockSlime, "block_slime");
+        registerItemBlock(BlockTomato, "tomato");
+        registerItemBlock(BlockBamboo, "bamboo");
         registerItemBlock(GotchaBox, "gotchabox");
         registerItemBlock(blockColorful, "colorful");
         registerItemBlock(blockColorfulBrick, "colorful_brick");
-        registerItemBlock(blockLantern, "block_lantern");
         registerItemBlock(blockColorfulWall, "colorful_wall");
         registerItemBlock(blockStairsColorful0, "colorful_stair");
         registerItemBlock(blockStairsColorful1, "colorful_stair");
@@ -151,11 +145,11 @@ public class Blocks extends Block {
         register.registerShapelessRecipe(new ItemStack(blockStairsColorful14, 9), true, new ItemStack(blockStairsColorful13, 9));
         register.registerShapelessRecipe(new ItemStack(blockStairsColorful15, 9), true, new ItemStack(blockStairsColorful14, 9));
         for (int i = 0; i < 15; i++) {
-            register.registerShapelessRecipe(new ItemStack(blockGotcha, 1, i + 1), true, new ItemStack(blockGotcha, 1, i));
+            register.registerShapelessRecipe(new ItemStack(BlockGotcha, 1, i + 1), true, new ItemStack(BlockGotcha, 1, i));
             register.registerShapelessRecipe(new ItemStack(blockColorful, 9, i + 1), true, new ItemStack(blockColorful, 9, i));
             register.registerShapelessRecipe(new ItemStack(blockColorfulBrick, 9, i + 1), true, new ItemStack(blockColorfulBrick, 9, i));
         }
-        register.registerShapelessRecipe(new ItemStack(blockGotcha, 1, 0), true, new ItemStack(blockGotcha, 1, 15));
+        register.registerShapelessRecipe(new ItemStack(BlockGotcha, 1, 0), true, new ItemStack(BlockGotcha, 1, 15));
         register.registerShapelessRecipe(new ItemStack(blockColorful, 9, 0), true, new ItemStack(blockColorful, 9, 15));
         register.registerShapelessRecipe(new ItemStack(blockColorfulBrick, 9, 0), true, new ItemStack(blockColorfulBrick, 9, 15));
     }

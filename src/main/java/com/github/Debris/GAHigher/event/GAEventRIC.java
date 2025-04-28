@@ -2,8 +2,10 @@ package com.github.Debris.GAHigher.event;
 
 import com.github.Debris.GAHigher.config.Configs;
 import com.github.Debris.GAHigher.event.listener.*;
+import com.github.Debris.GAHigher.item.Items;
 import com.github.Debris.GAHigher.registry.CraftingRegistry;
 import moddedmite.rustedironcore.api.event.Handlers;
+import net.minecraft.ItemStack;
 
 public class GAEventRIC extends Handlers {
     public static void registerEvents() {
@@ -11,11 +13,7 @@ public class GAEventRIC extends Handlers {
             GravelDrop.register(new GravelListener());
         }
 
-        SpawnCondition.register(new GASpawnCondition());
-
         PlayerEvent.register(new PlayerListener());
-
-        PropertiesRegistry.register(new PropertyRegistry());
 
         Combat.register(new CombatListener());
 
@@ -26,5 +24,13 @@ public class GAEventRIC extends Handlers {
         LootTable.register(new LootTableListener());
 
         ArmorModel.register(new ArmorModelListener());
+
+        BiomeDecoration.register(new BiomeDecorationListener());
+
+        Smelting.register(event -> {
+            event.register(Items.Drug_YD.itemID, new ItemStack(Items.Drug_YD_B, 1));
+        });
+
+        Trading.register(new TradingListener());
     }
 }

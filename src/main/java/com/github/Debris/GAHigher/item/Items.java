@@ -9,71 +9,34 @@ import com.github.Debris.GAHigher.item.api.StandardItem;
 import com.github.Debris.GAHigher.item.guilt.*;
 import com.github.Debris.GAHigher.item.jewelry.ItemJewelry;
 import com.github.Debris.GAHigher.item.jewelry.ItemMagnet;
-import com.github.Debris.GAHigher.item.material.Materials;
+import com.github.Debris.GAHigher.material.Materials;
 import com.github.Debris.GAHigher.unsafe.ITEAccessor;
-import com.github.Debris.GAHigher.util.ReflectHelper;
 import moddedmite.rustedironcore.api.event.events.CraftingRecipeRegisterEvent;
 import net.minecraft.*;
 import net.xiaoyu233.fml.reload.event.ItemRegistryEvent;
 import net.xiaoyu233.fml.reload.utils.IdUtil;
+import net.xiaoyu233.fml.util.ReflectHelper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Items extends Item {
+    public static final ItemFood Eight_Hamburger = new ItemEight_Hamburger(getNextItemID());
 
-    public static final Item Stones = new StandardItem(getNextItemID(), Material.diamond, "stones").setCraftingDifficultyAsComponent(1.0E-9F).setXPReward(1);
-
-    public static final Item Gem_Blue = new StandardItem(getNextItemID(), Material.diamond, "gem_blue").setCraftingDifficultyAsComponent(1.0E-9F).setXPReward(100);
-
-    public static final Item Gem_Yellow = new StandardItem(getNextItemID(), Material.diamond, "gem_yellow").setCraftingDifficultyAsComponent(1.0E-9F).setXPReward(1000);
-
-    public static final Item Guilt1 = new ItemGuilt1(getNextItemID());
-
-    public static final Item Guilt2 = new ItemGuilt2(getNextItemID());
-
-    public static final Item Guilt3 = new ItemGuilt3(getNextItemID());
-
-    public static final Item Guilt4 = new ItemGuilt4(getNextItemID());
-
-    public static final Item Guilt5 = new ItemGuilt5(getNextItemID());
-
-    public static final Item Guilt6 = new ItemGuilt6(getNextItemID());
-
-    public static final Item Guilt7 = new ItemGuilt7(getNextItemID());
-
-    public static final ItemPickaxe A_PICKAXE = ReflectHelper.createInstance(ItemPickaxe.class, new Class[]{int.class, Material.class}, (getNextItemID()), Materials.ancient_metal);
-
-    public static final ItemPickaxe B_PICKAXE = ReflectHelper.createInstance(ItemPickaxe.class, new Class[]{int.class, Material.class}, (getNextItemID()), Materials.ancient_metal);
-
-    public static final ItemPickaxe C_PICKAXE = ReflectHelper.createInstance(ItemPickaxe.class, new Class[]{int.class, Material.class}, (getNextItemID()), Materials.mithril);
-
-    public static final ItemPickaxe D_PICKAXE = ReflectHelper.createInstance(ItemPickaxe.class, new Class[]{int.class, Material.class}, (getNextItemID()), Materials.adamantium);
-
-    public static final ItemPickaxe E_PICKAXE = ReflectHelper.createInstance(ItemPickaxe.class, new Class[]{int.class, Material.class}, (getNextItemID()), getBestMaterial());
+    public static final ItemPickaxe GA_PICKAXE = ReflectHelper.createInstance(ItemPickaxe.class, new Class[]{int.class, Material.class}, getNextItemID(), Materials.mitega);
 
     public static final ItemFood Zombie_Brain = new ItemZombie_Brain(getNextItemID());
 
     public static final ItemFood Zombie_Drug = new ItemZombie_Drug(getNextItemID());
 
-    public static final ItemFood Spider_Leg = new ItemSpider_Leg(getNextItemID());
-
     public static final ItemFood Zombie_Soup = new ItemZombie_Soup(getNextItemID());
 
-    public static final Item Spider_Leg_B = new ItemSpider_Leg_B(getNextItemID());
+    public static final ItemFood Creeper_Baby = new ItemCreeper_Baby(getNextItemID());
 
-    public static final Item ColorBag = new ItemColorBag(getNextItemID(), Material.seed, "color_bag");
+    public static final ItemFood Creeper_Soul = new ItemCreeper_Soul(getNextItemID());
 
-    public static final Item Drug_BG = new ItemDrug_BG(getNextItemID());
-
-    public static final Item BadApple = new ItemBadApple(getNextItemID());
-
-    public static final Item Creeper_Baby = new ItemCreeper_Baby(getNextItemID());
-
-    public static final Item Creeper_Soul = new ItemCreeper_Soul(getNextItemID());
-
-    public static final ItemFood Drug_ZJ = new ItemDrug_ZJ(getNextItemID());
+    public static final ItemFood Spider_Leg = new ItemSpider_Leg(getNextItemID());
 
     public static final Item Stack_Gold_Nether = ReflectHelper.createInstance(ItemNugget.class, new Class[]{int.class, Material.class}, (getNextItemID()), getBestMaterial());
 
@@ -97,27 +60,128 @@ public class Items extends Item {
 
     public static final Item Stack_Leather = new StandardItem(getNextItemID(), Material.diamond, "stack_leather");
 
+    public static final Item Stones = new StandardItem(getNextItemID(), Material.diamond, "stones").setCraftingDifficultyAsComponent(1.0E-9F).setXPReward(1);
+
+    public static final Item Gem_Blue = new StandardItem(getNextItemID(), Material.diamond, "gem_blue").setCraftingDifficultyAsComponent(1.0E-9F).setXPReward(100);
+
+    public static final Item Gem_Yellow = new StandardItem(getNextItemID(), Material.diamond, "gem_yellow").setCraftingDifficultyAsComponent(1.0E-9F).setXPReward(1000);
+
+    public static final ItemFood Drug_BG = new ItemDrug_BG(getNextItemID());
+
+    public static final ItemFood Drug_ZJ = new ItemDrug_ZJ(getNextItemID());
+
+    //    public static final ItemGaBucket GA_BUCKET = new ItemGaBucket(getNextItemID(), getBestMaterial(), Material.h);
+    public static final ItemGaBucket GA_BUCKET = new ItemGaBucket(getNextItemID(), getBestMaterial(), Material.water);
+
+    public static final Item Drug_YD = new ItemDrug_YD(getNextItemID());
+
+    public static final ItemFood Drug_YD_B = new ItemDrug_YD_B(getNextItemID());
+
+    public static final ItemPickaxe A_PICKAXE = ReflectHelper.createInstance(ItemPickaxe.class, new Class[]{int.class, Material.class}, (getNextItemID()), Materials.ancient_metal);
+
+    public static final ItemPickaxe B_PICKAXE = ReflectHelper.createInstance(ItemPickaxe.class, new Class[]{int.class, Material.class}, (getNextItemID()), Materials.ancient_metal);
+
+    public static final ItemPickaxe C_PICKAXE = ReflectHelper.createInstance(ItemPickaxe.class, new Class[]{int.class, Material.class}, (getNextItemID()), Materials.mithril);
+
+    public static final ItemPickaxe D_PICKAXE = ReflectHelper.createInstance(ItemPickaxe.class, new Class[]{int.class, Material.class}, (getNextItemID()), Materials.adamantium);
+
+    public static final ItemPickaxe E_PICKAXE = ReflectHelper.createInstance(ItemPickaxe.class, new Class[]{int.class, Material.class}, (getNextItemID()), getBestMaterial());
+
+    public static final Item MITEGA_INGOT = ReflectHelper.createInstance(ItemIngot.class, new Class[]{int.class, Material.class}, getNextItemID(), Materials.mitega);
+
+    public static final Item Tomato = new ItemTomato(getNextItemID());
+
+    public static final Item Tomato_Omelette = new ItemTomato_Omelette(getNextItemID());
+
+    public static final Item Tomato_Bad = new ItemTomato_Bad(getNextItemID());
+
+    public static final Item Bamboo = new ItemBamboo(getNextItemID(), Blocks.BlockBamboo, "bamboo");
+
+    public static final Item Sausage = new ItemSausage(getNextItemID());
+
+    public static final Item BadApple = new ItemBadApple(getNextItemID());
+
     public static final Item GABag = new ItemGABag(getNextItemID(), getBestMaterial());
 
-    public static final Item lavaInPipes = new ItemLavaInPipes(getNextItemID(), Materials.lava);
+    public static final Item HellStones = new ItemHellStone(getNextItemID());
 
-    public static final Item ringKillerCopper = (new ItemRingKiller(getNextItemID(), Materials.copper, 1)).setUnlocalizedName("ringKillerCopper");
+    public static final Item Guilt1 = new ItemGuilt1(getNextItemID());
 
-    public static final Item ringKillerIron = (new ItemRingKiller(getNextItemID(), Materials.iron, 2)).setUnlocalizedName("ringKillerIron");
+    public static final Item Guilt2 = new ItemGuilt2(getNextItemID());
 
-    public static final Item ringKillerAncient = (new ItemRingKiller(getNextItemID(), Materials.ancient_metal, 3)).setUnlocalizedName("ringKillerAncient");
+    public static final Item Guilt3 = new ItemGuilt3(getNextItemID());
 
-    public static final Item ringKillerMithril = (new ItemRingKiller(getNextItemID(), Materials.mithril, 4)).setUnlocalizedName("ringKillerMithril");
+    public static final Item Guilt4 = new ItemGuilt4(getNextItemID());
 
-    public static final Item ringKillerAdamantium = (new ItemRingKiller(getNextItemID(), Materials.adamantium, 5)).setUnlocalizedName("ringKillerAdamantium");
+    public static final Item Guilt5 = new ItemGuilt5(getNextItemID());
 
-    public static final Item ringKillerVibranium = (new ItemRingKiller(getNextItemID(), getBestMaterial(), 6)).setUnlocalizedName("ringKillerVibranium");
+    public static final Item Guilt6 = new ItemGuilt6(getNextItemID());
 
-    public static final Item pants = new ItemGAMisc(getNextItemID(), "pants");
+    public static final Item Guilt7 = new ItemGuilt7(getNextItemID());
 
-    public static final ItemConsumables final_key = new ItemConsumables(getNextItemID(), getBestMaterial(), "final_key");
+    public static final Item Wither_Medal = ReflectHelper.createInstance(Item.class, new Class[]{int.class, Material.class, String.class}, getNextItemID(), Material.diamond, "wither_medal").setCraftingDifficultyAsComponent(1.0E-9F);
 
-    public static final ItemGAMisc cracked_key = new ItemGAMisc(getNextItemID(), "cracked_key");
+    public static final Item YYY = new ItemYinYangYu(getNextItemID());
+
+    public static final Item Spider_Leg_B = new ItemSpider_Leg_B(getNextItemID());
+
+    public static final Item Powder_JIN = new ItemPowderJin(getNextItemID());
+
+    public static final Item Powder_MU = new ItemPowderMu(getNextItemID());
+
+    public static final Item Powder_SHUI = new ItemPowderShui(getNextItemID());
+
+    public static final Item Powder_HUO = new ItemPowderHuo(getNextItemID());
+
+    public static final Item Powder_TU = new ItemPowderTu(getNextItemID());
+
+    public static final Item Powder_Feng = new ItemPowderFeng(getNextItemID());
+
+    public static final Item Powder_Lei = new ItemPowderLei(getNextItemID());
+
+    public static final Item Powder_Bing = new ItemPowderBing(getNextItemID());
+
+    public static final Item Powder_An = new ItemPowderAn(getNextItemID());
+
+    public static final ItemNugget MITEGA_NUGGET = ReflectHelper.createInstance(ItemNugget.class, new Class[]{int.class, Material.class}, getNextItemID(), Materials.mitega);
+
+    public static final Item GotchaChest = new ItemGotchaChest(getNextItemID());
+
+    public static final Item ColorBag = new ItemColorBag(getNextItemID(), Material.seed, "color_bag");
+
+    public static final Item Ghast_ShiZuKu = new ItemGhast_ShiZuKu(getNextItemID());
+
+    public static final Item LaTiao = new ItemLaTiao(getNextItemID());
+
+    public static final Item CubeSugar = new ItemCubeSugar(getNextItemID());
+
+    public static final Item HomeScroll = new ItemHomeScroll(getNextItemID(), Material.seed, "home_scroll");
+
+    public static final Item Fan = new ItemFan(getNextItemID(), Materials.mitega);
+
+    public static final Item Core = new ItemCore(getNextItemID());
+
+    public static final Item SoulBook = new ItemSoulBook(getNextItemID());
+
+    public static final Item SoulNewBook = new ItemSoulNewBook(getNextItemID());
+
+    public static final Item Pants = new ItemGAMisc(getNextItemID(), "pants");
+
+    public static final Item SoulBag = new ItemSoulBag(getNextItemID(), Materials.mitega);// TODO container
+
+    public static final Item SummonStaff = new ItemSummonStaff(getNextItemID(), Material.flint);
+
+    public static final Item OreBag = new ItemOreBag(getNextItemID(), Materials.mitega);
+
+    public static final Item PinRuCloth = new ItemPinRuCloth(getNextItemID(), Materials.mitega, false);
+
+    public static final Item Dimension = new ItemDimension(getNextItemID(), Material.diamond);
+
+    public static final Item AnimalBag = new ItemAnimalBag(getNextItemID(), Materials.mitega);
+
+    public static final Item AnimalBall = new ItemAnimalBall(getNextItemID(), Materials.mitega);
+
+    // specific for ga higher
 
     public static final ItemArmor leather_skirt = new ItemArmorSkirt(getNextItemID(), Material.leather, "leather_layer");
     public static final ItemArmor copper_skirt = new ItemArmorSkirt(getNextItemID(), Material.copper, "copper_layer");
@@ -166,32 +230,17 @@ public class Items extends Item {
         Item.ingotAncientMetal.setXPReward(20 * Configs.wenscConfig.OreExpValue.ConfigValue);
         Item.ingotMithril.setXPReward(40 * Configs.wenscConfig.OreExpValue.ConfigValue);
         Item.ingotAdamantium.setXPReward(100 * Configs.wenscConfig.OreExpValue.ConfigValue);
+        Drug_YD_B.setXPReward(5 * Configs.wenscConfig.MeatExpValue.ConfigValue);
 
 
-        register("stones", Stones).setUnlocalizedName("stones").setMaxStackSize(64);
-        register("gem_blue", Gem_Blue).setUnlocalizedName("gem_blue").setMaxStackSize(64);
-        register("gem_yellow", Gem_Yellow).setUnlocalizedName("gem_yellow").setMaxStackSize(64);
-        register("guilt1", Guilt1).setLowestCraftingDifficultyToProduce(1.0F);
-        register("guilt2", Guilt2).setLowestCraftingDifficultyToProduce(1.0F);
-        register("guilt3", Guilt3).setLowestCraftingDifficultyToProduce(1.0F);
-        register("guilt4", Guilt4).setLowestCraftingDifficultyToProduce(1.0F);
-        register("guilt5", Guilt5).setLowestCraftingDifficultyToProduce(1.0F);
-        register("guilt6", Guilt6).setLowestCraftingDifficultyToProduce(1.0F);
-        register("guilt7", Guilt7).setLowestCraftingDifficultyToProduce(1.0F);
-        register("a_pickaxe", A_PICKAXE).setLowestCraftingDifficultyToProduce(1.0F);
-        register("b_pickaxe", B_PICKAXE).setLowestCraftingDifficultyToProduce(1.0F);
-        register("c_pickaxe", C_PICKAXE).setLowestCraftingDifficultyToProduce(1.0F);
-        register("d_pickaxe", D_PICKAXE).setLowestCraftingDifficultyToProduce(1.0F);
-        register("e_pickaxe", E_PICKAXE).setLowestCraftingDifficultyToProduce(1.0F);
-        register("zombie_brain", Zombie_Brain);
-        register("zombie_drug", Zombie_Drug).setLowestCraftingDifficultyToProduce(1.0F);
-        register("spider_leg", Spider_Leg);
-        register("spider_leg_b", Spider_Leg_B).setLowestCraftingDifficultyToProduce(1.0F);
-        register("zombie_soup", Zombie_Soup).setLowestCraftingDifficultyToProduce(1.0F);
-        register("color_bag", ColorBag);
-        register("drug_bg", Drug_BG).setUnlocalizedName("drug_bg").setLowestCraftingDifficultyToProduce(1.0F);
-        register("bad_apple", BadApple).setLowestCraftingDifficultyToProduce(1.0F);
-        register("drug_zj", Drug_ZJ).setUnlocalizedName("drug_zj").setLowestCraftingDifficultyToProduce(1.0F);
+        register("eight_hamburger", Eight_Hamburger).setUnlocalizedName("eight_hamburger").setMaxStackSize(64);
+        register("ga_pickaxe", GA_PICKAXE);
+        register("zombie_brain", Zombie_Brain).setMaxStackSize(64);
+        register("zombie_drug", Zombie_Drug).setMaxStackSize(64).setLowestCraftingDifficultyToProduce(1.0F);
+        register("zombie_soup", Zombie_Soup).setMaxStackSize(64).setLowestCraftingDifficultyToProduce(1.0F);
+        register("creeper_baby", Creeper_Baby).setMaxStackSize(64);
+        register("creeper_soul", Creeper_Soul).setMaxStackSize(64).setCraftingDifficultyAsComponent(1.0E-9F);
+        register("spider_leg", Spider_Leg).setMaxStackSize(64);
         register("ingots/stack_gold_nether", Stack_Gold_Nether).setUnlocalizedName("stack_gold_nether").setMaxStackSize(64).setCraftingDifficultyAsComponent(1.0E-9F);
         register("ingots/stack_gold", Stack_Gold).setUnlocalizedName("stack_gold").setMaxStackSize(64).setCraftingDifficultyAsComponent(1.0E-9F);
         register("ingots/stack_silver", Stack_Silver).setUnlocalizedName("stack_silver").setMaxStackSize(64).setCraftingDifficultyAsComponent(1.0E-9F);
@@ -203,18 +252,67 @@ public class Items extends Item {
         register("stack_torch_on", Stack_Torch_On).setUnlocalizedName("stack_torch_on").setMaxStackSize(64).setCraftingDifficultyAsComponent(1.0E-9F);
         register("stack_log", Stack_Log).setUnlocalizedName("stack_log").setMaxStackSize(64).setCraftingDifficultyAsComponent(1.0E-9F);
         register("stack_leather", Stack_Leather).setMaxStackSize(64).setCraftingDifficultyAsComponent(1.0E-9F);
-        register("creeper_baby", Creeper_Baby).setUnlocalizedName("creeper_baby");
-        register("creeper_soul", Creeper_Soul).setUnlocalizedName("creeper_soul").setCraftingDifficultyAsComponent(1.0E-9F);
+        register("stones", Stones).setUnlocalizedName("stones").setMaxStackSize(64);
+        register("gem_blue", Gem_Blue).setUnlocalizedName("gem_blue").setMaxStackSize(64);
+        register("gem_yellow", Gem_Yellow).setUnlocalizedName("gem_yellow").setMaxStackSize(64);
+        register("drug_bg", Drug_BG).setUnlocalizedName("drug_bg").setMaxStackSize(64).setLowestCraftingDifficultyToProduce(1.0F);
+        register("drug_zj", Drug_ZJ).setUnlocalizedName("drug_zj").setMaxStackSize(64).setLowestCraftingDifficultyToProduce(1.0F);
+        register("ga_bucket", GA_BUCKET).setUnlocalizedName("ga_bucket").setMaxStackSize(64);
+        register("drug_yd", Drug_YD).setUnlocalizedName("drug_yd").setMaxStackSize(64);
+        register("drug_yd_b", Drug_YD_B).setUnlocalizedName("drug_yd_b").setMaxStackSize(64);
+        register("a_pickaxe", A_PICKAXE).setLowestCraftingDifficultyToProduce(1.0F);
+        register("b_pickaxe", B_PICKAXE).setLowestCraftingDifficultyToProduce(1.0F);
+        register("c_pickaxe", C_PICKAXE).setLowestCraftingDifficultyToProduce(1.0F);
+        register("d_pickaxe", D_PICKAXE).setLowestCraftingDifficultyToProduce(1.0F);
+        register("e_pickaxe", E_PICKAXE).setLowestCraftingDifficultyToProduce(1.0F);
+        register("mitega", MITEGA_INGOT);
+        register("tomato", Tomato).setLowestCraftingDifficultyToProduce(1.0F);
+        register("tomato_omelette", Tomato_Omelette).setLowestCraftingDifficultyToProduce(1.0F);
+        register("tomato_bad", Tomato_Bad).setLowestCraftingDifficultyToProduce(1.0F);
+        register("bamboo", Bamboo).setLowestCraftingDifficultyToProduce(1.0F);
+        register("sausage", Sausage).setLowestCraftingDifficultyToProduce(1.0F);
+        register("bad_apple", BadApple).setLowestCraftingDifficultyToProduce(1.0F);
         register("ga_bag", GABag).setUnlocalizedName("ga_bag").setLowestCraftingDifficultyToProduce(1.0F);
-        register("ring_killer/ring_killer_copper", ringKillerCopper).setUnlocalizedName("ring_killer_copper").setLowestCraftingDifficultyToProduce(1.0F);
-        register("ring_killer/ring_killer_iron", ringKillerIron).setUnlocalizedName("ring_killer_iron").setLowestCraftingDifficultyToProduce(1.0F);
-        register("ring_killer/ring_killer_ancient", ringKillerAncient).setUnlocalizedName("ring_killer_ancient").setLowestCraftingDifficultyToProduce(1.0F);
-        register("ring_killer/ring_killer_mithril", ringKillerMithril).setUnlocalizedName("ring_killer_mithril").setLowestCraftingDifficultyToProduce(1.0F);
-        register("ring_killer/ring_killer_adamantium", ringKillerAdamantium).setUnlocalizedName("ring_killer_adamantium").setLowestCraftingDifficultyToProduce(1.0F);
-        register("ring_killer/ring_killer_vibranium", ringKillerVibranium).setUnlocalizedName("ring_killer_vibranium").setLowestCraftingDifficultyToProduce(1.0F);
-        register("pants", pants);
-        register("final_key", final_key);
-        register("cracked_key", cracked_key);
+        register("hell_stones", HellStones).setMaxStackSize(64);
+        register("guilt1", Guilt1).setLowestCraftingDifficultyToProduce(1.0F);
+        register("guilt2", Guilt2).setLowestCraftingDifficultyToProduce(1.0F);
+        register("guilt3", Guilt3).setLowestCraftingDifficultyToProduce(1.0F);
+        register("guilt4", Guilt4).setLowestCraftingDifficultyToProduce(1.0F);
+        register("guilt5", Guilt5).setLowestCraftingDifficultyToProduce(1.0F);
+        register("guilt6", Guilt6).setLowestCraftingDifficultyToProduce(1.0F);
+        register("guilt7", Guilt7).setLowestCraftingDifficultyToProduce(1.0F);
+        register("wither_medal", Wither_Medal).setMaxStackSize(64);
+        register("yinyang_orb", YYY).setMaxStackSize(64);
+        register("spider_leg_b", Spider_Leg_B).setLowestCraftingDifficultyToProduce(1.0F);
+        register("powder_jin", Powder_JIN).setLowestCraftingDifficultyToProduce(1.0F);
+        register("powder_mu", Powder_MU).setLowestCraftingDifficultyToProduce(1.0F);
+        register("powder_shui", Powder_SHUI).setLowestCraftingDifficultyToProduce(1.0F);
+        register("powder_huo", Powder_HUO).setLowestCraftingDifficultyToProduce(1.0F);
+        register("powder_tu", Powder_TU).setLowestCraftingDifficultyToProduce(1.0F);
+        register("powder_feng", Powder_Feng).setLowestCraftingDifficultyToProduce(1.0F);
+        register("powder_lei", Powder_Lei).setLowestCraftingDifficultyToProduce(1.0F);
+        register("powder_bing", Powder_Bing).setLowestCraftingDifficultyToProduce(1.0F);
+        register("powder_an", Powder_An).setLowestCraftingDifficultyToProduce(1.0F);
+        register("mitega_nugget", MITEGA_NUGGET);
+        register("gotchachest", GotchaChest).setMaxStackSize(1);
+        register("color_bag", ColorBag).setMaxStackSize(64);
+        register("shizuku", Ghast_ShiZuKu).setLowestCraftingDifficultyToProduce(1.0F);
+        register("latiao", LaTiao).setLowestCraftingDifficultyToProduce(1.0F);
+        register("cubesugar", CubeSugar).setLowestCraftingDifficultyToProduce(1.0F);
+        register("home_scroll", HomeScroll).setLowestCraftingDifficultyToProduce(1.0F);
+        register("fan", Fan).setLowestCraftingDifficultyToProduce(1.0F);
+        register("core", Core).setLowestCraftingDifficultyToProduce(1.0F);
+        register("soulbook", SoulBook).setLowestCraftingDifficultyToProduce(1.0F);
+        register("soulnewbook", SoulNewBook).setLowestCraftingDifficultyToProduce(1.0F);
+        register("pants", Pants).setLowestCraftingDifficultyToProduce(1.0F);
+        register("soulbag", SoulBag).setLowestCraftingDifficultyToProduce(1.0F);
+        register("summon_staff", SummonStaff).setLowestCraftingDifficultyToProduce(1.0F);
+        register("ore_bag", OreBag).setLowestCraftingDifficultyToProduce(1.0F);
+        register("pinrucloth", PinRuCloth).setLowestCraftingDifficultyToProduce(1.0F);
+        register("dimension", Dimension).setLowestCraftingDifficultyToProduce(1.0F);
+        register("animal_bag", AnimalBag).setLowestCraftingDifficultyToProduce(1.0F);
+        register("animal_ball", AnimalBall).setLowestCraftingDifficultyToProduce(1.0F);
+
 
         register("skirt/leather_skirt", leather_skirt).setUnlocalizedName("leather_skirt");
         register("skirt/copper_skirt", copper_skirt).setUnlocalizedName("copper_skirt");
@@ -241,7 +339,9 @@ public class Items extends Item {
         return item;
     }
 
-    public static void registerRecipes(CraftingRecipeRegisterEvent register) {
+    public static void registerRecipes(CraftingRecipeRegisterEvent event) {
+        Item.manure.setCraftingDifficultyAsComponent(0.0F);
+
         List<ItemNugget> vanillaNuggets = List.of(
                 Item.goldNugget,
                 Item.copperNugget,
@@ -265,156 +365,198 @@ public class Items extends Item {
             ITEAccessor.addIngotToList(ingots);
         }
 
-        register.registerShapelessRecipe(new ItemStack(Blocks.blockLantern, 1), true, Blocks.torchWood, ironNugget, ironNugget, ironNugget, ironNugget, ironNugget, ironNugget, ironNugget, ironNugget);
         if (Configs.wenscConfig.isRecipeGABag.ConfigValue)
-            register.registerShapedRecipe(new ItemStack(GABag, 1), true, "#*#", "*#*", "#*#", ('#'), Blocks.obsidian, ('*'), enderPearl);
-        register.registerShapedRecipe(new ItemStack(Item.paper), true, "###", ('#'), Item.stick);
-        register.registerShapelessRecipe(new ItemStack(Blocks.blockGotcha, 64, 4), true, Gem_Blue);
+            event.registerShapedRecipe(new ItemStack(GABag, 1), true, "#*#", "*#*", "#*#", ('#'), Blocks.obsidian, ('*'), enderPearl);
+        event.registerShapedRecipe(new ItemStack(Item.paper), true, "###", ('#'), Item.stick);
+        event.registerShapelessRecipe(new ItemStack(Blocks.BlockGotcha, 64, 4), true, Gem_Blue);
         int i;
         for (i = 1; i < 10; i++) {
-            register.registerShapelessRecipe(new ItemStack(Block.cobblestone, i), true, new ItemStack(Stones, i));
+            event.registerShapelessRecipe(new ItemStack(Block.cobblestone, i), true, new ItemStack(Stones, i));
         }
-        register.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful0, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 0));
-        register.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful1, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 1));
-        register.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful2, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 2));
-        register.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful3, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 3));
-        register.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful4, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 4));
-        register.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful5, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 5));
-        register.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful6, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 6));
-        register.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful7, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 7));
-        register.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful8, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 8));
-        register.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful9, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 9));
-        register.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful10, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 10));
-        register.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful11, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 11));
-        register.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful12, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 12));
-        register.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful13, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 13));
-        register.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful14, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 14));
-        register.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful15, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 15));
+        for (i = 0; i < 5; i++) {
+            event.registerShapedRecipe(new ItemStack(Blocks.BlockSlime, 8), true, "###", "#S#", "###",
+                    '#', Block.sand,
+                    'S', new ItemStack(Item.slimeBall, 1, i));
+        }
+        Eight_Hamburger.setCraftingDifficultyAsComponent(ItemRock.getCraftingDifficultyAsComponent(Material.bread) / 4000.0F);
+        event.registerShapedRecipe(new ItemStack(Eight_Hamburger, 1), true, "###", "###", "###",
+                '#', Item.manure);
+        event.registerShapedRecipe(new ItemStack(GA_PICKAXE), true, "###", " S ", " S ",
+                '#', MITEGA_INGOT,
+                'S', Item.blazeRod);
+        GA_PICKAXE.setLowestCraftingDifficultyToProduce(1.0F);
+
+
+        event.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful0, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 0));
+        event.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful1, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 1));
+        event.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful2, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 2));
+        event.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful3, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 3));
+        event.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful4, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 4));
+        event.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful5, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 5));
+        event.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful6, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 6));
+        event.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful7, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 7));
+        event.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful8, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 8));
+        event.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful9, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 9));
+        event.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful10, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 10));
+        event.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful11, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 11));
+        event.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful12, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 12));
+        event.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful13, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 13));
+        event.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful14, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 14));
+        event.registerShapelessRecipe(new ItemStack(Blocks.blockStairsColorful15, 64), true, Gem_Blue, redstone, Blocks.stairsCobblestone, new ItemStack(Item.dyePowder, 1, 15));
         for (i = 0; i < 16; i++) {
-            register.registerShapelessRecipe(new ItemStack(Blocks.blockColorful, 64, i), true, Gem_Blue, redstone, new ItemStack(Item.dyePowder, 1, i));
-            register.registerShapelessRecipe(new ItemStack(Blocks.blockColorfulBrick, 64, i), true, Gem_Blue, redstone, Blocks.stoneBrick, new ItemStack(Item.dyePowder, 1, i));
-            register.registerShapelessRecipe(new ItemStack(Blocks.blockGotcha, 64, i), true, Gem_Blue, new ItemStack(Item.dyePowder, 1, i));
+            event.registerShapelessRecipe(new ItemStack(Blocks.blockColorful, 64, i), true, Gem_Blue, redstone, new ItemStack(Item.dyePowder, 1, i));
+            event.registerShapelessRecipe(new ItemStack(Blocks.blockColorfulBrick, 64, i), true, Gem_Blue, redstone, Blocks.stoneBrick, new ItemStack(Item.dyePowder, 1, i));
+            event.registerShapelessRecipe(new ItemStack(Blocks.BlockGotcha, 64, i), true, Gem_Blue, new ItemStack(Item.dyePowder, 1, i));
             if (Configs.wenscConfig.isRecipeGAPickaxe.ConfigValue)
-                register.registerShapedRecipe(new ItemStack(A_PICKAXE, 1), true, "###", "#I#", "###", ('I'), Item.pickaxeAncientMetal, ('#'), new ItemStack(Blocks.blockGotcha, 1, i));
-            register.registerShapelessRecipe(new ItemStack(silk, 4), true, new ItemStack(Block.cloth, 1, i));
+                event.registerShapedRecipe(new ItemStack(A_PICKAXE, 1), true, "###", "#I#", "###", ('I'), Item.pickaxeAncientMetal, ('#'), new ItemStack(Blocks.BlockGotcha, 1, i));
+            event.registerShapelessRecipe(new ItemStack(silk, 4), true, new ItemStack(Block.cloth, 1, i));
         }
         if (Configs.wenscConfig.isRecipeGAPickaxe.ConfigValue) {
-            register.registerShapelessRecipe(new ItemStack(Guilt1, 1), true, Block.blockCopper, Block.blockSilver, Block.blockIron, Block.blockGold, Block.blockMithril, Gem_Blue);
-            register.registerShapelessRecipe(new ItemStack(Guilt2, 1), true, Block.blockSilver, Block.blockDiamond, Block.blockIron, Block.blockGold, Block.blockMithril, Gem_Blue);
-            register.registerShapelessRecipe(new ItemStack(Guilt3, 1), true, Block.blockCopper, Block.blockRedstone, Block.blockIron, Block.blockGold, Block.blockMithril, Gem_Blue);
-            register.registerShapelessRecipe(new ItemStack(Guilt4, 1), true, Block.blockSilver, Block.blockAncientMetal, Block.blockIron, Block.blockGold, Block.blockMithril, Gem_Blue);
-            register.registerShapelessRecipe(new ItemStack(Guilt5, 1), true, Block.blockCopper, Block.blockEmerald, Block.blockIron, Block.blockGold, Block.blockMithril, Gem_Blue);
-            register.registerShapelessRecipe(new ItemStack(Guilt6, 1), true, Block.blockSilver, Block.blockNetherQuartz, Block.blockIron, Block.blockGold, Block.blockMithril, Gem_Blue);
-            register.registerShapelessRecipe(new ItemStack(Guilt7, 1), true, Block.blockCopper, Block.blockLapis, Block.blockIron, Block.blockGold, Block.blockMithril, Gem_Blue);
-            register.registerShapelessRecipe(new ItemStack(B_PICKAXE), true, A_PICKAXE, Block.blockAncientMetal, Guilt1, Guilt2, Guilt3, Guilt4, Guilt5, Guilt6, Guilt7);
-            register.registerShapelessRecipe(new ItemStack(C_PICKAXE), true, B_PICKAXE, Block.blockMithril, Guilt1, Guilt2, Guilt3, Guilt4, Guilt5, Guilt6, Guilt7);
-            register.registerShapelessRecipe(new ItemStack(D_PICKAXE), true, C_PICKAXE, Block.blockAdamantium, Guilt1, Guilt2, Guilt3, Guilt4, Guilt5, Guilt6, Guilt7);
+            event.registerShapelessRecipe(new ItemStack(Guilt1, 1), true, Block.blockCopper, Block.blockSilver, Block.blockIron, Block.blockGold, Block.blockMithril, Gem_Blue);
+            event.registerShapelessRecipe(new ItemStack(Guilt2, 1), true, Block.blockSilver, Block.blockDiamond, Block.blockIron, Block.blockGold, Block.blockMithril, Gem_Blue);
+            event.registerShapelessRecipe(new ItemStack(Guilt3, 1), true, Block.blockCopper, Block.blockRedstone, Block.blockIron, Block.blockGold, Block.blockMithril, Gem_Blue);
+            event.registerShapelessRecipe(new ItemStack(Guilt4, 1), true, Block.blockSilver, Block.blockAncientMetal, Block.blockIron, Block.blockGold, Block.blockMithril, Gem_Blue);
+            event.registerShapelessRecipe(new ItemStack(Guilt5, 1), true, Block.blockCopper, Block.blockEmerald, Block.blockIron, Block.blockGold, Block.blockMithril, Gem_Blue);
+            event.registerShapelessRecipe(new ItemStack(Guilt6, 1), true, Block.blockSilver, Block.blockNetherQuartz, Block.blockIron, Block.blockGold, Block.blockMithril, Gem_Blue);
+            event.registerShapelessRecipe(new ItemStack(Guilt7, 1), true, Block.blockCopper, Block.blockLapis, Block.blockIron, Block.blockGold, Block.blockMithril, Gem_Blue);
+            event.registerShapelessRecipe(new ItemStack(B_PICKAXE), true, A_PICKAXE, Block.blockAncientMetal, Guilt1, Guilt2, Guilt3, Guilt4, Guilt5, Guilt6, Guilt7);
+            event.registerShapelessRecipe(new ItemStack(C_PICKAXE), true, B_PICKAXE, Block.blockMithril, Guilt1, Guilt2, Guilt3, Guilt4, Guilt5, Guilt6, Guilt7);
+            event.registerShapelessRecipe(new ItemStack(D_PICKAXE), true, C_PICKAXE, Block.blockAdamantium, Guilt1, Guilt2, Guilt3, Guilt4, Guilt5, Guilt6, Guilt7);
         }
-        register.registerShapelessRecipe(new ItemStack(Zombie_Drug), true, Zombie_Brain, Zombie_Brain, Zombie_Brain, Block.plantYellow);
-        register.registerShapelessRecipe(new ItemStack(Zombie_Drug, 3), true, Zombie_Brain, Zombie_Brain, Zombie_Brain, Item.goldenCarrot);
-        register.registerShapelessRecipe(new ItemStack(leather, 1), true, rottenFlesh);
-        register.registerShapelessRecipe(new ItemStack(Blocks.cloth, 1), true, silk, silk, silk, silk);
-        register.registerShapedRecipe(new ItemStack(Item.poisonousPotato, 1), true, "##", "##", ('#'), Item.seeds);
+
+        event.registerShapelessRecipe(new ItemStack(Tomato_Omelette, 1, 0), true, Tomato, Item.egg);
+        event.registerShapelessRecipe(new ItemStack(Blocks.BlockTomato, 1, 0), true, Tomato, Item.manure, new ItemStack(Item.dyePowder, 1, 15), Block.dirt);
+
+        event.registerShapedRecipe(new ItemStack(Item.stick), false, "#", "#", "#",
+                '#', Bamboo);
+
+        event.registerShapelessRecipe(new ItemStack(Zombie_Drug), true, Zombie_Brain, Zombie_Brain, Zombie_Brain, Block.plantYellow);
+        event.registerShapelessRecipe(new ItemStack(Zombie_Drug, 3), true, Zombie_Brain, Zombie_Brain, Zombie_Brain, Item.goldenCarrot);
+        event.registerShapelessRecipe(new ItemStack(leather, 1), true, rottenFlesh);
+        event.registerShapelessRecipe(new ItemStack(Blocks.cloth, 1), true, silk, silk, silk, silk);
+        event.registerShapedRecipe(new ItemStack(Item.poisonousPotato, 1), true, "##", "##", ('#'), Item.seeds);
         if (Configs.wenscConfig.isRecipeRottenSoup.ConfigValue)
-            register.registerShapelessRecipe(new ItemStack(Zombie_Soup), true, Item.rottenFlesh, Item.spiderEye, Item.poisonousPotato, new ItemStack(Item.dyePowder, 1, 15));
-        register.registerShapelessRecipe(new ItemStack(Spider_Leg_B, 6, 0), true, new ItemStack(Spider_Leg, 6, 0), Item.bakedPotato, Item.snowball);
+            event.registerShapelessRecipe(new ItemStack(Zombie_Soup), true, Item.rottenFlesh, Item.spiderEye, Item.poisonousPotato, new ItemStack(Item.dyePowder, 1, 15));
+        event.registerShapelessRecipe(new ItemStack(Spider_Leg_B, 6, 0), true, new ItemStack(Spider_Leg, 6, 0), Item.bakedPotato, Item.snowball);
+        event.registerShapelessRecipe(new ItemStack(LaTiao, 1, 0), true, Item.rottenFlesh, Item.rottenFlesh, Item.rottenFlesh, Item.rottenFlesh);
+        event.registerShapelessRecipe(new ItemStack(CubeSugar, 1, 0), true, Item.sugar, Item.sugar, Item.sugar, Item.sugar);
+        event.registerShapelessRecipe(new ItemStack(MITEGA_NUGGET, 1, 0), true, Powder_An, Powder_Bing, Powder_Feng, Powder_HUO, Powder_JIN, Powder_Lei, Powder_MU, Powder_SHUI, Powder_TU);
+        event.registerShapelessRecipe(new ItemStack(MITEGA_INGOT, 1, 0), true, new ItemStack(MITEGA_NUGGET, 9, 0));
+        event.registerShapelessRecipe(new ItemStack(Core, 1, 0), true, new ItemStack(MITEGA_NUGGET, 4, 0));
+        event.registerShapedRecipe(new ItemStack(Fan), true, "I  ", "SI ", "ASI",
+                'I', Item.paper,
+                'S', Item.stick,
+                'A', Core);
+        event.registerShapedRecipe(new ItemStack(OreBag, 1), true, "III", "I#I", "III",
+
+                'I', Item.leather,
+                '#', Core);
+        event.registerShapedRecipe(new ItemStack(SummonStaff, 1), true, "I", "#", "#",
+
+                'I', Gem_Blue,
+                '#', Item.stick);
+        event.registerShapedRecipe(new ItemStack(AnimalBag, 1), true, " I ", "I#I", "I I",
+
+                'I', Item.ingotGold,
+                '#', Core);
+        event.registerShapelessRecipe(new ItemStack(HomeScroll, 64, 0), true, Gem_Blue, new ItemStack(Item.paper, 4), new ItemStack(Powder_TU, 4));
         if (Configs.wenscConfig.isRecipeGAGoldApple.ConfigValue) {
-            register.registerShapedRecipe(new ItemStack(BadApple), true, "##", "##", ('#'), Block.leaves);
+            event.registerShapedRecipe(new ItemStack(BadApple), true, "##", "##", ('#'), Block.leaves);
 
             for (Item nugget : nuggets) {
-                register.registerShapedRecipe(new ItemStack(Item.appleGold), true, "###", "#N#", "###", ('N'), BadApple, ('#'), nugget);
+                event.registerShapedRecipe(new ItemStack(Item.appleGold), true, "###", "#N#", "###", ('N'), BadApple, ('#'), nugget);
 
                 if (nugget != Item.goldNugget) {
-                    register.registerShapedRecipe(new ItemStack(Item.appleGold), true, "###", "#N#", "###", ('N'), Item.appleRed, ('#'), nugget);
+                    event.registerShapedRecipe(new ItemStack(Item.appleGold), true, "###", "#N#", "###", ('N'), Item.appleRed, ('#'), nugget);
                 }
             }
 
         }
         if (Configs.wenscConfig.isRecipeDrugProtection.ConfigValue)
-            register.registerShapelessRecipe(new ItemStack(Drug_ZJ, 2), true, Item.emerald, Item.emerald, Item.egg, Block.plantYellow);
+            event.registerShapelessRecipe(new ItemStack(Drug_ZJ, 2), true, Item.emerald, Item.emerald, Item.egg, Block.plantYellow);
         if (Configs.wenscConfig.isRecipeMineralBag.ConfigValue) {
-            register.registerShapelessRecipe(new ItemStack(Stack_Gold_Nether, 2), true, new ItemStack(Block.oreGold, 1, 2), new ItemStack(Block.oreGold, 1, 2), new ItemStack(Block.oreGold, 1, 2), new ItemStack(Block.oreGold, 1, 2), new ItemStack(Block.oreGold, 1, 2), new ItemStack(Block.oreGold, 1, 2), new ItemStack(Block.oreGold, 1, 2), new ItemStack(Block.oreGold, 1, 2));
-            register.registerShapelessRecipe(new ItemStack(Stack_Gold_Nether, 1), true, new ItemStack(Block.oreGold, 1, 2), new ItemStack(Block.oreGold, 1, 2), new ItemStack(Block.oreGold, 1, 2), new ItemStack(Block.oreGold, 1, 2));
+            event.registerShapelessRecipe(new ItemStack(Stack_Gold_Nether, 2), true, new ItemStack(Block.oreGold, 1, 2), new ItemStack(Block.oreGold, 1, 2), new ItemStack(Block.oreGold, 1, 2), new ItemStack(Block.oreGold, 1, 2), new ItemStack(Block.oreGold, 1, 2), new ItemStack(Block.oreGold, 1, 2), new ItemStack(Block.oreGold, 1, 2), new ItemStack(Block.oreGold, 1, 2));
+            event.registerShapelessRecipe(new ItemStack(Stack_Gold_Nether, 1), true, new ItemStack(Block.oreGold, 1, 2), new ItemStack(Block.oreGold, 1, 2), new ItemStack(Block.oreGold, 1, 2), new ItemStack(Block.oreGold, 1, 2));
 
-            RepeatRecipeBuilder.of(Stack_Gold_Nether, new ItemStack(Block.oreGold, 1, 2)).build(register);
+            RepeatRecipeBuilder.of(Stack_Gold_Nether, new ItemStack(Block.oreGold, 1, 2)).build(event);
 
-            register.registerShapelessRecipe(new ItemStack(Stack_Gold, 2), true, Block.oreGold, Block.oreGold, Block.oreGold, Block.oreGold, Block.oreGold, Block.oreGold, Block.oreGold, Block.oreGold);
-            register.registerShapelessRecipe(new ItemStack(Stack_Gold, 1), true, Block.oreGold, Block.oreGold, Block.oreGold, Block.oreGold);
+            event.registerShapelessRecipe(new ItemStack(Stack_Gold, 2), true, Block.oreGold, Block.oreGold, Block.oreGold, Block.oreGold, Block.oreGold, Block.oreGold, Block.oreGold, Block.oreGold);
+            event.registerShapelessRecipe(new ItemStack(Stack_Gold, 1), true, Block.oreGold, Block.oreGold, Block.oreGold, Block.oreGold);
 
-            RepeatRecipeBuilder.of(Stack_Gold, Block.oreGold).build(register);
+            RepeatRecipeBuilder.of(Stack_Gold, Block.oreGold).build(event);
 
-            register.registerShapelessRecipe(new ItemStack(Stack_Silver, 2), true, Block.oreSilver, Block.oreSilver, Block.oreSilver, Block.oreSilver, Block.oreSilver, Block.oreSilver, Block.oreSilver, Block.oreSilver);
-            register.registerShapelessRecipe(new ItemStack(Stack_Silver, 1), true, Block.oreSilver, Block.oreSilver, Block.oreSilver, Block.oreSilver);
-
-
-            RepeatRecipeBuilder.of(Stack_Silver, Block.oreSilver).build(register);
-
-            register.registerShapelessRecipe(new ItemStack(Stack_Copper, 2), true, Block.oreCopper, Block.oreCopper, Block.oreCopper, Block.oreCopper, Block.oreCopper, Block.oreCopper, Block.oreCopper, Block.oreCopper);
-            register.registerShapelessRecipe(new ItemStack(Stack_Copper, 1), true, Block.oreCopper, Block.oreCopper, Block.oreCopper, Block.oreCopper);
-
-            RepeatRecipeBuilder.of(Stack_Copper, Block.oreCopper).build(register);
-
-            register.registerShapelessRecipe(new ItemStack(Stack_Iron, 2), true, Block.oreIron, Block.oreIron, Block.oreIron, Block.oreIron, Block.oreIron, Block.oreIron, Block.oreIron, Block.oreIron);
-            register.registerShapelessRecipe(new ItemStack(Stack_Iron, 1), true, Block.oreIron, Block.oreIron, Block.oreIron, Block.oreIron);
-
-            RepeatRecipeBuilder.of(Stack_Iron, Block.oreIron).build(register);
-
-            register.registerShapelessRecipe(new ItemStack(Stack_Mithril, 2), true, Block.oreMithril, Block.oreMithril, Block.oreMithril, Block.oreMithril, Block.oreMithril, Block.oreMithril, Block.oreMithril, Block.oreMithril);
-            register.registerShapelessRecipe(new ItemStack(Stack_Mithril, 1), true, Block.oreMithril, Block.oreMithril, Block.oreMithril, Block.oreMithril);
+            event.registerShapelessRecipe(new ItemStack(Stack_Silver, 2), true, Block.oreSilver, Block.oreSilver, Block.oreSilver, Block.oreSilver, Block.oreSilver, Block.oreSilver, Block.oreSilver, Block.oreSilver);
+            event.registerShapelessRecipe(new ItemStack(Stack_Silver, 1), true, Block.oreSilver, Block.oreSilver, Block.oreSilver, Block.oreSilver);
 
 
-            RepeatRecipeBuilder.of(Stack_Mithril, Block.oreMithril).build(register);
+            RepeatRecipeBuilder.of(Stack_Silver, Block.oreSilver).build(event);
 
-            register.registerShapelessRecipe(new ItemStack(Stack_Adamantium, 2), true, Block.oreAdamantium, Block.oreAdamantium, Block.oreAdamantium, Block.oreAdamantium, Block.oreAdamantium, Block.oreAdamantium, Block.oreAdamantium, Block.oreAdamantium);
-            register.registerShapelessRecipe(new ItemStack(Stack_Adamantium, 1), true, Block.oreAdamantium, Block.oreAdamantium, Block.oreAdamantium, Block.oreAdamantium);
+            event.registerShapelessRecipe(new ItemStack(Stack_Copper, 2), true, Block.oreCopper, Block.oreCopper, Block.oreCopper, Block.oreCopper, Block.oreCopper, Block.oreCopper, Block.oreCopper, Block.oreCopper);
+            event.registerShapelessRecipe(new ItemStack(Stack_Copper, 1), true, Block.oreCopper, Block.oreCopper, Block.oreCopper, Block.oreCopper);
 
-            RepeatRecipeBuilder.of(Stack_Adamantium, Block.oreAdamantium).build(register);
+            RepeatRecipeBuilder.of(Stack_Copper, Block.oreCopper).build(event);
+
+            event.registerShapelessRecipe(new ItemStack(Stack_Iron, 2), true, Block.oreIron, Block.oreIron, Block.oreIron, Block.oreIron, Block.oreIron, Block.oreIron, Block.oreIron, Block.oreIron);
+            event.registerShapelessRecipe(new ItemStack(Stack_Iron, 1), true, Block.oreIron, Block.oreIron, Block.oreIron, Block.oreIron);
+
+            RepeatRecipeBuilder.of(Stack_Iron, Block.oreIron).build(event);
+
+            event.registerShapelessRecipe(new ItemStack(Stack_Mithril, 2), true, Block.oreMithril, Block.oreMithril, Block.oreMithril, Block.oreMithril, Block.oreMithril, Block.oreMithril, Block.oreMithril, Block.oreMithril);
+            event.registerShapelessRecipe(new ItemStack(Stack_Mithril, 1), true, Block.oreMithril, Block.oreMithril, Block.oreMithril, Block.oreMithril);
+
+
+            RepeatRecipeBuilder.of(Stack_Mithril, Block.oreMithril).build(event);
+
+            event.registerShapelessRecipe(new ItemStack(Stack_Adamantium, 2), true, Block.oreAdamantium, Block.oreAdamantium, Block.oreAdamantium, Block.oreAdamantium, Block.oreAdamantium, Block.oreAdamantium, Block.oreAdamantium, Block.oreAdamantium);
+            event.registerShapelessRecipe(new ItemStack(Stack_Adamantium, 1), true, Block.oreAdamantium, Block.oreAdamantium, Block.oreAdamantium, Block.oreAdamantium);
+
+            RepeatRecipeBuilder.of(Stack_Adamantium, Block.oreAdamantium).build(event);
         }
         if (Configs.wenscConfig.isRecipeGATorch.ConfigValue) {
-            register.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, Block.wood, Item.silk, Item.coal, Item.coal);
-            register.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, Block.wood, Item.sinew, Item.coal, Item.coal);
-            register.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, Block.wood, Item.silk, new ItemStack(Item.coal, 1, 1), new ItemStack(Item.coal, 1, 1));
-            register.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, Block.wood, Item.sinew, new ItemStack(Item.coal, 1, 1), new ItemStack(Item.coal, 1, 1));
-            register.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, new ItemStack(Block.wood, 1, 1), Item.silk, Item.coal, Item.coal);
-            register.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, new ItemStack(Block.wood, 1, 1), Item.sinew, Item.coal, Item.coal);
-            register.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, new ItemStack(Block.wood, 1, 1), Item.silk, new ItemStack(Item.coal, 1, 1), new ItemStack(Item.coal, 1, 1));
-            register.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, new ItemStack(Block.wood, 1, 1), Item.sinew, new ItemStack(Item.coal, 1, 1), new ItemStack(Item.coal, 1, 1));
-            register.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, new ItemStack(Block.wood, 1, 2), Item.silk, Item.coal, Item.coal);
-            register.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, new ItemStack(Block.wood, 1, 2), Item.sinew, Item.coal, Item.coal);
-            register.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, new ItemStack(Block.wood, 1, 2), Item.silk, new ItemStack(Item.coal, 1, 1), new ItemStack(Item.coal, 1, 1));
-            register.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, new ItemStack(Block.wood, 1, 2), Item.sinew, new ItemStack(Item.coal, 1, 1), new ItemStack(Item.coal, 1, 1));
-            register.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, new ItemStack(Block.wood, 1, 3), Item.silk, Item.coal, Item.coal);
-            register.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, new ItemStack(Block.wood, 1, 3), Item.sinew, Item.coal, Item.coal);
-            register.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, new ItemStack(Block.wood, 1, 3), Item.silk, new ItemStack(Item.coal, 1, 1), new ItemStack(Item.coal, 1, 1));
-            register.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, new ItemStack(Block.wood, 1, 3), Item.sinew, new ItemStack(Item.coal, 1, 1), new ItemStack(Item.coal, 1, 1));
+            event.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, Block.wood, Item.silk, Item.coal, Item.coal);
+            event.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, Block.wood, Item.sinew, Item.coal, Item.coal);
+            event.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, Block.wood, Item.silk, new ItemStack(Item.coal, 1, 1), new ItemStack(Item.coal, 1, 1));
+            event.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, Block.wood, Item.sinew, new ItemStack(Item.coal, 1, 1), new ItemStack(Item.coal, 1, 1));
+            event.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, new ItemStack(Block.wood, 1, 1), Item.silk, Item.coal, Item.coal);
+            event.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, new ItemStack(Block.wood, 1, 1), Item.sinew, Item.coal, Item.coal);
+            event.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, new ItemStack(Block.wood, 1, 1), Item.silk, new ItemStack(Item.coal, 1, 1), new ItemStack(Item.coal, 1, 1));
+            event.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, new ItemStack(Block.wood, 1, 1), Item.sinew, new ItemStack(Item.coal, 1, 1), new ItemStack(Item.coal, 1, 1));
+            event.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, new ItemStack(Block.wood, 1, 2), Item.silk, Item.coal, Item.coal);
+            event.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, new ItemStack(Block.wood, 1, 2), Item.sinew, Item.coal, Item.coal);
+            event.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, new ItemStack(Block.wood, 1, 2), Item.silk, new ItemStack(Item.coal, 1, 1), new ItemStack(Item.coal, 1, 1));
+            event.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, new ItemStack(Block.wood, 1, 2), Item.sinew, new ItemStack(Item.coal, 1, 1), new ItemStack(Item.coal, 1, 1));
+            event.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, new ItemStack(Block.wood, 1, 3), Item.silk, Item.coal, Item.coal);
+            event.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, new ItemStack(Block.wood, 1, 3), Item.sinew, Item.coal, Item.coal);
+            event.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, new ItemStack(Block.wood, 1, 3), Item.silk, new ItemStack(Item.coal, 1, 1), new ItemStack(Item.coal, 1, 1));
+            event.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, new ItemStack(Block.wood, 1, 3), Item.sinew, new ItemStack(Item.coal, 1, 1), new ItemStack(Item.coal, 1, 1));
 
-            RepeatRecipeBuilder.of(Stack_Torch, Block.torchWood).ratio(16).is3X3(false).build(register);
+            RepeatRecipeBuilder.of(Stack_Torch, Block.torchWood).ratio(16).is3X3(false).build(event);
 
-            register.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, Stack_Torch_On, Stack_Torch_On, Stack_Torch_On, Stack_Torch_On);
-            register.registerShapelessRecipe(new ItemStack(Stack_Torch, 2), true, Stack_Torch_On, Stack_Torch_On, Stack_Torch_On, Stack_Torch_On, Stack_Torch_On, Stack_Torch_On, Stack_Torch_On, Stack_Torch_On);
-            register.registerShapelessRecipe(new ItemStack(Stack_Torch_On, 1), true, Block.torchWood, Block.torchWood, Block.torchWood, Block.torchWood);
-            register.registerShapelessRecipe(new ItemStack(Stack_Torch_On, 2), true, Block.torchWood, Block.torchWood, Block.torchWood, Block.torchWood, Block.torchWood, Block.torchWood, Block.torchWood, Block.torchWood);
-            register.registerShapelessRecipe(new ItemStack(Block.torchWood, 12), true, Stack_Torch_On, Stack_Torch_On, Stack_Torch_On);
-            register.registerShapelessRecipe(new ItemStack(Block.torchWood, 8), true, Stack_Torch_On, Stack_Torch_On);
-            register.registerShapelessRecipe(new ItemStack(Block.torchWood, 4), true, Stack_Torch_On);
-            register.registerShapelessRecipe(new ItemStack(Stack_Log, 1), true, Block.wood, Block.wood, Block.wood, Block.wood);
-            register.registerShapelessRecipe(new ItemStack(Stack_Log, 1), true, new ItemStack(Block.wood, 1, 1), new ItemStack(Block.wood, 1, 1), new ItemStack(Block.wood, 1, 1), new ItemStack(Block.wood, 1, 1));
-            register.registerShapelessRecipe(new ItemStack(Stack_Log, 1), true, new ItemStack(Block.wood, 1, 2), new ItemStack(Block.wood, 1, 2), new ItemStack(Block.wood, 1, 2), new ItemStack(Block.wood, 1, 2));
-            register.registerShapelessRecipe(new ItemStack(Stack_Log, 1), true, new ItemStack(Block.wood, 1, 3), new ItemStack(Block.wood, 1, 3), new ItemStack(Block.wood, 1, 3), new ItemStack(Block.wood, 1, 3));
-            register.registerShapelessRecipe(new ItemStack(Stack_Leather, 1, 0), true, new ItemStack(Item.leather, 8, 0), Item.silk);
-            register.registerShapelessRecipe(new ItemStack(Stack_Leather, 1, 0), true, new ItemStack(Item.leather, 8, 0), Item.sinew);
-            register.registerShapelessRecipe(new ItemStack(Item.leather, 8, 0), true, Stack_Leather);
+            event.registerShapelessRecipe(new ItemStack(Stack_Torch, 1), true, Stack_Torch_On, Stack_Torch_On, Stack_Torch_On, Stack_Torch_On);
+            event.registerShapelessRecipe(new ItemStack(Stack_Torch, 2), true, Stack_Torch_On, Stack_Torch_On, Stack_Torch_On, Stack_Torch_On, Stack_Torch_On, Stack_Torch_On, Stack_Torch_On, Stack_Torch_On);
+            event.registerShapelessRecipe(new ItemStack(Stack_Torch_On, 1), true, Block.torchWood, Block.torchWood, Block.torchWood, Block.torchWood);
+            event.registerShapelessRecipe(new ItemStack(Stack_Torch_On, 2), true, Block.torchWood, Block.torchWood, Block.torchWood, Block.torchWood, Block.torchWood, Block.torchWood, Block.torchWood, Block.torchWood);
+            event.registerShapelessRecipe(new ItemStack(Block.torchWood, 12), true, Stack_Torch_On, Stack_Torch_On, Stack_Torch_On);
+            event.registerShapelessRecipe(new ItemStack(Block.torchWood, 8), true, Stack_Torch_On, Stack_Torch_On);
+            event.registerShapelessRecipe(new ItemStack(Block.torchWood, 4), true, Stack_Torch_On);
+            event.registerShapelessRecipe(new ItemStack(Stack_Log, 1), true, Block.wood, Block.wood, Block.wood, Block.wood);
+            event.registerShapelessRecipe(new ItemStack(Stack_Log, 1), true, new ItemStack(Block.wood, 1, 1), new ItemStack(Block.wood, 1, 1), new ItemStack(Block.wood, 1, 1), new ItemStack(Block.wood, 1, 1));
+            event.registerShapelessRecipe(new ItemStack(Stack_Log, 1), true, new ItemStack(Block.wood, 1, 2), new ItemStack(Block.wood, 1, 2), new ItemStack(Block.wood, 1, 2), new ItemStack(Block.wood, 1, 2));
+            event.registerShapelessRecipe(new ItemStack(Stack_Log, 1), true, new ItemStack(Block.wood, 1, 3), new ItemStack(Block.wood, 1, 3), new ItemStack(Block.wood, 1, 3), new ItemStack(Block.wood, 1, 3));
+            event.registerShapelessRecipe(new ItemStack(Stack_Leather, 1, 0), true, new ItemStack(Item.leather, 8, 0), Item.silk);
+            event.registerShapelessRecipe(new ItemStack(Stack_Leather, 1, 0), true, new ItemStack(Item.leather, 8, 0), Item.sinew);
+            event.registerShapelessRecipe(new ItemStack(Item.leather, 8, 0), true, Stack_Leather);
 
 
-            RepeatRecipeBuilder.of(Stack_Log, Block.wood).is3X3(false).build(register);
+            RepeatRecipeBuilder.of(Stack_Log, Block.wood).is3X3(false).build(event);
 
         }
-        register.registerShapelessRecipe(new ItemStack(Creeper_Soul), true, Creeper_Baby, Creeper_Baby, Creeper_Baby, Creeper_Baby);
+        event.registerShapelessRecipe(new ItemStack(Creeper_Soul), true, Creeper_Baby, Creeper_Baby, Creeper_Baby, Creeper_Baby);
         if (Configs.wenscConfig.isRecipeDrugFull.ConfigValue) {
 
             for (Item nugget : nuggets) {
-                register.registerShapelessRecipe(new ItemStack(Drug_BG, 64), true, Block.plantYellow, nugget, Item.redstone, new ItemStack(Block.plantRed, 1, 0), new ItemStack(Block.plantRed, 1, 1), new ItemStack(Block.plantRed, 1, 2), new ItemStack(Block.plantRed, 1, 5), new ItemStack(Block.plantRed, 1, 7), new ItemStack(Block.plantRed, 1, 8));
-                register.registerShapelessRecipe(new ItemStack(Drug_BG, 1), true, Item.redstone, new ItemStack(Block.plantYellow, 7), nugget);
+                event.registerShapelessRecipe(new ItemStack(Drug_BG, 64), true, Block.plantYellow, nugget, Item.redstone, new ItemStack(Block.plantRed, 1, 0), new ItemStack(Block.plantRed, 1, 1), new ItemStack(Block.plantRed, 1, 2), new ItemStack(Block.plantRed, 1, 5), new ItemStack(Block.plantRed, 1, 7), new ItemStack(Block.plantRed, 1, 8));
+                event.registerShapelessRecipe(new ItemStack(Drug_BG, 1), true, Item.redstone, new ItemStack(Block.plantYellow, 7), nugget);
             }
 
         }
@@ -422,61 +564,53 @@ public class Items extends Item {
             if (i == 0 || i == 1 || i == 2 || i == 5 || i == 7 || i == 8) {
                 if (Configs.wenscConfig.isRecipeDrugFull.ConfigValue) {
                     for (Item nugget : nuggets) {
-                        register.registerShapelessRecipe(new ItemStack(Drug_BG, 1), true, Item.redstone, new ItemStack(Block.plantRed, 7, i), nugget);
+                        event.registerShapelessRecipe(new ItemStack(Drug_BG, 1), true, Item.redstone, new ItemStack(Block.plantRed, 7, i), nugget);
                     }
                 }
-                register.registerShapelessRecipe(new ItemStack(Zombie_Drug), true, Zombie_Brain, Zombie_Brain, Zombie_Brain, new ItemStack(Block.plantRed, 1, i));
+                event.registerShapelessRecipe(new ItemStack(Zombie_Drug), true, Zombie_Brain, Zombie_Brain, Zombie_Brain, new ItemStack(Block.plantRed, 1, i));
                 if (Configs.wenscConfig.isRecipeDrugProtection.ConfigValue)
-                    register.registerShapelessRecipe(new ItemStack(Drug_ZJ, 2), true, Item.emerald, Item.emerald, Item.egg, new ItemStack(Block.plantRed, 1, i));
+                    event.registerShapelessRecipe(new ItemStack(Drug_ZJ, 2), true, Item.emerald, Item.emerald, Item.egg, new ItemStack(Block.plantRed, 1, i));
             }
         }
 
         for (Item ingot : ingots) {
             if (ingot == Item.ingotIron) continue;
-            register.registerShapedRecipe(new ItemStack(Block.hopperBlock), true, "I I", "IDI", " I ", ('D'), Block.chest, ('I'), ingot);
+            event.registerShapedRecipe(new ItemStack(Block.hopperBlock), true, "I I", "IDI", " I ", ('D'), Block.chest, ('I'), ingot);
         }
 
-        if (Configs.wenscConfig.isRecipeRingKiller.ConfigValue) {
-            register.registerShapedRecipe(new ItemStack(ringKillerCopper, 1), true, "###", "#*#", "###", ('#'), swordCopper, ('*'), emerald);
-            register.registerShapedRecipe(new ItemStack(ringKillerIron, 1), true, "###", "#*#", "###", ('#'), swordIron, ('*'), ringKillerCopper);
-            register.registerShapedRecipe(new ItemStack(ringKillerAncient, 1), true, "###", "#*#", "###", ('#'), swordAncientMetal, ('*'), ringKillerIron);
-            register.registerShapedRecipe(new ItemStack(ringKillerMithril, 1), true, "###", "#*#", "###", ('#'), swordMithril, ('*'), ringKillerAncient);
-            register.registerShapedRecipe(new ItemStack(ringKillerAdamantium, 1), true, "###", "#*#", "###", ('#'), swordAdamantium, ('*'), ringKillerMithril);
-        }
-
-        registerSkirtRecipe(register, leather_skirt, leather);
-        registerSkirtRecipe(register, copper_skirt, ingotCopper);
-        registerSkirtRecipe(register, silver_skirt, ingotSilver);
-        registerSkirtRecipe(register, gold_skirt, ingotGold);
-        registerSkirtRecipe(register, iron_skirt, ingotIron);
-        registerSkirtRecipe(register, ancient_metal_skirt, ingotAncientMetal);
-        registerSkirtRecipe(register, mithril_skirt, ingotMithril);
-        registerSkirtRecipe(register, adamantium_skirt, ingotAdamantium);
+        registerSkirtRecipe(event, leather_skirt, leather);
+        registerSkirtRecipe(event, copper_skirt, ingotCopper);
+        registerSkirtRecipe(event, silver_skirt, ingotSilver);
+        registerSkirtRecipe(event, gold_skirt, ingotGold);
+        registerSkirtRecipe(event, iron_skirt, ingotIron);
+        registerSkirtRecipe(event, ancient_metal_skirt, ingotAncientMetal);
+        registerSkirtRecipe(event, mithril_skirt, ingotMithril);
+        registerSkirtRecipe(event, adamantium_skirt, ingotAdamantium);
 
         // iron to ancient metal
 //        registerUpdateHelmetRecipe(register, helmetAncientMetal, helmetIron, ingotAncientMetal);
 //        registerUpdateChestPlateRecipe(register, plateAncientMetal, plateIron, ingotAncientMetal);
 //        registerUpdateLeggingsRecipe(register, legsAncientMetal, legsIron, ingotAncientMetal);
-        registerUpdateSkirtRecipe(register, ancient_metal_skirt, iron_skirt, ingotAncientMetal);
+        registerUpdateSkirtRecipe(event, ancient_metal_skirt, iron_skirt, ingotAncientMetal);
 //        registerUpdateBootsRecipe(register, bootsAncientMetal, bootsIron, ingotAncientMetal);
 
         // ancient metal to mithril
 //        registerUpdateHelmetRecipe(register, helmetMithril, helmetAncientMetal, ingotMithril);
 //        registerUpdateChestPlateRecipe(register, plateMithril, plateAncientMetal, ingotMithril);
 //        registerUpdateLeggingsRecipe(register, legsMithril, legsAncientMetal, ingotMithril);
-        registerUpdateSkirtRecipe(register, mithril_skirt, ancient_metal_skirt, ingotMithril);
+        registerUpdateSkirtRecipe(event, mithril_skirt, ancient_metal_skirt, ingotMithril);
 //        registerUpdateBootsRecipe(register, bootsMithril, bootsAncientMetal, ingotMithril);
 
         // mithril to adamantium
 //        registerUpdateHelmetRecipe(register, helmetAdamantium, helmetMithril, ingotAdamantium);
 //        registerUpdateChestPlateRecipe(register, plateAdamantium, plateMithril, ingotAdamantium);
 //        registerUpdateLeggingsRecipe(register, legsAdamantium, legsMithril, ingotAdamantium);
-        registerUpdateSkirtRecipe(register, adamantium_skirt, mithril_skirt, ingotAdamantium);
+        registerUpdateSkirtRecipe(event, adamantium_skirt, mithril_skirt, ingotAdamantium);
 //        registerUpdateBootsRecipe(register, bootsAdamantium, bootsMithril, ingotAdamantium);
 
 
         if (ModCompat.HAS_ITE) {
-            ITEAccessor.registerCompatRecipes(register);
+            ITEAccessor.registerCompatRecipes(event);
         } else {
             vibranium_skirt.setLowestCraftingDifficultyToProduce(adamantium_skirt.getLowestCraftingDifficultyToProduce() * 2);// to suppress the warning
         }

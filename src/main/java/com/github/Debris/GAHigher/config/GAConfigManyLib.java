@@ -33,7 +33,6 @@ public class GAConfigManyLib extends SimpleConfigs {
 
 
     // hotkey
-    public static final ConfigHotkey Shop = new ConfigHotkey("打开商店", "V", null);
     public static final ConfigHotkey OpenConfig = new ConfigHotkey("打开配置", "G,C", null);
 
 
@@ -49,7 +48,7 @@ public class GAConfigManyLib extends SimpleConfigs {
     }
 
     static {
-        hotkeys = List.of(Shop, OpenConfig);
+        hotkeys = List.of(OpenConfig);
         data = List.of(DropJewelryRate);
         function = List.of(PriceConfigStrongOverride, PriceOnTooltip);
 

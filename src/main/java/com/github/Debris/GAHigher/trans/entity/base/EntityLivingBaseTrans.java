@@ -18,6 +18,11 @@ public abstract class EntityLivingBaseTrans extends Entity {
         super(par1World);
     }
 
+    @Unique
+    private boolean isJumpingByCloud = false;
+    @Unique
+    private boolean hasDoubleJumped = false;
+
     @Inject(method = "updateFallState", at = @At("HEAD"))
     private void refreshDoubleJump(double par1, boolean par3, CallbackInfo ci) {
         if (par3) {
@@ -25,29 +30,23 @@ public abstract class EntityLivingBaseTrans extends Entity {
         }
     }
 
-    @Unique
-    private boolean hasDoubleJumped = false;
-
     @ModifyExpressionValue(method = "onLivingUpdate", at = @At(value = "FIELD", target = "Lnet/minecraft/EntityLivingBase;onGround:Z"))
     private boolean forceJump(boolean original) {
         if (original) {
-            this.jumpByCloud = false;
+            this.isJumpingByCloud = false;
             return true;
         }
         if (!this.canDoubleJump()) return false;
         if (!this.hasDoubleJumped) {
-            this.jumpByCloud = true;
+            this.isJumpingByCloud = true;
             return true;
         }
         return false;
     }
 
-    @Unique
-    private boolean jumpByCloud = false;
-
     @Inject(method = "onLivingUpdate", at = @At(value = "INVOKE", target = "Lnet/minecraft/EntityLivingBase;jump()V"))
     private void mark(CallbackInfo ci) {
-        if (this.jumpByCloud) {
+        if (this.isJumpingByCloud) {
             this.hasDoubleJumped = true;
         }
     }

@@ -16,6 +16,7 @@ public class ItemGABag extends ItemIngot {
         setCraftingDifficultyAsComponent(getCraftingDifficultyAsComponent(material));
     }
 
+    @Override
     public boolean onItemRightClick(EntityPlayer player, float partial_tick, boolean ctrl_is_down) {
         RaycastCollision rc = player.getSelectedObject(partial_tick, false);
         if (rc != null && rc.isBlock())
@@ -30,6 +31,8 @@ public class ItemGABag extends ItemIngot {
                 int j = rc.block_hit_y;
                 int k = rc.block_hit_z;
                 j++;
+                if (Blocks.BlockBamboo.tryPlaceBlock(rc.world, i, ++j, k, EnumFace.TOP, 0, player, true, true))
+                    return true;
             }
             int x = rc.neighbor_block_x;
             int y = rc.neighbor_block_y;

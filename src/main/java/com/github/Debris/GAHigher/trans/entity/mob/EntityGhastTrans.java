@@ -1,14 +1,23 @@
 package com.github.Debris.GAHigher.trans.entity.mob;
 
 import com.github.Debris.GAHigher.config.Configs;
+import com.github.Debris.GAHigher.item.Items;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.*;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin({EntityGhast.class})
 public abstract class EntityGhastTrans extends EntityFlying implements IMob {
 
     public EntityGhastTrans(World world) {
         super(world);
+    }
+
+    @WrapOperation(method = "dropFewItems", at = @At(value = "INVOKE", target = "Lnet/minecraft/EntityGhast;dropItem(II)Lnet/minecraft/EntityItem;", ordinal = 0))
+    private EntityItem changeLoot(EntityGhast instance, int id, int count, Operation<EntityItem> original) {
+        return original.call(instance, Items.Ghast_ShiZuKu.itemID, count);
     }
 
     @Override

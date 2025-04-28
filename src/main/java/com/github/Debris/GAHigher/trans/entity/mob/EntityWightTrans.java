@@ -1,10 +1,17 @@
 package com.github.Debris.GAHigher.trans.entity.mob;
 
 import com.github.Debris.GAHigher.config.Configs;
+import com.github.Debris.GAHigher.item.Items;
+import com.github.Debris.GAHigher.util.Constant;
+import net.minecraft.DamageSource;
 import net.minecraft.EntityMob;
 import net.minecraft.EntityWight;
 import net.minecraft.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin({EntityWight.class})
 public class EntityWightTrans extends EntityMob {
@@ -12,6 +19,14 @@ public class EntityWightTrans extends EntityMob {
         super(par1World);
     }
 
+    @Inject(method = "dropFewItems", at = @At("RETURN"))
+    private void dropDrugYD(boolean recently_hit_by_player, DamageSource damage_source, CallbackInfo ci) {
+        if (Constant.GARandom.nextInt(100) < Configs.wenscConfig.MobDropValue.ConfigValue)
+            dropItem(Items.Drug_YD);
+    }
+
+    @SuppressWarnings("OverwriteAuthorRequired")
+    @Overwrite
     public int getExperienceValue() {
         int baseExp = 10;
         int day = Math.max(getWorld().getDayOfWorld(), 1);
