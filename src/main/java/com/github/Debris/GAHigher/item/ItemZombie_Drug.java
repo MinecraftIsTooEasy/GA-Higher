@@ -9,7 +9,6 @@ public class ItemZombie_Drug extends ItemFood {
         super(par1, Material.chicken_soup, 0, 0, false, false, false, "zombie_drug");
         setMaxStackSize(64);
         setCraftingDifficultyAsComponent(1.0F);
-        setCreativeTab(CreativeTabs.tabFood);
     }
 
     protected void onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {

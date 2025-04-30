@@ -11,7 +11,6 @@ public class ItemZombie_Soup extends ItemFood {
         super(par1, Material.chicken_soup, 0, 0, false, false, false, "zombie_soup");
         setMaxStackSize(64);
         setCraftingDifficultyAsComponent(1.0F);
-        setCreativeTab(CreativeTabs.tabFood);
     }
 
     public int getMaxItemUseDuration(ItemStack par1ItemStack) {

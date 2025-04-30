@@ -7,7 +7,7 @@ import net.minecraft.*;
 import java.util.Random;
 
 /**
- * This class is based on BlockReed, or sugar cane.
+ * This class is based on {@link BlockReed}, or sugar cane.
  */
 public class BlockBamboo extends Block {
     protected BlockBamboo(int par1) {
@@ -106,11 +106,13 @@ public class BlockBamboo extends Block {
         return dropBlockAsEntityItem(info, Items.Bamboo);
     }
 
-    public int d() {
+    @Override
+    public int getRenderType() {
         return 1;
     }
 
-    public int d(World par1World, int par2, int par3, int par4) {
+    @Override
+    public int idPicked(World par1World, int par2, int par3, int par4) {
         return Items.Bamboo.itemID;
     }
 

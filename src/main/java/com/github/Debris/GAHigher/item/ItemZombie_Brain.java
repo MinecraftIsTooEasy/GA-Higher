@@ -10,7 +10,6 @@ public class ItemZombie_Brain extends ItemFood {
         super(par1, Material.meat, 0, 0, false, false, false, "zombie_brain");
         setMaxStackSize(64);
         setCraftingDifficultyAsComponent(1.0F);
-        setCreativeTab(CreativeTabs.tabFood);
     }
 
     protected void onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {

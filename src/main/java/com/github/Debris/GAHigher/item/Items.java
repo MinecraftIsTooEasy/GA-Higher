@@ -38,19 +38,19 @@ public class Items extends Item {
 
     public static final ItemFood Spider_Leg = new ItemSpider_Leg(getNextItemID());
 
-    public static final Item Stack_Gold_Nether = ReflectHelper.createInstance(ItemNugget.class, new Class[]{int.class, Material.class}, (getNextItemID()), getBestMaterial());
+    public static final Item Stack_Gold_Nether = ReflectHelper.createInstance(ItemNugget.class, new Class[]{int.class, Material.class}, (getNextItemID()), Materials.getBestMaterial());
 
-    public static final Item Stack_Gold = ReflectHelper.createInstance(ItemNugget.class, new Class[]{int.class, Material.class}, (getNextItemID()), getBestMaterial());
+    public static final Item Stack_Gold = ReflectHelper.createInstance(ItemNugget.class, new Class[]{int.class, Material.class}, (getNextItemID()), Materials.getBestMaterial());
 
-    public static final Item Stack_Silver = ReflectHelper.createInstance(ItemNugget.class, new Class[]{int.class, Material.class}, (getNextItemID()), getBestMaterial());
+    public static final Item Stack_Silver = ReflectHelper.createInstance(ItemNugget.class, new Class[]{int.class, Material.class}, (getNextItemID()), Materials.getBestMaterial());
 
-    public static final Item Stack_Copper = ReflectHelper.createInstance(ItemNugget.class, new Class[]{int.class, Material.class}, (getNextItemID()), getBestMaterial());
+    public static final Item Stack_Copper = ReflectHelper.createInstance(ItemNugget.class, new Class[]{int.class, Material.class}, (getNextItemID()), Materials.getBestMaterial());
 
-    public static final Item Stack_Iron = ReflectHelper.createInstance(ItemNugget.class, new Class[]{int.class, Material.class}, (getNextItemID()), getBestMaterial());
+    public static final Item Stack_Iron = ReflectHelper.createInstance(ItemNugget.class, new Class[]{int.class, Material.class}, (getNextItemID()), Materials.getBestMaterial());
 
-    public static final Item Stack_Mithril = ReflectHelper.createInstance(ItemNugget.class, new Class[]{int.class, Material.class}, (getNextItemID()), getBestMaterial());
+    public static final Item Stack_Mithril = ReflectHelper.createInstance(ItemNugget.class, new Class[]{int.class, Material.class}, (getNextItemID()), Materials.getBestMaterial());
 
-    public static final Item Stack_Adamantium = ReflectHelper.createInstance(ItemNugget.class, new Class[]{int.class, Material.class}, (getNextItemID()), getBestMaterial());
+    public static final Item Stack_Adamantium = ReflectHelper.createInstance(ItemNugget.class, new Class[]{int.class, Material.class}, (getNextItemID()), Materials.getBestMaterial());
 
     public static final Item Stack_Torch = new StandardItem(getNextItemID(), Material.seed, "stack_torch");
 
@@ -71,7 +71,7 @@ public class Items extends Item {
     public static final ItemFood Drug_ZJ = new ItemDrug_ZJ(getNextItemID());
 
     //    public static final ItemGaBucket GA_BUCKET = new ItemGaBucket(getNextItemID(), getBestMaterial(), Material.h);
-    public static final ItemGaBucket GA_BUCKET = new ItemGaBucket(getNextItemID(), getBestMaterial(), Material.water);
+    public static final ItemGaBucket GA_BUCKET = new ItemGaBucket(getNextItemID(), Materials.getBestMaterial(), Material.water);
 
     public static final Item Drug_YD = new ItemDrug_YD(getNextItemID());
 
@@ -85,7 +85,7 @@ public class Items extends Item {
 
     public static final ItemPickaxe D_PICKAXE = ReflectHelper.createInstance(ItemPickaxe.class, new Class[]{int.class, Material.class}, (getNextItemID()), Materials.adamantium);
 
-    public static final ItemPickaxe E_PICKAXE = ReflectHelper.createInstance(ItemPickaxe.class, new Class[]{int.class, Material.class}, (getNextItemID()), getBestMaterial());
+    public static final ItemPickaxe E_PICKAXE = ReflectHelper.createInstance(ItemPickaxe.class, new Class[]{int.class, Material.class}, (getNextItemID()), Materials.getBestMaterial());
 
     public static final Item MITEGA_INGOT = ReflectHelper.createInstance(ItemIngot.class, new Class[]{int.class, Material.class}, getNextItemID(), Materials.mitega);
 
@@ -101,7 +101,7 @@ public class Items extends Item {
 
     public static final Item BadApple = new ItemBadApple(getNextItemID());
 
-    public static final Item GABag = new ItemGABag(getNextItemID(), getBestMaterial());
+    public static final Item GABag = new ItemGABag(getNextItemID(), Materials.getBestMaterial());
 
     public static final Item HellStones = new ItemHellStone(getNextItemID());
 
@@ -191,7 +191,7 @@ public class Items extends Item {
     public static final ItemArmor ancient_metal_skirt = new ItemArmorSkirt(getNextItemID(), Material.ancient_metal, "ancient_metal_layer");
     public static final ItemArmor mithril_skirt = new ItemArmorSkirt(getNextItemID(), Material.mithril, "mithril_layer");
     public static final ItemArmor adamantium_skirt = new ItemArmorSkirt(getNextItemID(), Material.adamantium, "adamantium_layer");
-    public static final ItemArmor vibranium_skirt = new ItemArmorSkirt(getNextItemID(), getBestMaterial(), "vibranium_layer");
+    public static final ItemArmor vibranium_skirt = new ItemArmorSkirt(getNextItemID(), Materials.getBestMaterial(), "vibranium_layer");
 
     public static final ItemJewelry item_magnet = new ItemMagnet(getNextItemID());
 
@@ -202,13 +202,6 @@ public class Items extends Item {
     public static final ItemJewelry pocket_piston = new ItemJewelry(getNextItemID(), Material.piston, "pocket_piston");
 
     public static final ItemJewelry[] jewelries = new ItemJewelry[]{item_magnet, lucky_clover, bottled_cloud, pocket_piston};
-
-    private static Material getBestMaterial() {
-        if (ModCompat.HAS_ITE) {
-            return ITEAccessor.getVibraniumMaterial();
-        }
-        return Material.adamantium;
-    }
 
     private static ItemRegistryEvent itemRegistryEvent;
 
@@ -333,8 +326,7 @@ public class Items extends Item {
     }
 
     public static Item register(String resourceLocation, Item item) {
-        itemRegistryEvent.register(GAStart.MOD_ID, resourceLocation, item, GACreativeTabs.GAItem);
-//        item.setTextureName(((GAItem) item).getResourceLocationPrefix() + resourceLocation);
+        itemRegistryEvent.register(GAStart.MOD_NAME, resourceLocation, item, GACreativeTabs.GAItem);
         item.setUnlocalizedName(resourceLocation);
         return item;
     }

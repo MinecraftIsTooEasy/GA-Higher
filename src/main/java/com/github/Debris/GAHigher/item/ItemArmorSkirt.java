@@ -1,6 +1,5 @@
 package com.github.Debris.GAHigher.item;
 
-import net.minecraft.CreativeTabs;
 import net.minecraft.ItemLeggings;
 import net.minecraft.Material;
 
@@ -10,7 +9,6 @@ public class ItemArmorSkirt extends ItemLeggings {
     public ItemArmorSkirt(int id, Material material, String texture) {
         super(id, material, false);// 2 is leggings slot
         this.texture = texture;
-        this.setCreativeTab(CreativeTabs.tabCombat);
     }
 
     @Override

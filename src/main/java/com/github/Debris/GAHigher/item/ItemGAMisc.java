@@ -12,7 +12,6 @@ public class ItemGAMisc extends Item {
         super(id, Materials.invincible, "miscItem");
         this.tag = tag;
         setMaxStackSize(64);
-        setCreativeTab(CreativeTabs.tabMisc);
         this.setCraftingDifficultyAsComponent(100.0F);
     }
 

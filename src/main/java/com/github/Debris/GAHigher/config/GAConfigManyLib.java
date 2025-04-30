@@ -44,7 +44,7 @@ public class GAConfigManyLib extends SimpleConfigs {
     }
 
     public GAConfigManyLib() {
-        super(GAStart.MOD_ID + "-ManyLib", hotkeys, values);
+        super(GAStart.MOD_NAME + "-ManyLib", hotkeys, values);
     }
 
     static {

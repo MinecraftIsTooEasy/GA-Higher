@@ -8,7 +8,6 @@ public class ItemGuilt6 extends Item {
     public ItemGuilt6(int par1) {
         super(par1, Material.diamond, "guilt6");
         setMaxStackSize(64);
-        setCreativeTab(CreativeTabs.tabMaterials);
         setCraftingDifficultyAsComponent(1.0E-9F);
     }
 

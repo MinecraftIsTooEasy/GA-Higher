@@ -10,7 +10,6 @@ public class ItemSpider_Leg extends ItemFood {
         super(par1, Material.chicken_soup, 0, 0, false, false, false, "spider_leg");
         setMaxStackSize(64);
         setCraftingDifficultyAsComponent(1.0F);
-        setCreativeTab(CreativeTabs.tabFood);
     }
 
     protected void onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {

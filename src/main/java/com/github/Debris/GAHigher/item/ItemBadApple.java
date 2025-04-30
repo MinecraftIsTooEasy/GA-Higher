@@ -8,7 +8,6 @@ public class ItemBadApple extends Item {
     public ItemBadApple(int par1) {
         super(par1, Material.seed, "bad_apple");
         setMaxStackSize(64);
-        setCreativeTab(CreativeTabs.tabMaterials);
         setCraftingDifficultyAsComponent(1.0E-9F);
     }
 

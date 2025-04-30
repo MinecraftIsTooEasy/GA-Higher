@@ -26,6 +26,7 @@ public class CombatListener implements ICombatListener {
     public float onEntityLivingFallDamageModify(EntityLivingBase instance, float fall_distance, BlockInfo block_landed_on_info, float original) {
         if (instance instanceof EntityPlayer player) {
             ItemStack itemStack = player.getHeldItemStack();
+            if (itemStack == null) return original;
             if (itemStack.getItem() == Items.Fan) {
 //                int adddamage = (int) Math.min(original / player.aN() * 10000.0F, 10000.0F);
                 int adddamage = (int) Math.min(original / player.getHealth() * 10000.0F, 10000.0F);

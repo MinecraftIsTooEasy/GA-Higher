@@ -17,7 +17,7 @@ import java.util.function.Consumer;
 public class Configs {
     private static final Logger LOGGER = LogUtil.getLogger();
 
-    public static final String configFilePath = "config" + File.separator + GAStart.MOD_ID + ".cfg";
+    public static final String configFilePath = "config" + File.separator + GAStart.MOD_NAME + ".cfg";
 
     public static Map<String, ConfigItem> wenscMap = new HashMap<>();
 

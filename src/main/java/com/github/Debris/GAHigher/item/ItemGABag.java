@@ -12,7 +12,6 @@ public class ItemGABag extends ItemIngot {
         super(par1, material);
         this.a = Blocks.GotchaBox.blockID;
         setMaxStackSize(1);
-        setCreativeTab(CreativeTabs.tabMaterials);
         setCraftingDifficultyAsComponent(getCraftingDifficultyAsComponent(material));
     }
 

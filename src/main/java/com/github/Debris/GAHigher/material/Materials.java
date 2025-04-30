@@ -1,5 +1,7 @@
 package com.github.Debris.GAHigher.material;
 
+import com.github.Debris.GAHigher.compat.ModCompat;
+import com.github.Debris.GAHigher.unsafe.ITEAccessor;
 import net.minecraft.EnumEquipmentMaterial;
 import net.minecraft.Material;
 
@@ -14,5 +16,12 @@ public abstract class Materials extends Material {
 
     public Materials(String name) {
         super(name);
+    }
+
+    public static Material getBestMaterial() {
+        if (ModCompat.HAS_ITE) {
+            return ITEAccessor.getVibraniumMaterial();
+        }
+        return adamantium;
     }
 }

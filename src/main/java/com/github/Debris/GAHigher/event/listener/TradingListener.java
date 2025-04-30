@@ -1,7 +1,9 @@
 package com.github.Debris.GAHigher.event.listener;
 
 import com.github.Debris.GAHigher.block.Blocks;
+import com.github.Debris.GAHigher.compat.ModCompat;
 import com.github.Debris.GAHigher.item.Items;
+import com.github.Debris.GAHigher.unsafe.ITEAccessor;
 import moddedmite.rustedironcore.api.event.events.TradingRegisterEvent;
 import net.minecraft.Item;
 import net.minecraft.ItemStack;
@@ -24,16 +26,20 @@ public class TradingListener implements Consumer<TradingRegisterEvent> {
             });
         });
 
-        event.getForProfession(3).ifPresent(villagerSettings ->
-                villagerSettings.addEntry((recipeList, villager, rand) -> {
-                    if (rand.nextFloat() < villager.adjustProbability(0.2F)) {
-                        recipeList.add(new MerchantRecipe(new ItemStack(Items.MITEGA_INGOT, 9), new ItemStack(Items.MITEGA_NUGGET, 1, 0)));
-                    }
-                }).addEntry((recipeList, villager, rand) -> {
-                    if (rand.nextFloat() < villager.adjustProbability(0.2F)) {
-                        recipeList.add(new MerchantRecipe(new ItemStack(Items.MITEGA_NUGGET, 1, 0), new ItemStack(Items.MITEGA_INGOT, 9)));
-                    }
-                }));// TODO vibranium
+        event.getForProfession(3).ifPresent(villagerSettings -> {
+            villagerSettings.addEntry((recipeList, villager, rand) -> {
+                if (rand.nextFloat() < villager.adjustProbability(0.2F)) {
+                    recipeList.add(new MerchantRecipe(new ItemStack(Items.MITEGA_INGOT, 9), new ItemStack(Items.MITEGA_NUGGET, 1, 0)));
+                }
+            }).addEntry((recipeList, villager, rand) -> {
+                if (rand.nextFloat() < villager.adjustProbability(0.2F)) {
+                    recipeList.add(new MerchantRecipe(new ItemStack(Items.MITEGA_NUGGET, 1, 0), new ItemStack(Items.MITEGA_INGOT, 9)));
+                }
+            });
+            if (ModCompat.HAS_ITE) {
+                ITEAccessor.addSmithRecipe(villagerSettings);
+            }
+        });
 
         event.getForProfession(4).ifPresent(villagerSettings ->
                 villagerSettings.sellEntry(Items.Tomato_Omelette.itemID, 0.3F));

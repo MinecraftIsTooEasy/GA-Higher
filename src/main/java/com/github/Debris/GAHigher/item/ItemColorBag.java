@@ -9,7 +9,6 @@ public class ItemColorBag extends Item {
         super(id, material, texture);
         setMaxStackSize(64);
         setCraftingDifficultyAsComponent(getCraftingDifficultyAsComponent(material));
-        setCreativeTab(CreativeTabs.tabMaterials);
     }
 
     public static float getCraftingDifficultyAsComponent(Material material) {

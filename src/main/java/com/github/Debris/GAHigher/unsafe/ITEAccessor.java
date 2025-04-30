@@ -2,17 +2,18 @@ package com.github.Debris.GAHigher.unsafe;
 
 import com.github.Debris.GAHigher.config.Configs;
 import moddedmite.rustedironcore.api.event.events.CraftingRecipeRegisterEvent;
+import moddedmite.rustedironcore.villager.VillagerSettings;
 import net.minecraft.Item;
 import net.minecraft.ItemStack;
 import net.minecraft.Material;
+import net.minecraft.MerchantRecipe;
 
 import java.util.List;
 
-import static com.github.Debris.GAHigher.item.Items.copperNugget;
-import static com.github.Debris.GAHigher.item.Items.silverNugget;
 import static com.github.Debris.GAHigher.item.Items.*;
 import static net.xiaoyu233.mitemod.miteite.block.MITEITEBlockRegistryInit.blockVibranium;
-import static net.xiaoyu233.mitemod.miteite.item.MITEITEItemRegistryInit.*;
+import static net.xiaoyu233.mitemod.miteite.item.MITEITEItemRegistryInit.VIBRANIUM_INGOT;
+import static net.xiaoyu233.mitemod.miteite.item.MITEITEItemRegistryInit.VIBRANIUM_NUGGET;
 import static net.xiaoyu233.mitemod.miteite.item.Materials.vibranium;
 import static net.xiaoyu233.mitemod.miteite.util.Configs.Item.ENCHANTED_GOLDEN_APPLE_EAT_TIME;
 
@@ -41,7 +42,15 @@ public class ITEAccessor {
         ingots.add(VIBRANIUM_NUGGET);
     }
 
-    public static Item getIconForKillZombieBoss() {
-        return VIBRANIUM_WAR_HAMMER;
+    public static void addSmithRecipe(VillagerSettings villagerSettings) {
+        villagerSettings.addEntry((recipeList, villager, rand) -> {
+            if (rand.nextFloat() < villager.adjustProbability(0.2F)) {
+                recipeList.add(new MerchantRecipe(new ItemStack(VIBRANIUM_INGOT, 9), new ItemStack(VIBRANIUM_NUGGET, 1, 0)));
+            }
+        }).addEntry((recipeList, villager, rand) -> {
+            if (rand.nextFloat() < villager.adjustProbability(0.2F)) {
+                recipeList.add(new MerchantRecipe(new ItemStack(VIBRANIUM_NUGGET, 1, 0), new ItemStack(VIBRANIUM_INGOT, 9)));
+            }
+        });
     }
 }

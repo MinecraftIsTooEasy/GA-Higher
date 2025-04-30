@@ -10,7 +10,7 @@ import net.minecraft.ServerPlayer;
 import net.xiaoyu233.fml.FishModLoader;
 
 public class GANetwork {
-    public static final ResourceLocation OverlayMessage = new ResourceLocation(GAStart.MOD_ID_COMPACT, "OverlayMessage");
+    public static final ResourceLocation OverlayMessage = new ResourceLocation(GAStart.NAMESPACE, "OverlayMessage");
 
     public static void sendToClient(ServerPlayer player, Packet packet) {
         Network.sendToClient(player, packet);

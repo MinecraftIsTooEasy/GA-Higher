@@ -10,7 +10,6 @@ public class ItemJewelry extends Item {
     public ItemJewelry(int id, Material material, String texture) {
         super(id, material, texture);
         this.setMaxStackSize(1);
-        this.setCreativeTab(CreativeTabs.tabTools);
     }
 
     public void onTick(ItemStack itemStack, ServerPlayer player) {

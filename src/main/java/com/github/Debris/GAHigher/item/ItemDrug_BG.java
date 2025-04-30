@@ -10,7 +10,6 @@ public class ItemDrug_BG extends ItemFood {
         setPotionEffect(Potion.field_76443_y.id, 600, 0, 1.0F);
         setMaxStackSize(64);
         setCraftingDifficultyAsComponent(1.0F);
-        setCreativeTab(CreativeTabs.tabFood);
     }
 
     public boolean isHarmedByPepsin() {

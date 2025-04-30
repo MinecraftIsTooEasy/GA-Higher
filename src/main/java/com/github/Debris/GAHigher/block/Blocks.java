@@ -73,6 +73,8 @@ public abstract class Blocks extends Block {
 
     public static final Block blockItemDuper = new BlockItemDuper(getNextBlockID()).setHardness(3.0F);
 
+    public static final BlockWorkbenchGA blockWorkbenchGA = new BlockWorkbenchGA(getNextBlockID());
+
     protected Blocks(int par1, Material par2Material, BlockConstants constants) {
         super(par1, par2Material, constants);
     }
@@ -82,7 +84,7 @@ public abstract class Blocks extends Block {
     }
 
     private static void registerItemBlock(Block block, String resourceLocation) {
-        itemRegistryEvent.registerItemBlock(GAStart.MOD_ID, resourceLocation, block);
+        itemRegistryEvent.registerItemBlock(GAStart.MOD_NAME, resourceLocation, block);
         if (block.canBeCarried()) {
             block.setCreativeTab(GACreativeTabs.GABlock);
         }
@@ -119,6 +121,7 @@ public abstract class Blocks extends Block {
         registerItemBlock(blockStairsColorful14, "colorful_stair");
         registerItemBlock(blockStairsColorful15, "colorful_stair");
         registerItemBlock(blockItemDuper, "item_duper");
+        registerItemBlock(blockWorkbenchGA, "mitega");
 
         itemRegistryEvent = null;
         Item.itemsList[Blocks.blockColorfulSingleSlabGroup1.blockID] = (new ItemSlab(Blocks.blockColorfulSingleSlabGroup1, Blocks.blockColorfulDoubleSlabGroup1, false)).setUnlocalizedName("colorfulSlab");
@@ -152,5 +155,6 @@ public abstract class Blocks extends Block {
         register.registerShapelessRecipe(new ItemStack(BlockGotcha, 1, 0), true, new ItemStack(BlockGotcha, 1, 15));
         register.registerShapelessRecipe(new ItemStack(blockColorful, 9, 0), true, new ItemStack(blockColorful, 9, 15));
         register.registerShapelessRecipe(new ItemStack(blockColorfulBrick, 9, 0), true, new ItemStack(blockColorfulBrick, 9, 15));
+        blockWorkbenchGA.registerSimpleRecipe(register);
     }
 }
