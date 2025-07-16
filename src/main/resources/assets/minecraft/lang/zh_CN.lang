@@ -298,3 +298,12 @@ key.openShop=打开商店
 
 itemGroup.gaHigher.item=娱乐物品
 itemGroup.gaHigher.block=娱乐方块
+
+ga.item.powder_mu.info=砍原木，概率为“砍树”附魔等级x1%
+ga.item.powder_shui.info=钓鱼，概率为“饵钓”附魔等级x1%
+ga.item.powder_huo.info=杀火元素
+ga.item.powder_tu.info=收小麦萝卜土豆洋葱时，概率为“收获”附魔等级x1%
+ga.item.powder_feng.info=吃蜘蛛腿，概率为靴子“速度”附魔xK%,松脆蜘蛛腿K=1,油炸蜘蛛腿K=5
+ga.item.powder_lei.info=蓝月全天，竹子唤雷必出
+ga.item.powder_bing.info=敲冰块，概率为持有物品的“灵活移动”附魔等级x1%
+ga.item.powder_an.info=蘑菇树，“效率”附魔等级xK%,白蘑菇K=1,红蘑菇K=5

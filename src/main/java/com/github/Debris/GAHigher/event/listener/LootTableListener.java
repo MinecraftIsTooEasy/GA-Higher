@@ -17,7 +17,7 @@ public class LootTableListener implements ILootTableRegisterListener {
     );
 
     private static final Supplier<List<WeightedRandomChestContent>> UnderWorldDungeon = () ->
-            Arrays.stream(Items.jewelries)
+            Arrays.stream(Items.baubles)
                     .map(x -> new WeightedRandomChestContent(x.itemID, 0, 1, 1, 2))
                     .toList();
 

@@ -1,5 +1,6 @@
 package com.github.Debris.GAHigher.unsafe;
 
+import cn.wensc.mitemod.shop.api.ShopItem;
 import com.github.Debris.GAHigher.config.Configs;
 import moddedmite.rustedironcore.api.event.events.CraftingRecipeRegisterEvent;
 import moddedmite.rustedironcore.villager.VillagerSettings;
@@ -52,5 +53,12 @@ public class ITEAccessor {
                 recipeList.add(new MerchantRecipe(new ItemStack(VIBRANIUM_NUGGET, 1, 0), new ItemStack(VIBRANIUM_INGOT, 9)));
             }
         });
+    }
+
+    public static Item getVibraniumIngot() {
+        return VIBRANIUM_INGOT;
+    }
+    public static Item getVibraniumNugget() {
+        return VIBRANIUM_NUGGET;
     }
 }

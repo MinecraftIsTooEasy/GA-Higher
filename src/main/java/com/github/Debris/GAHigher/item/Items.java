@@ -7,7 +7,7 @@ import com.github.Debris.GAHigher.compat.ModCompat;
 import com.github.Debris.GAHigher.config.Configs;
 import com.github.Debris.GAHigher.item.api.StandardItem;
 import com.github.Debris.GAHigher.item.guilt.*;
-import com.github.Debris.GAHigher.item.jewelry.ItemJewelry;
+import com.github.Debris.GAHigher.item.jewelry.ItemBauble;
 import com.github.Debris.GAHigher.item.jewelry.ItemMagnet;
 import com.github.Debris.GAHigher.material.Materials;
 import com.github.Debris.GAHigher.unsafe.ITEAccessor;
@@ -193,15 +193,15 @@ public class Items extends Item {
     public static final ItemArmor adamantium_skirt = new ItemArmorSkirt(getNextItemID(), Material.adamantium, "adamantium_layer");
     public static final ItemArmor vibranium_skirt = new ItemArmorSkirt(getNextItemID(), Materials.getBestMaterial(), "vibranium_layer");
 
-    public static final ItemJewelry item_magnet = new ItemMagnet(getNextItemID());
+    public static final ItemBauble item_magnet = new ItemMagnet(getNextItemID());
 
-    public static final ItemJewelry lucky_clover = new ItemJewelry(getNextItemID(), Material.grass, "lucky_clover");
+    public static final ItemBauble lucky_clover = new ItemBauble(getNextItemID(), Material.grass, "lucky_clover");
 
-    public static final ItemJewelry bottled_cloud = new ItemJewelry(getNextItemID(), Material.glass, "bottled_cloud");
+    public static final ItemBauble bottled_cloud = new ItemBauble(getNextItemID(), Material.glass, "bottled_cloud");
 
-    public static final ItemJewelry pocket_piston = new ItemJewelry(getNextItemID(), Material.piston, "pocket_piston");
+    public static final ItemBauble pocket_piston = new ItemBauble(getNextItemID(), Material.piston, "pocket_piston");
 
-    public static final ItemJewelry[] jewelries = new ItemJewelry[]{item_magnet, lucky_clover, bottled_cloud, pocket_piston};
+    public static final ItemBauble[] baubles = new ItemBauble[]{item_magnet, lucky_clover, bottled_cloud, pocket_piston};
 
     private static ItemRegistryEvent itemRegistryEvent;
 

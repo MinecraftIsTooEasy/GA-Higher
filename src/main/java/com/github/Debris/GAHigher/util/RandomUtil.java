@@ -10,7 +10,7 @@ public class RandomUtil {
 
     public static <T extends EntityLivingBase> void dropRandomJewelry(T entity) {
         if (entity.rand.nextInt(GAConfigManyLib.DropJewelryRate.getIntegerValue()) == 0) {
-            entity.dropItem(getRamdom(Items.jewelries, entity.rand));
+            entity.dropItem(getRamdom(Items.baubles, entity.rand));
         }
     }
 

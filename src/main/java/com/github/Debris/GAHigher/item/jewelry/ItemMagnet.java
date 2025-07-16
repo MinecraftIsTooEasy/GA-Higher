@@ -5,7 +5,7 @@ import net.minecraft.*;
 
 import java.util.List;
 
-public class ItemMagnet extends ItemJewelry {
+public class ItemMagnet extends ItemBauble {
     public ItemMagnet(int id) {
         super(id, Material.iron, "magnet");
     }

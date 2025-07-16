@@ -3,7 +3,7 @@ package com.github.Debris.GAHigher.compat;
 import baubles.api.BaubleType;
 import baubles.api.IBaublePlugin;
 import com.github.Debris.GAHigher.item.Items;
-import com.github.Debris.GAHigher.item.jewelry.ItemJewelry;
+import com.github.Debris.GAHigher.item.jewelry.ItemBauble;
 import net.minecraft.EntityLivingBase;
 import net.minecraft.Item;
 import net.minecraft.ItemStack;
@@ -14,7 +14,7 @@ public class BaublesPlugin implements IBaublePlugin {
     public boolean canPutBaubleSlot(ItemStack itemStack, BaubleType baubleType) {
         if (baubleType == BaubleType.AMULET) {
             Item item = itemStack.getItem();
-            for (ItemJewelry jewelry : Items.jewelries) {
+            for (ItemBauble jewelry : Items.baubles) {
                 if (jewelry == item) return true;
             }
         }
@@ -26,8 +26,8 @@ public class BaublesPlugin implements IBaublePlugin {
         if (itemStack == null) return;
         Item item = itemStack.getItem();
         if (entity instanceof ServerPlayer serverPlayer) {
-            if (item instanceof ItemJewelry itemJewelry) {
-                itemJewelry.onTick(itemStack, serverPlayer);
+            if (item instanceof ItemBauble itemBauble) {
+                itemBauble.onTick(itemStack, serverPlayer);
             }
         }
     }

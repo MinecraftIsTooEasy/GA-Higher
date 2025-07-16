@@ -5,6 +5,9 @@ import com.github.Debris.GAHigher.util.Constant;
 import net.minecraft.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Random;
 
@@ -15,27 +18,21 @@ public class BlockIceMixin extends BlockBreakable {
         super(par1, par2Str, par3Material, par4, block_constants);
     }
 
-    @Overwrite
-    public int dropBlockAsEntityItem(BlockBreakInfo info) {
-        EntityPlayer MMPlayer = null;
-        try {
-            MMPlayer = info.getHarvester().getAsEntityPlayerMP();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (info.wasExploded() || MMPlayer == null)
-            return 0;
+    @Inject(method = "dropBlockAsEntityItem", at = @At("HEAD"))
+    private void addLoot(BlockBreakInfo info, CallbackInfoReturnable<Integer> cir) {
+        EntityPlayer MMPlayer = info.getHarvester().getAsEntityPlayerMP();
+        if (info.wasExploded()) return;
+
         boolean unNatural = BitHelper.isBitSet(info.getMetadata(), 1);
         int k = EnchantmentHelper.getEnchantmentLevel(Enchantment.free_action, MMPlayer.getHeldItemStack());
-        if (k > 8)
-            k = 8;
-        if (k > 0)
-            if (!unNatural && Constant.GARandom.nextInt(100) < k) {
-                MMPlayer.dropItem(Items.Powder_Bing.itemID, 1, 1.0F);
-            } else {
-                MMPlayer.dropItem(Block.ice.blockID, 1, 1.0F);
-            }
-        return 0;
+        if (k > 8) k = 8;
+        if (k <= 0) return;
+
+        if (!unNatural && Constant.GARandom.nextInt(100) < k) {
+            MMPlayer.dropItem(Items.Powder_Bing.itemID, 1, 1.0F);
+        } else {
+            MMPlayer.dropItem(Block.ice.blockID, 1, 1.0F);
+        }
     }
 
     @Overwrite

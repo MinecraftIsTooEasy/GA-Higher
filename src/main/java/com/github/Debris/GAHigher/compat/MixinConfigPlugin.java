@@ -1,26 +1,14 @@
 package com.github.Debris.GAHigher.compat;
 
-import com.github.Debris.GAHigher.util.MixinConditionUtil;
-import org.objectweb.asm.tree.ClassNode;
-import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
-import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
+import me.fallenbreath.conditionalmixin.api.mixin.RestrictiveMixinConfigPlugin;
 
 import java.util.List;
 import java.util.Set;
 
-public class MixinConfigPlugin implements IMixinConfigPlugin {
-    @Override
-    public void onLoad(String s) {
-    }
-
+public class MixinConfigPlugin extends RestrictiveMixinConfigPlugin {
     @Override
     public String getRefMapperConfig() {
         return null;
-    }
-
-    @Override
-    public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        return MixinConditionUtil.check(mixinClassName);
     }
 
     @Override
@@ -30,13 +18,5 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
     @Override
     public List<String> getMixins() {
         return null;
-    }
-
-    @Override
-    public void preApply(String s, ClassNode classNode, String s1, IMixinInfo iMixinInfo) {
-    }
-
-    @Override
-    public void postApply(String s, ClassNode classNode, String s1, IMixinInfo iMixinInfo) {
     }
 }

@@ -53,6 +53,7 @@ dependencies {
     // compile needed
     compileOnly files("${lib_dir}/MITE-ITE.jar")
     compileOnly files("${lib_dir}/Extreme.jar")
+    compileOnly files("${lib_dir}/Shop.jar")
     implementation files("${lib_dir}/EMI.jar")// but this is useful
 
     // useful mods

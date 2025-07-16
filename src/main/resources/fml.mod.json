@@ -42,6 +42,9 @@
     ],
     "baubles": [
       "com.github.Debris.GAHigher.compat.BaublesPlugin"
+    ],
+    "shop": [
+      "com.github.Debris.GAHigher.compat.ShopImpl"
     ]
   },
   "mixins": [

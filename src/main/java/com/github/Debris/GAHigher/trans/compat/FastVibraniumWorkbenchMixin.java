@@ -1,16 +1,16 @@
 package com.github.Debris.GAHigher.trans.compat;
 
-import com.github.Debris.GAHigher.api.Condition;
-import com.github.Debris.GAHigher.api.ConditionalMixin;
 import com.github.Debris.GAHigher.compat.ModCompat;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 import static net.xiaoyu233.mitemod.miteite.block.MITEITEBlockRegistryInit.vibraniumWorkBench;
 
-@ConditionalMixin(require = @Condition(value = ModCompat.ITE))
+@Restriction(require = @Condition(value = ModCompat.ITE))
 @Mixin(SlotCrafting.class)
 public abstract class FastVibraniumWorkbenchMixin extends Slot {
     public FastVibraniumWorkbenchMixin(IInventory inventory, int slot_index, int display_x, int display_y) {

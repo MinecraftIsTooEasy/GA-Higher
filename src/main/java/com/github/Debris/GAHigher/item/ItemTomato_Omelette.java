@@ -1,6 +1,7 @@
 package com.github.Debris.GAHigher.item;
 
 import com.github.Debris.GAHigher.util.Constant;
+import com.github.Debris.GAHigher.util.PlayerUtil;
 import net.minecraft.*;
 
 import java.util.List;
@@ -23,8 +24,9 @@ public class ItemTomato_Omelette extends ItemFood {
             }
             par3EntityPlayer.getAsEntityPlayerMP().setPhytonutrients(par3EntityPlayer.getAsEntityPlayerMP().getPhytonutrients() + 32000);
             par3EntityPlayer.getAsEntityPlayerMP().setProtein(par3EntityPlayer.getAsEntityPlayerMP().getProtein() + 24000);
-            if (Constant.GARandom.nextInt(30) == 0)
-                par3EntityPlayer.dropItem(Items.Guilt2);
+            if (Constant.GARandom.nextInt(30) == 0) {
+                PlayerUtil.addToInventoryOrDrop(par3EntityPlayer, new ItemStack(Items.Guilt2));
+            }
         }
     }
 

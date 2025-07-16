@@ -5,9 +5,9 @@ import net.minecraft.*;
 
 import java.util.List;
 
-public class ItemJewelry extends Item {
+public class ItemBauble extends Item {
 
-    public ItemJewelry(int id, Material material, String texture) {
+    public ItemBauble(int id, Material material, String texture) {
         super(id, material, texture);
         this.setMaxStackSize(1);
     }
