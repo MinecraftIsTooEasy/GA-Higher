@@ -9,11 +9,11 @@
     "conditional-mixin": "*"
   },
   "suggests": {
-    "mite_ite": ">=2.0.11",
+    "mite_ite": ">=2.0.16",
     "baubles": ">=1.0.9"
   },
   "breaks": {
-    "mite_ite": "<=2.0.10"
+    "mite_ite": "<2.0.16"
   },
   "environment": "*",
   "name": "GA-Higher",
@@ -29,22 +29,22 @@
   ],
   "entrypoints": {
     "main": [
-      "com.github.Debris.GAHigher.GAStart"
+      "com.github.debris.gah.GAStart"
     ],
     "preLaunch": [
-      "com.github.Debris.GAHigher.EarlyRiser"
+      "com.github.debris.gah.EarlyRiser"
     ],
     "modmenu": [
-      "com.github.Debris.GAHigher.compat.ModMenuImpl"
+      "com.github.debris.gah.compat.ModMenuImpl"
     ],
     "emi": [
-      "com.github.Debris.GAHigher.compat.EmiPlugin"
+      "com.github.debris.gah.compat.EmiPlugin"
     ],
     "baubles": [
-      "com.github.Debris.GAHigher.compat.BaublesPlugin"
+      "com.github.debris.gah.compat.BaublesPlugin"
     ],
     "shop": [
-      "com.github.Debris.GAHigher.compat.ShopImpl"
+      "com.github.debris.gah.compat.ShopImpl"
     ]
   },
   "mixins": [
