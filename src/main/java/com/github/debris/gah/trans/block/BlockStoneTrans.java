@@ -1,18 +1,19 @@
 package com.github.debris.gah.trans.block;
 
 import com.github.debris.gah.api.GAEntityPlayer;
-import com.github.debris.gah.block.Blocks;
 import com.github.debris.gah.config.Configs;
 import com.github.debris.gah.item.Items;
 import com.github.debris.gah.util.Constant;
 import com.github.debris.gah.util.PickaxeHelper;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin({BlockStone.class})
+@Mixin(value = BlockStone.class, priority = 999)
 public class BlockStoneTrans extends Block {
 
     protected BlockStoneTrans(int par1, Material par2Material, BlockConstants constants) {
@@ -24,8 +25,8 @@ public class BlockStoneTrans extends Block {
         this.setMaxStackSize(64);
     }
 
-    @Override
-    public int dropBlockAsEntityItem(BlockBreakInfo info) {
+    @WrapOperation(method = "dropBlockAsEntityItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/BlockStone;dropBlockAsEntityItem(Lnet/minecraft/BlockBreakInfo;Lnet/minecraft/Block;)I"))
+    public int dropBlockAsEntityItem(BlockStone instance, BlockBreakInfo info, Block block, Operation<Integer> original) {
         EntityPlayer MMPlayer = null;
         try {
             MMPlayer = info.getHarvester().getAsEntityPlayerMP();
@@ -76,17 +77,18 @@ public class BlockStoneTrans extends Block {
             }
         }
         if (Configs.wenscConfig.isDropBlueGem.ConfigValue && Configs.wenscConfig.isDropGAStones.ConfigValue) {
-            return (Constant.GARandom.nextInt(100) == 0) ? dropBlockAsEntityItem(info, Items.Gem_Blue.itemID) : dropBlockAsEntityItem(info, Items.Stones.itemID);
+            if (Constant.GARandom.nextInt(100) == 0)
+                return dropBlockAsEntityItem(info, Items.Gem_Blue.itemID);
+            else return dropBlockAsEntityItem(info, Items.Stones.itemID);
         }
         if (Configs.wenscConfig.isDropBlueGem.ConfigValue) {
             if (Constant.GARandom.nextInt(100) == 0) {
                 return dropBlockAsEntityItem(info, Items.Gem_Blue.itemID);
             }
-            return dropBlockAsEntityItem(info, Blocks.cobblestone.blockID);
         }
         if (Configs.wenscConfig.isDropGAStones.ConfigValue) {
             return dropBlockAsEntityItem(info, Items.Stones.itemID);
         }
-        return dropBlockAsEntityItem(info, Blocks.cobblestone.blockID);
+        return original.call(instance, info, block);
     }
 }
